@@ -1,0 +1,87 @@
+/* Общий стиль для всего тела документа */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    max-width: 400px;
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+input[type="number"] {
+    width: 70px;
+    padding: 7px;
+    margin: 0 10px 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Убираем стрелки в Chrome, Safari, Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Убираем стрелки в Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+
+ul#days {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+ul#days li {
+    padding: 10px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+ul#days li:hover {
+    background-color: #45a049;
+}

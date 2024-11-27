@@ -1,66 +1,33 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Кодировка и настройки для адаптивного отображения -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тренировка</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-        }
 
-        h1 {
-            text-align: center;
-        }
+    <!-- Подключение внешнего CSS-файла -->
+    <link rel="stylesheet" href="styles.css">
 
-        form {
-            max-width: 400px;
-            margin: auto;
-            border: 1px solid #ccc;
-            padding: 15px;
-            background-color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="number"] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .result {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
 <h1>Ввод тренировки</h1>
+
+
+<style>
+    /* Убираем стрелки в Chrome, Safari, Edge */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Убираем стрелки в Firefox */
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+</style>
+
 
 <form id="workoutForm">
     <label for="exercise">Наименование упражнения:</label>
@@ -110,8 +77,14 @@
             const setDiv = document.createElement('div');
             setDiv.className = 'set';
 
+            const approachLabel = document.createElement('span');
+            approachLabel.textContent = `Подход ${i}`;
+            approachLabel.style.fontWeight = 'bold';
+            approachLabel.style.marginBottom = '10px';
+            approachLabel.style.display = 'block';
+
             const weightLabel = document.createElement('label');
-            weightLabel.textContent = `Вес для подхода ${i}:`;
+            weightLabel.textContent = 'Вес:';
             const weightInput = document.createElement('input');
             weightInput.type = 'number';
             weightInput.min = '0';
@@ -119,12 +92,13 @@
             weightInput.classList.add('weight');
 
             const repsLabel = document.createElement('label');
-            repsLabel.textContent = `Повторения для подхода ${i}:`;
+            repsLabel.textContent = 'Повторения:';
             const repsInput = document.createElement('input');
             repsInput.type = 'number';
             repsInput.min = '1';
             repsInput.classList.add('reps');
 
+            setDiv.appendChild(approachLabel);
             setDiv.appendChild(weightLabel);
             setDiv.appendChild(weightInput);
             setDiv.appendChild(repsLabel);

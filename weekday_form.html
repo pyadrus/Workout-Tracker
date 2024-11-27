@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Выбор дня недели</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Выберите день недели</h1>
+
+<ul id="days">
+  <li data-link="exercise.html">Понедельник</li>
+  <li data-link="exercise.html">Вторник</li>
+  <li data-link="exercise.html">Среда</li>
+  <li data-link="exercise.html">Четверг</li>
+  <li data-link="exercise.html">Пятница</li>
+  <li data-link="exercise.html">Суббота</li>
+  <li data-link="exercise.html">Воскресенье</li>
+</ul>
+
+<script>
+  // Обработка кликов на элементах списка
+  document.querySelectorAll('#days li').forEach(function(day) {
+    day.addEventListener('click', function() {
+      const link = this.getAttribute('data-link');
+      if (link) {
+        window.location.href = link; // Переход на указанную страницу
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

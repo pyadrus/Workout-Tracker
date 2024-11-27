@@ -1,30 +1,38 @@
-from flask import Flask, request, render_template
-import json
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+
+@app.route('/exercise')
+def exercise():
     return render_template('exercise.html')
 
-@app.route('/save_workout', methods=['POST'])
-def save_workout():
-    exercise = request.form['exercise']
-    sets = request.form['sets']
-    workout_data = json.loads(request.form['workoutData'])
 
-    # Форматирование данных для записи
-    workout_info = f"Упражнение: {exercise}\nКоличество подходов: {sets}\n\n"
-    for idx, set_data in enumerate(workout_data, start=1):
-        workout_info += f"Подход {idx}: Вес {set_data['weight']} кг, Повторений {set_data['reps']}\n"
+@app.route('/workout_data', methods=['POST'])
+def workout_data():
+    sets = int(request.form['sets'])
+    workout_data = []
 
-    workout_info += "\n--------------------\n"
+    # Собираем данные о подходах
+    for i in range(sets):
+        workout_data.append({
+            'weight': 0,  # Изначально вес 0
+            'reps': 0     # Изначально повторений 0
+        })
 
-    # Запись в файл
-    with open('workout_log.txt', 'a', encoding='utf-8') as f:
-        f.write(workout_info)
+    # Передаем данные о подходах на страницу для расчета
+    return render_template('workout_calculation.html', workout_data=workout_data)
 
-    return "Данные успешно сохранены!"
+@app.route('/calculate_workout', methods=['POST'])
+def calculate_workout():
+    workout_data = request.form.getlist('workoutData')
+    total_weight = sum([float(data.split(',')[0]) * int(data.split(',')[1]) for data in workout_data])
+
+    return f'Общий поднятый вес: {total_weight} кг'
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренировка - Расчет</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+<h1>Расчет тренировки</h1>
+
+<form id="workoutCalculationForm" method="POST" action="/calculate_workout">
+    <div id="setInputs">
+        <!-- Данные о подходах будут вставлены сюда с помощью JavaScript -->
+    </div>
+
+    <button type="submit">Рассчитать</button>
+</form>
+
+<p class="result" id="totalWeight"></p>
+
+<script>
+    // Данные о подходах будут вставлены с сервера
+    const workoutData = {{ workout_data | tojson }};
+
+    const setInputsContainer = document.getElementById('setInputs');
+
+    workoutData.forEach((set, index) => {
+        const setDiv = document.createElement('div');
+        setDiv.className = 'set';
+
+        const approachLabel = document.createElement('span');
+        approachLabel.textContent = `Подход ${index + 1}`;
+        approachLabel.style.fontWeight = 'bold';
+        approachLabel.style.marginBottom = '10px';
+        approachLabel.style.display = 'block';
+
+        const weightLabel = document.createElement('label');
+        weightLabel.textContent = 'Вес:';
+        const weightInput = document.createElement('input');
+        weightInput.type = 'number';
+        weightInput.value = set.weight;
+        weightInput.classList.add('weight');
+
+        const repsLabel = document.createElement('label');
+        repsLabel.textContent = 'Повторения:';
+        const repsInput = document.createElement('input');
+        repsInput.type = 'number';
+        repsInput.value = set.reps;
+        repsInput.classList.add('reps');
+
+        setDiv.appendChild(approachLabel);
+        setDiv.appendChild(weightLabel);
+        setDiv.appendChild(weightInput);
+        setDiv.appendChild(repsLabel);
+        setDiv.appendChild(repsInput);
+
+        setInputsContainer.appendChild(setDiv);
+    });
+
+    document.getElementById('workoutCalculationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let totalWeight = 0;
+        const setElements = document.querySelectorAll('#setInputs > div');
+
+        setElements.forEach((element) => {
+            const weightInput = element.querySelector('.weight');
+            const repsInput = element.querySelector('.reps');
+
+            const weight = parseFloat(weightInput.value);
+            const reps = parseInt(repsInput.value);
+
+            totalWeight += weight * reps;
+        });
+
+        document.getElementById('totalWeight').innerText = `Общий поднятый вес: ${totalWeight} кг`;
+    });
+</script>
+</body>
+</html>

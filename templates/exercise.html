@@ -1,80 +1,63 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Кодировка и настройки для адаптивного отображения -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тренировка</title>
-
-    <!-- Подключение внешнего CSS-файла -->
+    <title>Ввод тренировки</title>
     <link rel="stylesheet" href="../static/css/styles.css">
-
 </head>
 <body>
 <h1>Ввод тренировки</h1>
 
-
-<style>
-    /* Убираем стрелки в Chrome, Safari, Edge */
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    /* Убираем стрелки в Firefox */
-    input[type="number"] {
-        -moz-appearance: textfield;
-    }
-</style>
-
-
-<form id="workoutForm" method="POST" action="/save_workout">
-    <label for="exercise">Наименование упражнения:</label>
-    <input type="text" id="exercise" name="exercise" placeholder="Жим лежа" required>
-
+<form id="workoutForm" method="POST" action="/workout_data">
     <label for="sets">Количество подходов:</label>
     <input type="number" id="sets" name="sets" min="1" value="1" required>
 
     <div id="setInputs"></div>
 
-    <button type="submit">Рассчитать</button>
+    <button type="submit">Далее</button>
 </form>
 
-
-<p class="result" id="totalWeight"></p>
-
 <script>
-    document.getElementById('workoutForm').addEventListener('submit', function(event) {
-        const setElements = document.querySelectorAll('#setInputs > div');
-        let totalWeight = 0;
-        let workoutData = [];
+    document.getElementById('sets').addEventListener('change', function() {
+        const setsCount = parseInt(this.value);
+        const setInputsContainer = document.getElementById('setInputs');
+        setInputsContainer.innerHTML = '';
 
-        setElements.forEach((element, index) => {
-            const weightInput = element.querySelector('.weight');
-            const repsInput = element.querySelector('.reps');
+        for (let i = 1; i <= setsCount; i++) {
+            const setDiv = document.createElement('div');
+            setDiv.className = 'set';
 
-            if (!weightInput || !repsInput) return;
+            const approachLabel = document.createElement('span');
+            approachLabel.textContent = `Подход ${i}`;
+            approachLabel.style.fontWeight = 'bold';
+            approachLabel.style.marginBottom = '10px';
+            approachLabel.style.display = 'block';
 
-            const weight = parseFloat(weightInput.value);
-            const reps = parseInt(repsInput.value);
+            const weightLabel = document.createElement('label');
+            weightLabel.textContent = 'Вес:';
+            const weightInput = document.createElement('input');
+            weightInput.type = 'number';
+            weightInput.min = '0';
+            weightInput.step = '0.5';
+            weightInput.classList.add('weight');
 
-            workoutData.push({ weight, reps });
-            totalWeight += weight * reps;
-        });
+            const repsLabel = document.createElement('label');
+            repsLabel.textContent = 'Повторения:';
+            const repsInput = document.createElement('input');
+            repsInput.type = 'number';
+            repsInput.min = '1';
+            repsInput.classList.add('reps');
 
-        // Добавление скрытого поля с JSON-данными о подходах
-        const hiddenField = document.createElement('input');
-        hiddenField.type = 'hidden';
-        hiddenField.name = 'workoutData';
-        hiddenField.value = JSON.stringify(workoutData);
+            setDiv.appendChild(approachLabel);
+            setDiv.appendChild(weightLabel);
+            setDiv.appendChild(weightInput);
+            setDiv.appendChild(repsLabel);
+            setDiv.appendChild(repsInput);
 
-        this.appendChild(hiddenField);
-
-        // Также можно показать общий вес на странице
-        document.getElementById('totalWeight').innerText = `Общий поднятый вес: ${totalWeight} кг`;
+            setInputsContainer.appendChild(setDiv);
+        }
     });
-
 </script>
 </body>
 </html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренировка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>Ввод тренировки</h1>
+
+<form id="workoutForm">
+    <label for="exercise">Наименование упражнения:</label>
+    <input type="text" id="exercise" placeholder="Жим лежа" required>
+
+    <label for="sets">Количество подходов:</label>
+    <input type="number" id="sets" min="1" value="1" required>
+
+    <div id="setInputs"></div>
+
+    <button type="submit">Рассчитать</button>
+</form>
+
+<p class="result" id="totalWeight"></p>
+
+<script>
+    document.getElementById('workoutForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const exercise = document.getElementById('exercise').value;
+        const sets = parseInt(document.getElementById('sets').value);
+        let totalWeight = 0;
+
+        // Получаем все введённые веса и повторения
+        const setElements = document.querySelectorAll('#setInputs > div');
+        setElements.forEach((element, index) => {
+            const weightInput = element.querySelector('.weight');
+            const repsInput = element.querySelector('.reps');
+
+            if (!weightInput || !repsInput) return;
+
+            const weight = parseFloat(weightInput.value);
+            const reps = parseInt(repsInput.value);
+
+            totalWeight += weight * reps;
+        });
+
+        document.getElementById('totalWeight').innerText = `Общий поднятый вес: ${totalWeight} кг`;
+    });
+
+    document.getElementById('sets').addEventListener('change', function() {
+        const setsCount = parseInt(this.value);
+        const setInputsContainer = document.getElementById('setInputs');
+        setInputsContainer.innerHTML = '';
+
+        for (let i = 1; i <= setsCount; i++) {
+            const setDiv = document.createElement('div');
+            setDiv.className = 'set';
+
+            const weightLabel = document.createElement('label');
+            weightLabel.textContent = `Вес для подхода ${i}:`;
+            const weightInput = document.createElement('input');
+            weightInput.type = 'number';
+            weightInput.min = '0';
+            weightInput.step = '0.5';
+            weightInput.classList.add('weight');
+
+            const repsLabel = document.createElement('label');
+            repsLabel.textContent = `Повторения для подхода ${i}:`;
+            const repsInput = document.createElement('input');
+            repsInput.type = 'number';
+            repsInput.min = '1';
+            repsInput.classList.add('reps');
+
+            setDiv.appendChild(weightLabel);
+            setDiv.appendChild(weightInput);
+            setDiv.appendChild(repsLabel);
+            setDiv.appendChild(repsInput);
+
+            setInputsContainer.appendChild(setDiv);
+        }
+    });
+</script>
+</body>
+</html>

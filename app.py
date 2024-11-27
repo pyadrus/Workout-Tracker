@@ -2,37 +2,31 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+# Стартовая страница
 @app.route('/')
 def index():
     return render_template('index.html')
 
+# Страница ввода тренировки
+@app.route('/exercise/<day>', methods=['GET', 'POST'])
+def exercise(day):
+    if request.method == 'POST':
+        sets = int(request.form['sets'])
+        return render_template('workout_calculation.html', sets=sets, day=day)
+    return render_template('exercise.html', day=day)
 
-@app.route('/exercise')
-def exercise():
-    return render_template('exercise.html')
-
-
-@app.route('/workout_data', methods=['POST'])
+# Страница для получения данных о подходах и их сохранения
+@app.route('/workout_calculation', methods=['POST'])
 def workout_data():
-    sets = int(request.form['sets'])
-    workout_data = []
-
-    # Собираем данные о подходах
+    total_weight = 0
+    # Получаем все веса и повторения из формы
+    sets = int(request.form['sets'])  # Количество подходов
     for i in range(sets):
-        workout_data.append({
-            'weight': 0,  # Изначально вес 0
-            'reps': 0     # Изначально повторений 0
-        })
+        weight = float(request.form[f'set[{i}][weight]'])  # Вес
+        reps = int(request.form[f'set[{i}][reps]'])  # Повторения
+        total_weight += weight * reps
 
-    # Передаем данные о подходах на страницу для расчета
-    return render_template('workout_calculation.html', workout_data=workout_data)
-
-@app.route('/calculate_workout', methods=['POST'])
-def calculate_workout():
-    workout_data = request.form.getlist('workoutData')
-    total_weight = sum([float(data.split(',')[0]) * int(data.split(',')[1]) for data in workout_data])
-
-    return f'Общий поднятый вес: {total_weight} кг'
+    return render_template('workout_result.html', total_weight=total_weight)
 
 if __name__ == '__main__':
     app.run(debug=True)

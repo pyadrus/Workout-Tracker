@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ввод тренировки</title>
+    <title>Ввод тренировки - {{ day }}</title>
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-<h1>Ввод тренировки</h1>
+<h1>Ввод тренировки - {{ day }}</h1>
 
-<form id="workoutForm" method="POST" action="/workout_data">
+<form id="workoutForm" method="POST">
     <label for="sets">Количество подходов:</label>
     <input type="number" id="sets" name="sets" min="1" value="1" required>
 
@@ -18,46 +18,5 @@
     <button type="submit">Далее</button>
 </form>
 
-<script>
-    document.getElementById('sets').addEventListener('change', function() {
-        const setsCount = parseInt(this.value);
-        const setInputsContainer = document.getElementById('setInputs');
-        setInputsContainer.innerHTML = '';
-
-        for (let i = 1; i <= setsCount; i++) {
-            const setDiv = document.createElement('div');
-            setDiv.className = 'set';
-
-            const approachLabel = document.createElement('span');
-            approachLabel.textContent = `Подход ${i}`;
-            approachLabel.style.fontWeight = 'bold';
-            approachLabel.style.marginBottom = '10px';
-            approachLabel.style.display = 'block';
-
-            const weightLabel = document.createElement('label');
-            weightLabel.textContent = 'Вес:';
-            const weightInput = document.createElement('input');
-            weightInput.type = 'number';
-            weightInput.min = '0';
-            weightInput.step = '0.5';
-            weightInput.classList.add('weight');
-
-            const repsLabel = document.createElement('label');
-            repsLabel.textContent = 'Повторения:';
-            const repsInput = document.createElement('input');
-            repsInput.type = 'number';
-            repsInput.min = '1';
-            repsInput.classList.add('reps');
-
-            setDiv.appendChild(approachLabel);
-            setDiv.appendChild(weightLabel);
-            setDiv.appendChild(weightInput);
-            setDiv.appendChild(repsLabel);
-            setDiv.appendChild(repsInput);
-
-            setInputsContainer.appendChild(setDiv);
-        }
-    });
-</script>
 </body>
 </html>

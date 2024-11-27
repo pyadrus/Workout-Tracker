@@ -10,14 +10,14 @@ body {
     background-color: #f4f4f4;
     color: #333;
     line-height: 1.6;
-    padding: 20px;
+    padding: 10px;
 }
 
 /* Контейнер для контента */
 .container {
     max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
+    margin: 20px auto;
+    padding: 15px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -25,16 +25,16 @@ body {
 
 /* Заголовок */
 .title, h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
 }
 
 /* Формы */
 form {
-    max-width: 400px;
-    margin: 0 auto 30px;
+    max-width: 100%;
+    margin: 0 auto 20px;
     padding: 15px;
     background-color: white;
     border: 1px solid #ccc;
@@ -52,7 +52,7 @@ label {
 /* Поля ввода */
 input[type="number"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -71,7 +71,6 @@ button, .btn {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
-    text-decoration: none;
 }
 
 button:hover, .btn:hover {
@@ -83,11 +82,10 @@ ul {
     list-style-type: none;
     padding: 0;
     margin: 20px 0;
-    text-align: center;
 }
 
 ul li {
-    padding: 15px;
+    padding: 12px;
     margin: 10px 0;
     background-color: #4CAF50;
     color: white;
@@ -104,7 +102,7 @@ ul li:hover {
 .result {
     font-size: 1.2rem;
     color: #4CAF50;
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: center;
     font-weight: bold;
 }
@@ -118,4 +116,32 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    form {
+        padding: 10px;
+        border: none;
+        box-shadow: none;
+    }
+
+    input[type="number"],
+    button {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    ul li {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
 }

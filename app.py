@@ -3,10 +3,12 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
+name_user = "Шварц" # Имя пользователя, в бальнейшем бкрем из базы данных
+
 @app.route('/')
 def index():
     """Стартовая страница с выбором дня недели"""
-    return render_template('index.html')
+    return render_template('index.html', name_user=name_user)
 
 
 @app.route('/types_of_exercises/<day>')

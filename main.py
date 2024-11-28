@@ -1,9 +1,9 @@
+from typing import List
+
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from typing import List
-from typing import Union
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 

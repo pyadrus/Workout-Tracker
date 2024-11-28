@@ -1,1 +1,3 @@
-Flask
+fastapi[standard]
+python-multipart
+uvicorn[standard]

@@ -91,10 +91,10 @@
             position: absolute;
             left: 0;
         }
-        
+
         #menu-toggle {
-    display: none;
-}
+            display: none;
+        }
 
         .menu-button::before {
             top: -8px;
@@ -120,14 +120,14 @@
 
 
         .container {
-    width: 100%;
-    max-width: 500px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-}
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
 
         h1 {
             font-size: 1.8rem;
@@ -161,38 +161,38 @@
 
 
         .profile-container {
-    width: 90%;
-    max-width: 400px;
-    background-color: #1c1c1e;
-    border-radius: 20px;
-    padding: 20px;
-}
+            width: 90%;
+            max-width: 400px;
+            background-color: #1c1c1e;
+            border-radius: 20px;
+            padding: 20px;
+        }
 
-.profile-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.profile-header h2 {
-    font-size: 1.5rem;
-}
+        .profile-header h2 {
+            font-size: 1.5rem;
+        }
 
-.profile-info {
-    text-align: center;
-    margin: 20px 0;
-}
+        .profile-info {
+            text-align: center;
+            margin: 20px 0;
+        }
 
-.profile-picture {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 4px solid #555;
-}
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #555;
+        }
 
-.phone-number {
-    color: #aaa;
-}
+        .phone-number {
+            color: #aaa;
+        }
 
         /* Адаптация для мобильных устройств */
         @media (max-width: 700px) {
@@ -201,46 +201,154 @@
                 padding: 10px;
             }
         }
+
+        /* From Uiverse.io by eslam-hany */
+
+        .button-container {
+            width: 100%; /* Сделать контейнер адаптивным */
+            max-width: 300px; /* Максимальная ширина */
+        }
+
+        .button-container {
+
+            display: flex;
+            background-color: rgba(0, 73, 144);
+            width: 250px;
+            max-width: 300px; /* Увеличенная ширина */
+            height: 40px;
+            align-items: center;
+            justify-content: space-around;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px,
+            rgba(0, 73, 144, 0.5) 5px 10px 15px;
+            transition: all 0.5s;
+        }
+        .button-container:hover {
+            width: 300px;
+            transition: all 0.5s;
+        }
+
+        .button {
+            outline: 0 !important;
+            border: 0 !important;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: all ease-in-out 0.3s;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .icon {
+            font-size: 20px;
+        }
+
     </style>
 </head>
 
 <body>
 
-    <!-- Шапка с гамбургер-меню -->
-    <section class="top-nav">
-        <div>Workout Tracker</div>
-        <input id="menu-toggle" type="checkbox" />
-        <label class="menu-button-container" for="menu-toggle">
-            <div class="menu-button"></div>
-        </label>
-        <ul class="menu">
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="about_us.html">О нас</a></li>
-            <li><a href="сontacts.html">Контакты</a></li>
-            <li><a href="settings.html">Настройки</a></li>
-        </ul>
-    </section>
+<!-- Шапка с гамбургер-меню -->
+<section class="top-nav">
+    <div>Workout Tracker</div>
+    <input id="menu-toggle" type="checkbox"/>
+    <label class="menu-button-container" for="menu-toggle">
+        <div class="menu-button"></div>
+    </label>
+    <ul class="menu">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about_us.html">О нас</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+        <li><a href="settings.html">Настройки</a></li>
+    </ul>
+</section>
 
-    <!-- Контейнер с контентом -->
-    <div class="container">
+<!-- Контейнер с контентом -->
+<div class="container">
 
-        <!-- Информация о пользователе -->
-        <div class="profile-info">
-            <img src="avatar.jpg" alt="Profile Picture" class="profile-picture">
-            <h3>Шварц</h3>
-            <p class="phone-number">8876116536</p>
-        </div>
-
-        <p>С этим Telegram-ботом вы добьетесь небывалых высот и станете настоящей звездой!</p>
-
-        <!-- Кнопки -->
-        <button class="button2">Посмотреть результаты</button>
-        <button class="button2">Посмотреть тренировки</button>
-        <button class="button2">Сформировать тренировки</button>
-        <button class="button2">Мои данные</button>
-        <button class="button2">Тренировки</button>
-        <button class="button2">Питание</button>
+    <!-- Информация о пользователе -->
+    <div class="profile-info">
+        <img src="avatar.jpg" alt="Profile Picture" class="profile-picture">
+        <h3>Шварц</h3>
+        <p class="phone-number">8876116536</p>
     </div>
+
+    <p>С этим Telegram-ботом вы добьетесь небывалых высот и станете настоящей звездой!</p>
+
+    <!-- Кнопки -->
+    <button class="button2">Посмотреть результаты</button>
+    <button class="button2">Посмотреть тренировки</button>
+    <button class="button2">Сформировать тренировки</button>
+    <button class="button2">Мои данные</button>
+    <button class="button2">Тренировки</button>
+    <button class="button2">Питание</button>
+
+
+    <div class="button-container">
+        <button class="button">
+            <svg
+                    class="icon"
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 1024 1024"
+                    height="1em"
+                    width="1em"
+
+            >
+                <path
+                        d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"
+                ></path>
+            </svg>
+        </button>
+        <button class="button">
+            <svg
+                    class="icon"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    height="1em"
+                    width="1em"
+
+            >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+            </svg>
+        </button>
+        <button class="button">
+            <svg
+                    class="icon"
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 24 24"
+                    height="1em"
+                    width="1em"
+
+            >
+                <path
+                        d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"
+                ></path>
+            </svg>
+        </button>
+
+    </div>
+
+
+</div>
 
 </body>
 

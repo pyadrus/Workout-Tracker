@@ -15,7 +15,12 @@ name_user = "Шварц"  # Имя пользователя, в дальнейш
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    """Стартовая страница с выбором дня недели."""
+    """
+    Стартовая страница
+
+    :param request: Request
+    :return: HTMLResponse
+    """
     return templates.TemplateResponse("index.html", {"request": request, "name_user": name_user})
 
 

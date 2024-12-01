@@ -1,10 +1,354 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Среда</title>
+    <style>
+        /* Сброс стандартных стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* CSS Переменные для гибкости */
+        :root {
+            --primary-color: #009087;
+            --hover-color: #009087;
+            --text-color: #333;
+            --background-color: #f4f4f4;
+            --white-color: white;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --button-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Шапка с гамбургер-меню */
+        .top-nav {
+            width: 100%;  /* Ширина */
+            max-width: 500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to left, #4CAF50, #5ccf60);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .menu-button-container {
+            display: flex;
+            cursor: pointer;
+        }
+
+        .menu {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            list-style-type: none;
+            margin-top: 10px;
+            padding-left: 0;
+        }
+
+        #menu-toggle:checked + .menu-button-container + .menu {
+            display: flex;
+        }
+
+        .menu > li {
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: white;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .menu > li:hover {
+            background-color: var(--hover-color);
+            color: white;
+        }
+
+        /* Кнопка-гамбургер */
+        .menu-button,
+        .menu-button::before,
+        .menu-button::after {
+            background-color: #fff;
+            height: 4px;
+            width: 30px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .menu-button {
+            position: relative;
+        }
+
+        .menu-button::before,
+        .menu-button::after {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-button::before {
+            top: -8px;
+        }
+
+        .menu-button::after {
+            top: 8px;
+        }
+
+        #menu-toggle:checked + .menu-button-container .menu-button {
+            background: transparent;
+        }
+
+        #menu-toggle:checked + .menu-button-container .menu-button::before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        #menu-toggle:checked + .menu-button-container .menu-button::after {
+            transform: rotate(-45deg);
+            top: 0;
+        }
+
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        /* Стили для кнопок */
+        .button2 {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 0.5em;
+            background: #e8e8e8;
+            border: 1px solid #e8e8e8;
+            box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+            transition: all 0.2s ease-in;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .button2:hover {
+            color: white;
+            background-color: var(--hover-color);
+            border-color: var(--hover-color);
+        }
+
+
+        .profile-container {
+            width: 90%;
+            max-width: 400px;
+            background-color: #1c1c1e;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profile-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .profile-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #555;
+        }
+
+        .phone-number {
+            color: #aaa;
+        }
+
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 700px) {
+            .button2 {
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+
+        /* From Uiverse.io by eslam-hany */
+
+        .button-container {
+            width: 100%;
+            max-width: 500px;  /* Увеличьте максимальную ширину контейнера */
+            height: 60px;      /* Увеличьте высоту */
+            padding: 5px;      /* Добавьте отступы для большего пространства между кнопками */
+            border-radius: 15px;  /* Сделайте углы более округлыми */
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            transition: all 0.5s;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--hover-color);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;  /* Для равномерного распределения кнопок */
+            align-items: center;
+            gap: 60px;  /* Увеличьте расстояние между кнопками */
+        }
+
+        .button {
+            outline: 0 !important;
+            border: 0 !important;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: all ease-in-out 0.3s;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .icon {
+            font-size: 20px;
+        }
+
+    </style>
 </head>
+
 <body>
 
+<!-- Шапка с гамбургер-меню -->
+<section class="top-nav">
+    <div>Workout Tracker</div>
+    <input id="menu-toggle" type="checkbox"/>
+    <label class="menu-button-container" for="menu-toggle">
+        <div class="menu-button"></div>
+    </label>
+    <ul class="menu">
+        <li><a href="../index.html">Главная</a></li>
+        <li><a href="../about_us.html">О нас</a></li>
+        <li><a href="../contacts.html">Контакты</a></li>
+        <li><a href="../settings.html">Настройки</a></li>
+    </ul>
+</section>
+
+<!-- Контейнер с контентом -->
+<div class="container">
+
+    <p>Среда</p>
+
+    <!-- Кнопки -->
+    <!--    <button class="button2"><a href="day_of_the_week/monday.html">Понедельник</a></button>-->
+    <!--    <button class="button2"><a href="day_of_the_week/tuesday.html">Вторник</a></button>-->
+    <!--    <button class="button2"><a href="day_of_the_week/wednesday.html">Среда</a></button>-->
+    <!--    <button class="button2"><a href="day_of_the_week/tuesday.html">Четверг</a></button>-->
+    <!--    <button class="button2"><a href="day_of_the_week/friday.html">Пятница</a></button>-->
+    <!--    <button class="button2"><a href="day_of_the_week/saturday.html">Суббота</a></button>-->
+    <!--    <button class="button2"><a href="day_of_the_week/sunday.html">Воскресенье</a></button>-->
+
+
+    <!--    Кнопка возврата в начальное меню-->
+    <button class="button2"><a href="../index.html">В главное меню</a></button>
+
+
+    <div class="button-container">
+        <button class="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="feather feather-trello">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <rect x="7" y="7" width="3" height="9"></rect>
+                <rect x="14" y="7" width="3" height="5"></rect>
+            </svg>
+        </button>
+        <button class="button">
+            <svg
+                    class="icon"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    height="1em"
+                    width="1em"
+
+            >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+            </svg>
+        </button>
+        <button class="button">
+            <svg
+                    class="icon"
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 24 24"
+                    height="1em"
+                    width="1em"
+
+            >
+                <path
+                        d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"
+                ></path>
+            </svg>
+        </button>
+
+    </div>
+
+
+</div>
+
 </body>
+
 </html>

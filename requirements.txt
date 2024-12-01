@@ -1,8 +1,8 @@
-fastapi[standard]~=0.115.4
+fastapi[standard]
 python-multipart
 uvicorn[standard]
-aiogram~=3.13.1
-python-dotenv~=1.0.1
+aiogram
+python-dotenv
 aiogram
 python-dotenv
 sqlalchemy

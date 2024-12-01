@@ -13,9 +13,20 @@
             box-sizing: border-box;
         }
 
+        /* CSS Переменные для гибкости */
+        :root {
+            --primary-color: #009087;
+            --hover-color: #009087;
+            --text-color: #333;
+            --background-color: #f4f4f4;
+            --white-color: white;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --button-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: var(--background-color);
             color: #333;
             display: flex;
             flex-direction: column;
@@ -27,7 +38,7 @@
 
         /* Шапка с гамбургер-меню */
         .top-nav {
-            width: 100%;
+            width: 100%;  /* Ширина */
             max-width: 500px;
             display: flex;
             justify-content: space-between;
@@ -66,7 +77,7 @@
         }
 
         .menu > li:hover {
-            background-color: #009087;
+            background-color: var(--hover-color);
             color: white;
         }
 
@@ -132,7 +143,7 @@
         h1 {
             font-size: 1.8rem;
             margin-bottom: 20px;
-            color: #4CAF50;
+            color: var(--primary-color);
         }
 
         /* Стили для кнопок */
@@ -155,8 +166,8 @@
 
         .button2:hover {
             color: white;
-            background-color: #009087;
-            border-color: #009087;
+            background-color: var(--hover-color);
+            border-color: var(--hover-color);
         }
 
 
@@ -205,26 +216,24 @@
         /* From Uiverse.io by eslam-hany */
 
         .button-container {
-            width: 100%; /* Сделать контейнер адаптивным */
-            max-width: 300px; /* Максимальная ширина */
+            width: 100%;
+            max-width: 500px;  /* Увеличьте максимальную ширину контейнера */
+            height: 60px;      /* Увеличьте высоту */
+            padding: 5px;      /* Добавьте отступы для большего пространства между кнопками */
+            border-radius: 15px;  /* Сделайте углы более округлыми */
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            transition: all 0.5s;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--hover-color);
         }
 
         .button-container {
             display: flex;
-            background-color: #009087;
-            width: 250px;
-            max-width: 300px; /* Увеличенная ширина */
-            height: 40px;
+            justify-content: space-between;  /* Для равномерного распределения кнопок */
             align-items: center;
-            justify-content: space-around;
-            border-radius: 10px;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            transition: all 0.5s;
-        }
-
-        .button-container:hover {
-            width: 300px;
-            transition: all 0.5s;
+            gap: 60px;  /* Увеличьте расстояние между кнопками */
         }
 
         .button {
@@ -283,12 +292,12 @@
     <p>С этим Telegram-ботом вы добьетесь небывалых высот и станете настоящей звездой!</p>
 
     <!-- Кнопки -->
-    <button class="button2">Посмотреть результаты</button>
-    <button class="button2">Посмотреть тренировки</button>
-    <button class="button2">Сформировать тренировки</button>
-    <button class="button2">Мои данные</button>
-    <button class="button2">Тренировки</button>
-    <button class="button2">Питание</button>
+    <button class="button2"><a href="view_results.html">Посмотреть результаты</a></button>
+    <button class="button2"><a href="view_workouts.html">Посмотреть тренировки</a></button>
+    <button class="button2"><a href="сreate_workouts.html">Сформировать тренировки</a></button>
+    <button class="button2"><a href="my_details.html">Мои данные</a></button>
+    <button class="button2"><a href="workout.html">Тренировки</a></button>
+    <button class="button2"><a href="nutrition.html">Питание</a></button>
 
 
     <div class="button-container">

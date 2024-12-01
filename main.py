@@ -38,10 +38,10 @@ async def get_exercise(request: Request, day: str, exercise1: str):
 
 @app.post("/exercise/{day}/{exercise1}", response_class=HTMLResponse)
 async def post_exercise(
-    request: Request,
-    day: str,
-    exercise1: str,
-    sets: int = Form(...),
+        request: Request,
+        day: str,
+        exercise1: str,
+        sets: int = Form(...),
 ):
     """Страница ввода данных о подходах (POST запрос)."""
     return templates.TemplateResponse(
@@ -52,10 +52,10 @@ async def post_exercise(
 
 @app.post("/workout_calculation", response_class=HTMLResponse)
 async def workout_data(
-    request: Request,
-    sets: int = Form(...),
-    weights: List[float] = Form(...),
-    reps: List[int] = Form(...),
+        request: Request,
+        sets: int = Form(...),
+        weights: List[float] = Form(...),
+        reps: List[int] = Form(...),
 ):
     """Получение данных о подходах и их расчет."""
     total_weight = sum(weight * rep for weight, rep in zip(weights, reps))

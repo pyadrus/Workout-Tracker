@@ -17,8 +17,7 @@
 
 ### 1. Клонирование репозитория:
 
-```
-bash
+```bash
 git clone https://github.com/username/workout-tracker.git cd workout-tracker
 ```
 
@@ -26,8 +25,7 @@ git clone https://github.com/username/workout-tracker.git cd workout-tracker
 
 Создайте виртуальное окружение и активируйте его:
 
-```
-bash
+```bash
 python -m venv venv 
 source venv/bin/activate  # Для Linux/macOS 
 venv\Scripts\activate     # Для Windows
@@ -35,15 +33,13 @@ venv\Scripts\activate     # Для Windows
 
 Установите необходимые зависимости:
 
-```
-bash
+```bash
 pip install -r requirements.txt
 ```
 
 ### 3. Запуск приложения:
 
-```
-bash
+```bash
 uvicorn main:app
 ```
 
@@ -62,8 +58,7 @@ uvicorn main:app
 
 ## **Файловая структура:**
 
-```
-csharp
+```csharp
 
 workout-tracker/
 ├── static/
@@ -93,3 +88,9 @@ workout-tracker/
 - Добавление возможности сохранять результаты тренировок.
 - Расширение функционала для просмотра статистики по дням.
 - Поддержка авторизации пользователей.
+
+
+Установка бота
+
+1. установить зависимости requirements.txt
+2. создать файл .env и туда записать переменную TOKEN="токен вашего бота"

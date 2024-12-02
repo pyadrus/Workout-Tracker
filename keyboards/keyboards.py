@@ -22,5 +22,5 @@ def generate_user_options_keyboard():
     return keyboard
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     generate_user_options_keyboard()

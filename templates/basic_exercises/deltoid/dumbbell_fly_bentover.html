@@ -1,10 +1,389 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дельтовидные мышцы</title>
+    <style>
+        /* Сброс стандартных стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* CSS Переменные для гибкости */
+        :root {
+            --primary-color: #009087;
+            --hover-color: #009087;
+            --text-color: #333;
+            --background-color: #f4f4f4;
+            --white-color: white;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --button-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Шапка с гамбургер-меню */
+        .top-nav {
+            width: 100%;  /* Ширина */
+            max-width: 500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to left, #4CAF50, #5ccf60);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .menu-button-container {
+            display: flex;
+            cursor: pointer;
+        }
+
+        .menu {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            list-style-type: none;
+            margin-top: 10px;
+            padding-left: 0;
+        }
+
+        #menu-toggle:checked + .menu-button-container + .menu {
+            display: flex;
+        }
+
+        .menu > li {
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: white;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .menu > li:hover {
+            background-color: var(--hover-color);
+            color: white;
+        }
+
+        /* Кнопка-гамбургер */
+        .menu-button,
+        .menu-button::before,
+        .menu-button::after {
+            background-color: #fff;
+            height: 4px;
+            width: 30px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .menu-button {
+            position: relative;
+        }
+
+        .menu-button::before,
+        .menu-button::after {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-button::before {
+            top: -8px;
+        }
+
+        .menu-button::after {
+            top: 8px;
+        }
+
+        #menu-toggle:checked + .menu-button-container .menu-button {
+            background: transparent;
+        }
+
+        #menu-toggle:checked + .menu-button-container .menu-button::before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        #menu-toggle:checked + .menu-button-container .menu-button::after {
+            transform: rotate(-45deg);
+            top: 0;
+        }
+
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: left; /* Выравнивание текста по левому краю */
+        }
+
+        p, h1, h2, h3, b, i {
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        /* Стили для кнопок */
+        .button2 {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 0.5em;
+            background: #e8e8e8;
+            border: 1px solid #e8e8e8;
+            box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+            transition: all 0.2s ease-in;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .button2:hover {
+            color: white;
+            background-color: var(--hover-color);
+            border-color: var(--hover-color);
+        }
+
+
+        .profile-container {
+            width: 90%;
+            max-width: 400px;
+            background-color: #1c1c1e;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profile-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .profile-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #555;
+        }
+
+        .phone-number {
+            color: #aaa;
+        }
+
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 700px) {
+            .button2 {
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+
+        /* From Uiverse.io by eslam-hany */
+
+        .button-container {
+            width: 100%;
+            max-width: 500px;  /* Увеличьте максимальную ширину контейнера */
+            height: 60px;      /* Увеличьте высоту */
+            padding: 5px;      /* Добавьте отступы для большего пространства между кнопками */
+            border-radius: 15px;  /* Сделайте углы более округлыми */
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            transition: all 0.5s;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--hover-color);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;  /* Для равномерного распределения кнопок */
+            align-items: center;
+            gap: 60px;  /* Увеличьте расстояние между кнопками */
+        }
+
+        .button {
+            outline: 0 !important;
+            border: 0 !important;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: all ease-in-out 0.3s;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .icon {
+            font-size: 20px;
+        }
+
+    </style>
 </head>
+
 <body>
 
+<!-- Шапка с гамбургер-меню -->
+<section class="top-nav">
+    <div>Workout Tracker</div>
+    <input id="menu-toggle" type="checkbox"/>
+    <label class="menu-button-container" for="menu-toggle">
+        <div class="menu-button"></div>
+    </label>
+    <ul class="menu">
+        <li><a href="../../index.html">Главная</a></li>
+        <li><a href="../../about_us.html">О нас</a></li>
+        <li><a href="../../contacts.html">Контакты</a></li>
+        <li><a href="../../settings.html">Настройки</a></li>
+    </ul>
+</section>
+
+<!-- Контейнер с контентом -->
+<div class="container">
+
+    <h1>Дельтовидные мышцы</h1>
+
+    <div style="text-align: center;">
+        <img src="dumbbell_fly_bentover.jpg" alt="Дельтовидные мышцы" width="400">
+    </div>
+
+    <h2>Разведение гантелей в наклоне</h2><br>
+
+    <i>Задние дельты, трапеции и мышцы-вращатели плеча /Формирующее упражнение/ Форма и рельеф задних плеч</i><br><br>
+
+    <b>Разведения в наклоне</b> — изолируют нагрузку на заднюю головку дельт и применяются для того, чтобы придать этому пучку мышц отчетливую бугристую форму, добавить «полосатости» и выделить его на фоне мышц спины.<br>
+
+    Включив разведения в наклоне в программу силовой подготовки, вы улучшите спортивные достижения во всех видах спорта, в которых вы часто подтягиваете руки к телу (плавание, гимнастика) или отводите их назад (стрельба из лука, гребля), совершаете удары руками сверху вниз (волейбол, теннис) или удерживаете соперника возле себя (борьба).<br><br>
+
+    Запомните: чем сильнее задние дельты, тем крепче плечевой сустав.<br>
+
+    <h3>Техника: Разведение гантелей в наклоне</h3><br>
+    1. Возьмите легкие гантели в обе руки нейтральным хватом (ладони смотрят друг на друга).<br>
+    2. Наклонитесь вперед так, чтобы торс был параллелен полу. Спина ровная, чуть прогнута в пояснице.<br>
+    3. Если у вас тугие мышцы задней части бедра, можно слегка согнуть ноги в коленях. Главное — прочно зафиксировать нормальный, S-образный изгиб позвоночника. Но если и это не помогает и вам все-таки тяжело держать торс в таком положении, воспользуйтесь горизонтальной скамьей. Расположитесь на ней так, чтобы почти вся грудь «вылазила» за ее край (скамья не должна мешать разводить гантели), а ноги прочно упирались в пол.<br>
+    4. В исходном положении гантели свисают на выпрямленных руках под грудью. Руки должны быть прочно зафиксированы в локтях до самого конца сета. Их можно чуть-чуть согнуть, перед тем как приступить к выполнению упражнения, но сгибать или разгибать их во время сета не допускается. Все движение происходит только в плечевых суставах, все остальные суставы — неподвижны!<br>
+    5. Сделайте вдох и задержите дыхание. Изо всех сил напрягите задние дельты и трапеции и плавно разведите гантели в стороны, стараясь поднять их как можно выше.<br>
+    6. Обратите особое внимание: руки должны двигаться исключительно в вертикальной плоскости, проходящей через плечи. Не отводите гантели ни назад, ни вперед.<br>
+    7. В верхней точке локти должны быть выше уровня спины.<br>
+    8. Выдохните и плавно опустите гантели в исходное положение. Сделайте короткую паузу и выполните следующее повторение.<br>
+
+    <h3>Советы: Разведение гантелей в наклоне</h3><br>
+    1. Всегда держите спину ровной, чуть прогнутой в пояснице. Даже легкое скругление спины чревато травмой.<br>
+    2. Задержка дыхания во время разведения рук не только стабилизирует положение торса, но и делает вас сильнее.<br>
+    3. Чтобы нагрузить задние дельты по максимуму, опускайте плечи в исходном положении и поднимайте гантели как можно выше уровня спины, но при этом не сводите лопатки вместе.<br>
+    4. Чтобы прицельно отработать средние трапеции и ромбовидные мышцы и добиться их максимального сокращения, обязательно сводите лопатки в верхней точке.<br>
+    5. Не используйте чрезмерно тяжелые гантели. Они могут не дать вам отработать упражнение технически правильно и стать причиной травмы.<br>
+    6. Держите руки выпрямленными или чуть согнутыми в локтях. Имейте в виду: чем больше руки согнуты в локтях, тем короче амплитуда движения и тем меньше нагрузка на задние дельты.<br>
+    7. Вариация упражнения — перекрестные разведения в кроссовере. Поставьте скамью посередине кроссовера так, чтобы ваши плечи оказались в одной вертикальной плоскости с нижними блоками. Прикрепите D-образные рукоятки к тросам, проходящим через эти блоки, и, скрещивая тросы, выполняйте разведения. Однако кроссовер, по сравнению с гантелями, имеет существенный недостаток — вы не можете выполнять разведения по полной амплитуде, так как развести рукоятки выше уровня плеч вам мешают перекрещивающиеся тросы.<br>
+    8. Еще одна вариация — разведения одной рукой в блочном тренажере стоя на коленях. В исходном положении вы становитесь на четвереньки, упираетесь одной рукой в пол и слегка сгибаете ее так, чтобы плечо рабочей руки оказалось приподнятым (иначе во время возвращения в исходную позицию рукоятка будет цепляться за пол).<br><br>
+
+    <h3>Применение: Разведение гантелей в наклоне</h3><br>
+
+    <b>Кому:</b> Всем, от новичка до мастера.<br><br>
+
+    <b>Когда:</b> В конце тренировки плеч. Перед разведениями гантелей в наклоне сделайте жим гантелей/штанги сидя/стоя, разведения гантелей стоя и подъемы перед собой.<br><br>
+
+    <b>Сколько:</b> 3-4 сета по 8-12 повторений.<br><br>
+
+    <!-- Кнопки -->
+    <button class="button2"><a href="../../index.html">В главное меню</a></button>
+
+    <div class="button-container">
+        <button class="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="feather feather-trello">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <rect x="7" y="7" width="3" height="9"></rect>
+                <rect x="14" y="7" width="3" height="5"></rect>
+            </svg>
+        </button>
+        <button class="button">
+            <svg
+                    class="icon"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    height="1em"
+                    width="1em"
+
+            >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+            </svg>
+        </button>
+        <button class="button">
+            <svg
+                    class="icon"
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 24 24"
+                    height="1em"
+                    width="1em"
+
+            >
+                <path
+                        d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"
+                ></path>
+            </svg>
+        </button>
+
+    </div>
+
+
+</div>
+
 </body>
+
 </html>

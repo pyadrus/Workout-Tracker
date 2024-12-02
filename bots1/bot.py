@@ -1,8 +1,9 @@
 # Код запуска бота
+import asyncio
+
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums.parse_mode import ParseMode
-import asyncio
 from data.config import BOT_TOKEN
 from handlers.handler import router
 

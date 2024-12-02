@@ -1,5 +1,4 @@
 import sqlite3
-from logging import exception
 
 from loguru import logger
 

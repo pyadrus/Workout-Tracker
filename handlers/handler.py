@@ -45,7 +45,7 @@ async def start_bot(message: Message) -> None:
 
 
 # Обработчик сообщения с текстом "описание", отправляющий описание бота.
-@router.message(F.text.lower() == "описание")
+@router.message(F.text.lower() == "ℹ️ описание")
 async def description(message: Message) -> None:
     """
     Отправляет описание бота пользователю.

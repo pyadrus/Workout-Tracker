@@ -1,14 +1,22 @@
 # Основной файл Telegram-бота, использующего aiogram для взаимодействия с пользователями.
 # В этом файле создается логика обработки сообщений и FSM (Finite State Machine) для регистрации пользователей.
 
-from aiogram import Router, F
+from aiogram import F, Router
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
 
-from data.text import text_hello_welcome, text_description  # Импорты текстов приветствия и описания.
-from keyboards.keyboards import generate_user_options_keyboard  # Импорт функции для создания клавиатуры.
+from data.text import (  # Импорты текстов приветствия и описания.
+    text_description,
+    text_hello_welcome,
+)
+from database.database import (
+    add_users,  # Импорт функции добавления пользователя в базу
+)
+from keyboards.keyboards import (
+    generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
+)
 
 router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
@@ -49,7 +57,7 @@ async def description(message: Message) -> None:
 
 
 # Обработчик сообщения с текстом "регистрация", начинающий процесс регистрации.
-@router.message(F.text.lower() == "регистрация")
+@router.message(F.text.lower() == "📝 регистрация")
 async def registration(message: Message, state: FSMContext) -> None:
     """
     Начинает процесс регистрации пользователя.
@@ -58,7 +66,7 @@ async def registration(message: Message, state: FSMContext) -> None:
     :param message: Сообщение пользователя с текстом "регистрация".
     :param state: Контекст состояния FSM.
     """
-    await state.update_data(name=message.text)
+    # await state.update_data(name=message.text)
     await state.set_state(Registration.name)
     await message.answer("✍️ Для регистрации введите своё имя")
 
@@ -113,11 +121,13 @@ async def get_training_experience(message: Message, state: FSMContext) -> None:
 async def registration_info(message: Message, state: FSMContext) -> None:
     """
     Завершает процесс регистрации и отображает введенные пользователем данные.
+    Добавляет пользователя в базу данных
 
     Аргументы:
     :param message: Сообщение пользователя с опытом тренировок.
     :param state: Контекст состояния FSM.
     """
+    await state.update_data(training_experience=message.text)
     user_data = await state.get_data()
     await message.answer(
         f"✅ Данные регистрации:\n"
@@ -126,4 +136,12 @@ async def registration_info(message: Message, state: FSMContext) -> None:
         f"⚖️ Вес: {user_data['weight']} кг\n"
         f"🏋️ Опыт тренировок: {user_data['training_experience']}"
     )
+
+    add_users(
+        user_data["name"],
+        user_data["height"],
+        user_data["weight"],
+        user_data["training_experience"],
+    )
+
     await state.clear()  # Сброс состояния после завершения регистрации.

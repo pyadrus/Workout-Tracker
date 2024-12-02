@@ -1,8 +1,10 @@
 # Код для запуска Telegram-бота с использованием aiogram.
+import asyncio
+
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums.parse_mode import ParseMode
-import asyncio
+
 from data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
 from handlers.handler import router  # Импорт маршрутизатора с обработчиками.
 

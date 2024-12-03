@@ -1,4 +1,10 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import (
+    KeyboardButton,
+    ReplyKeyboardMarkup,
+    InlineKeyboardMarkup,
+    InlineKeyboardButton,
+)
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
 def generate_user_options_keyboard():
@@ -75,7 +81,33 @@ def generate_keyboard_personal_account():
     return keyboard
 
 
+def generate_inline_keyboard_update_data():
+    """
+    :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
+    """
+
+    kb = [
+        [
+            InlineKeyboardButton(
+                text="Мой хабр", url="https://habr.com/ru/users/yakvenalex/"
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="Мой Telegram", url="tg://resolve?domain=yakvenalexx"
+            )
+        ],
+    ]
+    # keyboard = ReplyKeyboardMarkup(
+    #     keyboard=kb,
+    #     resize_keyboard=True,  # Уменьшает размер кнопок для удобства.
+    #     input_field_placeholder="👇 Выберите один из вариантов",  # Подсказка в поле ввода.
+    # )
+    return InlineKeyboardMarkup(inline_keyboard=kb)
+
+
 if __name__ == "__main__":
     generate_user_options_keyboard()
     generate_authorized_user_options_keyboard()
     generate_keyboard_personal_account()
+    generate_inline_keyboard_update_data()

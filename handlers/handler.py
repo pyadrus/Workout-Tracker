@@ -21,6 +21,7 @@ from keyboards.keyboards import (
     generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
     generate_keyboard_personal_account,
     generate_authorized_user_options_keyboard,
+    generate_inline_keyboard_update_data,
 )
 
 router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
@@ -183,6 +184,7 @@ async def user_data(message: Message) -> None:
             f"📏 Рост: {height} см\n"
             f"⚖️ Вес: {weight} кг\n"
             f"🏋️ Опыт тренировок: {training_experience}",
+            reply_markup=generate_inline_keyboard_update_data(),
         )
 
 

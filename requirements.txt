@@ -4,5 +4,4 @@ uvicorn[standard]
 aiogram
 python-dotenv
 aiogram
-python-dotenv
-sqlalchemy
+loguru

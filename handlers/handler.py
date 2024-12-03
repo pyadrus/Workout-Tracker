@@ -10,12 +10,18 @@ from aiogram.types import Message
 from data.text import (  # Импорты текстов приветствия и описания.
     text_description,
     text_hello_welcome,
+    text_authorized_user_greeting,
 )
 from database.database import (
     add_users,  # Импорт функции добавления пользователя в базу
+    get_user_data,  # Импорт функции получения пользователя из базы
+    update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
 from keyboards.keyboards import (
     generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
+    generate_keyboard_personal_account,
+    generate_authorized_user_options_keyboard,
+    generate_inline_keyboard_update_data,
 )
 
 router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
@@ -38,10 +44,17 @@ async def start_bot(message: Message) -> None:
     :param message: Сообщение пользователя с командой /start.
     """
     username = message.from_user.username
-    await message.answer(
-        f"👋 Приветствую тебя, @{username}{text_hello_welcome()}",
-        reply_markup=generate_user_options_keyboard(),
-    )
+    data_user = get_user_data(username)
+    if not data_user:
+        await message.answer(
+            f"👋 Приветствую тебя, @{username}{text_hello_welcome()}",
+            reply_markup=generate_user_options_keyboard(),
+        )
+    else:
+        await message.answer(
+            f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
+            reply_markup=generate_authorized_user_options_keyboard(),
+        )
 
 
 # Обработчик сообщения с текстом "описание", отправляющий описание бота.
@@ -130,14 +143,17 @@ async def registration_info(message: Message, state: FSMContext) -> None:
     await state.update_data(training_experience=message.text)
     user_data = await state.get_data()
     await message.answer(
+        f"Вы успешно зарегистрировались!\n\n"
         f"✅ Данные регистрации:\n"
         f"👤 Имя: {user_data['name']}\n"
         f"📏 Рост: {user_data['height']} см\n"
         f"⚖️ Вес: {user_data['weight']} кг\n"
-        f"🏋️ Опыт тренировок: {user_data['training_experience']}"
+        f"🏋️ Опыт тренировок: {user_data['training_experience']}",
+        reply_markup=generate_authorized_user_options_keyboard(),
     )
-
+    username = message.from_user.username
     add_users(
+        username,
         user_data["name"],
         user_data["height"],
         user_data["weight"],
@@ -145,3 +161,43 @@ async def registration_info(message: Message, state: FSMContext) -> None:
     )
 
     await state.clear()  # Сброс состояния после завершения регистрации.
+
+
+# Обработчик состояния просмотра личного кабинета
+@router.message(F.text.lower() == "⚙️ личный кабинет")
+async def users_personal_account(message: Message) -> None:
+    await message.answer(
+        "Вы вошли в личный кабинет", reply_markup=generate_keyboard_personal_account()
+    )
+
+
+# Обработчик состояния просмотря личных данных при регистрации
+@router.message(F.text.lower() == "📋 просмотр данных")
+async def user_data(message: Message) -> None:
+    username = message.from_user.username
+    data_user = get_user_data(username)
+    if data_user:
+        _, name, height, weight, training_experience = data_user
+        await message.answer(
+            f"📋 Ваш профиль:\n"
+            f"👤 Имя: {name}\n"
+            f"📏 Рост: {height} см\n"
+            f"⚖️ Вес: {weight} кг\n"
+            f"🏋️ Опыт тренировок: {training_experience}",
+            reply_markup=generate_inline_keyboard_update_data(),
+        )
+
+
+# Обработчик состояния вернутся в основное меню
+@router.message(F.text.lower() == "✏️ изменение данных")
+async def back_to_main_menu(message: Message) -> None:
+    await message.answer("изменение данных")
+
+
+# Обработчик состояния вернутся в основное меню
+@router.message(F.text.lower() == "🔙 назад")
+async def back_to_main_menu(message: Message) -> None:
+    await message.answer(
+        "Вы вернулись в сновное меню",
+        reply_markup=generate_authorized_user_options_keyboard(),
+    )

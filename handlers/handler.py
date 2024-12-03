@@ -5,7 +5,7 @@ from aiogram import F, Router
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardRemove
 
 from data.text import (  # Импорты текстов приветствия и описания.
     text_description,
@@ -15,7 +15,7 @@ from data.text import (  # Импорты текстов приветствия 
 from database.database import (
     add_users,  # Импорт функции добавления пользователя в базу
     get_user_data,  # Импорт функции получения пользователя из базы
-    update_user_data,  # Импорт функции изменения данных пользователя в базе
+    # Импорт функции изменения данных пользователя в базе
 )
 from keyboards.keyboards import (
     generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
@@ -23,6 +23,8 @@ from keyboards.keyboards import (
     generate_authorized_user_options_keyboard,
     generate_inline_keyboard_update_data,
 )
+
+from loguru import logger
 
 router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
@@ -34,6 +36,8 @@ class Registration(StatesGroup):
     training_experience = State()  # Состояние ввода опыта тренировок.
 
 
+
+
 # Обработчик команды /start, отправляющий приветственное сообщение и клавиатуру с вариантами.
 @router.message(CommandStart())
 async def start_bot(message: Message) -> None:
@@ -43,18 +47,29 @@ async def start_bot(message: Message) -> None:
     Аргументы:
     :param message: Сообщение пользователя с командой /start.
     """
+
     username = message.from_user.username
-    data_user = get_user_data(username)
-    if not data_user:
-        await message.answer(
+    user_id = message.from_user.id
+
+    logger.info(f"Пользователь id: {user_id}, username: {username}")
+
+    # data_user = get_user_data(username)
+
+    # await message.answer(
+    #     "Клавиатура убрана.",
+    #     reply_markup=ReplyKeyboardRemove()  # Убирает клавиатуру.
+    # )
+
+    # if not data_user:
+    await message.answer(
             f"👋 Приветствую тебя, @{username}{text_hello_welcome()}",
             reply_markup=generate_user_options_keyboard(),
         )
-    else:
-        await message.answer(
-            f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
-            reply_markup=generate_authorized_user_options_keyboard(),
-        )
+    # else:
+    #     await message.answer(
+    #         f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
+    #         reply_markup=generate_authorized_user_options_keyboard(),
+    #     )
 
 
 # Обработчик сообщения с текстом "описание", отправляющий описание бота.

@@ -4,32 +4,27 @@ from aiogram.types import (
     InlineKeyboardMarkup,
     InlineKeyboardButton,
 )
-from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+from aiogram.types import WebAppInfo
 
 
 def generate_user_options_keyboard():
     """
     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
 
-    :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
+    :return: Объект InlineKeyboardMarkup с кнопками для выбора.
     """
-
     kb = [
         [
-            KeyboardButton(
-                text="📝 Регистрация"
-            ),  # Кнопка для начала процесса регистрации.
-            KeyboardButton(
-                text="ℹ️ Описание"
-            ),  # Кнопка для отображения описания проекта.
-        ]
+            InlineKeyboardButton(text="📝 Регистрация", callback_data="register"),
+            InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
+        ],
+        [
+            InlineKeyboardButton(text="В бота", web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"))
+        ],
     ]
-    keyboard = ReplyKeyboardMarkup(
-        keyboard=kb,
-        resize_keyboard=True,  # Уменьшает размер кнопок для удобства.
-        input_field_placeholder="👇 Выберите один из вариантов",  # Подсказка в поле ввода.
-    )
-    return keyboard
+
+    return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
 def generate_authorized_user_options_keyboard():

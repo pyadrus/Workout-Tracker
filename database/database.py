@@ -3,9 +3,7 @@ import sqlite3
 from loguru import logger
 
 
-def add_users(
-    username: str, name: str, height: str, weight: str, training_experience: str
-) -> None:
+def add_users(username: str, name: str, height: str, weight: str, training_experience: str) -> None:
     """
     Добавляет нового пользователя
 
@@ -61,11 +59,11 @@ def get_user_data(username: str) -> None:
 
 
 def update_user_data(
-    username: str,
-    name: str = None,
-    height: str = None,
-    weight: str = None,
-    training_experience: str = None,
+        username: str,
+        name: str = None,
+        height: str = None,
+        weight: str = None,
+        training_experience: str = None,
 ) -> None:
     """
     Редактировать пользователя из базы

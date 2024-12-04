@@ -99,7 +99,6 @@ def update_user_data(
             cursor = connection.cursor()
             query = f"UPDATE users SET {', '.join(updates)} WHERE username = ?"
             cursor.execute(query, values)
-            print(query)
 
     except Exception as error:
         logger.exception(error)

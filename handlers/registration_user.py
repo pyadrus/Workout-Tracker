@@ -67,6 +67,22 @@ async def get_height(message: Message, state: FSMContext) -> None:
     await message.answer("⚖️ Введите свой вес в килограммах")
 
 
+def is_float(value: str):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
+
+def is_int(value: str) -> bool:
+    try:
+        int(value)
+        return True
+    except ValueError:
+        return False
+
+
 # Обработчик состояния ввода веса пользователя.
 @routerrrr.message(Registration.weight)
 async def get_training_experience(message: Message, state: FSMContext) -> None:
@@ -77,9 +93,14 @@ async def get_training_experience(message: Message, state: FSMContext) -> None:
     :param message: Сообщение пользователя с весом.
     :param state: Контекст состояния FSM.
     """
-    await state.update_data(weight=message.text)
-    await state.set_state(Registration.training_experience)
-    await message.answer("🏋️ Введите свой опыт в тренировках")
+    weight = message.text
+    if is_int(weight) or is_float(weight):
+        await state.update_data(weight=weight)
+        await state.set_state(Registration.training_experience)
+        await message.answer("🏋️ Введите свой опыт в тренировках")
+    else:
+        await message.answer("🏋️ Вес должен содержать только числа")
+        return
 
 
 # Обработчик состояния ввода опыта тренировок, завершающий процесс регистрации.

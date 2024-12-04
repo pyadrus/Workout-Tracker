@@ -145,7 +145,7 @@ async def create_workouts(request: Request):
     Отображение страницы с информацией о проекте.
     :return: HTML-страница с информацией о проекте.
     """
-    return templates.TemplateResponse("сreate_workouts.html", {"request": request})
+    return templates.TemplateResponse("create_workouts.html", {"request": request})
 
 
 if __name__ == "__main__":

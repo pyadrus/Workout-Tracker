@@ -19,7 +19,7 @@ async def index(request: Request):
     :param request: Объект запроса.
     :return: HTML-страница с приветствием.
     """
-    return templates.TemplateResponse("index.html", {"request": request})  # Добавлен context.view_results
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/about_us")

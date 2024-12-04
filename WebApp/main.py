@@ -6,11 +6,11 @@ import uvicorn
 
 app = FastAPI()
 
-# Подключаем статические файлы
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Указываем директорию с шаблонами.
-templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")# Подключаем статические файлы
+
+
+templates = Jinja2Templates(directory="templates")# Указываем директорию с шаблонами.
 
 
 @app.get("/", response_class=HTMLResponse)

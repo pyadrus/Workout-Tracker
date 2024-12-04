@@ -11,6 +11,7 @@ from handlers.personal_acount import routerr  # Импорт маршрутиз�
 from handlers.registration_user import (
     routerrrr,
 )  # Импорт маршрутизатора с обработчиками.
+from handlers.feedback import routerrrrrrr
 
 
 async def main() -> None:
@@ -28,6 +29,8 @@ async def main() -> None:
     )  # Подключение маршрутизаторов с обработчиками команд и сообщений.
     dp.include_router(routerr)
     dp.include_router(routerrrr)
+    dp.include_router(routerrrrrrr)
+
     await dp.start_polling(bot)  # Запуск опроса обновлений.
 
 

@@ -48,7 +48,17 @@ def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
                 text="ℹ️ Описание",
                 callback_data="description",
             ),  # Кнопка для отображения описания проекта.
-        ]
+        ],
+        [
+            InlineKeyboardButton(
+                text="📞 Обратная связь",
+                callback_data="feedback",
+            ),  # Кнопка для начала процесса регистрации.
+            InlineKeyboardButton(
+                text="🏠 WebAPP",
+                callback_data="____",
+            ),  # Кнопка для отображения описания проекта.
+        ],
     ]
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)

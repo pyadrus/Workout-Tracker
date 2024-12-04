@@ -6,7 +6,12 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums.parse_mode import ParseMode
 
 from data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
-from handlers.handler import router  # Импорт маршрутизатора с обработчиками.
+from handlers.start import router  # Импорт маршрутизатора с обработчиками.
+from handlers.personal_acount import routerr  # Импорт маршрутизатора с обработчиками.
+from handlers.registration_user import (
+    routerrrr,
+)  # Импорт маршрутизатора с обработчиками.
+from handlers.feedback import routerrrrrrr
 
 
 async def main() -> None:
@@ -22,6 +27,10 @@ async def main() -> None:
     dp.include_router(
         router
     )  # Подключение маршрутизаторов с обработчиками команд и сообщений.
+    dp.include_router(routerr)
+    dp.include_router(routerrrr)
+    dp.include_router(routerrrrrrr)
+
     await dp.start_polling(bot)  # Запуск опроса обновлений.
 
 

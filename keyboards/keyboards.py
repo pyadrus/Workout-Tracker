@@ -95,7 +95,8 @@ def create_data_change_buttons() -> InlineKeyboardMarkup:
         [
             InlineKeyboardButton(text="⚖️ Изменить вес", callback_data="update_weight"),
             InlineKeyboardButton(
-                text="🏋️ Изменить опыт тренировок", callback_data="update_training_experience"
+                text="🏋️ Изменить опыт тренировок",
+                callback_data="update_training_experience",
             ),
         ],
     ]

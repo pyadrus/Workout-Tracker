@@ -57,7 +57,7 @@ async def update_user_data_name(
     data_user = get_user_data(username)
     if data_user:
         await state.set_state(ChangeData.name)
-        await callback_query.message.answer("Введите имя на которое нужно изменить")
+        await callback_query.message.answer("👤 Введите имя на которое нужно изменить")
 
 
 # Обработчик состояния изменения имя профиля. Продолжение update_user_data_name
@@ -68,7 +68,10 @@ async def update_name(message: Message, state: FSMContext) -> None:
     username = message.from_user.username
     changed_name = state_user_data["name"]
     update_user_data(username=username, name=changed_name)
-    await message.answer("Вы изменили имя")
+    await message.answer(
+        "👤 Вы изменили имя",
+        reply_markup=generate_keyboard_personal_account(),
+    )
     await state.clear()
 
 
@@ -81,7 +84,7 @@ async def update_user_data_height(
     data_user = get_user_data(username)
     if data_user:
         await state.set_state(ChangeData.height)
-        await callback_query.message.answer("Введите рост на которое нужно изменить")
+        await callback_query.message.answer("📏 Введите рост на которое нужно изменить")
 
 
 # Обработчик состояния изменения имя профиля. Продолжение update_user_data_height
@@ -92,7 +95,10 @@ async def update_height(message: Message, state: FSMContext) -> None:
     username = message.from_user.username
     changed_height = state_user_data["height"]
     update_user_data(username=username, height=changed_height)
-    await message.answer("Вы изменили рост")
+    await message.answer(
+        "📏 Вы изменили рост",
+        reply_markup=generate_keyboard_personal_account(),
+    )
     await state.clear()
 
 
@@ -105,7 +111,7 @@ async def update_user_data_weight(
     data_user = get_user_data(username)
     if data_user:
         await state.set_state(ChangeData.weight)
-        await callback_query.message.answer("Введите рост на которое нужно изменить")
+        await callback_query.message.answer("⚖️ Введите рост на которое нужно изменить")
 
 
 # Обработчик состояния изменения вес профиля. Продолжение update_user_data_weight
@@ -116,7 +122,10 @@ async def update_weight(message: Message, state: FSMContext) -> None:
     username = message.from_user.username
     changed_weight = state_user_data["weight"]
     update_user_data(username=username, weight=changed_weight)
-    await message.answer("Вы изменили рост")
+    await message.answer(
+        "⚖️ Вы изменили вес",
+        reply_markup=generate_keyboard_personal_account(),
+    )
     await state.clear()
 
 
@@ -129,7 +138,7 @@ async def update_user_data_training_experience(
     data_user = get_user_data(username)
     if data_user:
         await state.set_state(ChangeData.training_experience)
-        await callback_query.message.answer("Введите рост на которое нужно изменить")
+        await callback_query.message.answer("🏋️ Введите рост на которое нужно изменить")
 
 
 # Обработчик состояния изменения опыт тренировок профиля. Продолжение update_user_data_training_experience
@@ -140,7 +149,10 @@ async def update_training_experience(message: Message, state: FSMContext) -> Non
     username = message.from_user.username
     changed_training_experience = state_user_data["training_experience"]
     update_user_data(username=username, training_experience=changed_training_experience)
-    await message.answer("Вы изменили рост")
+    await message.answer(
+        "🏋️ Вы изменили опыт тренировок",
+        reply_markup=generate_keyboard_personal_account(),
+    )
     await state.clear()
 
 

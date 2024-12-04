@@ -1,7 +1,7 @@
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import CallbackQuery, Message
 
 from data.text import (
     text_authorized_user_greeting,
@@ -52,7 +52,7 @@ async def get_name(message: Message, state: FSMContext) -> None:
     await message.answer("📏 Введите свой рост в сантиметрах")
 
 
-# Обработчик состояния ввода роста пользователя.
+# Обработчик состояния ввода роста пользователя.±
 @routerrrr.message(Registration.height)
 async def get_height(message: Message, state: FSMContext) -> None:
     """

@@ -1,14 +1,13 @@
 from aiogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
     KeyboardButton,
     ReplyKeyboardMarkup,
-    InlineKeyboardMarkup,
-    InlineKeyboardButton,
+    WebAppInfo,
 )
 
-from aiogram.types import WebAppInfo
 
-
-def generate_user_options_keyboard():
+def generate_user_options_keyboard() -> InlineKeyboardMarkup:
     """
     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
 
@@ -39,35 +38,31 @@ def generate_authorized_user_options_keyboard():
 
     kb = [
         [
-            KeyboardButton(
-                text="⚙️ Личный кабинет"
+            InlineKeyboardButton(
+                text="⚙️ Личный кабинет",
+                callback_data="personal_account",
             ),  # Кнопка для начала процесса регистрации.
-            KeyboardButton(
-                text="ℹ️ Описание"
+            InlineKeyboardButton(
+                text="ℹ️ Описание",
+                callback_data="description",
             ),  # Кнопка для отображения описания проекта.
         ]
     ]
-    keyboard = ReplyKeyboardMarkup(
-        keyboard=kb,
-        resize_keyboard=True,  # Уменьшает размер кнопок для удобства.
-        input_field_placeholder="👇 Выберите один из вариантов",  # Подсказка в поле ввода.
-    )
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+
     return keyboard
 
 
-def generate_keyboard_personal_account():
+def generate_keyboard_personal_account() -> ReplyKeyboardMarkup:
     """
     :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
     """
 
     kb = [
         [
-            KeyboardButton(
-                text="📋 Просмотр данных"
-            ),  # Кнопка для начала процесса регистрации.
-            KeyboardButton(
-                text="✏️ Изменение данных"
-            ),  # Кнопка для отображения описания проекта.
+            KeyboardButton(text="📋 Просмотр данных"),  # Кнопка для начала процесса регистрации.
+            KeyboardButton(text="✏️ Изменение данных"),  # Кнопка для отображения описания проекта.
         ],
         [KeyboardButton(text="🔙 Назад")],  # Кнопка для просмотра личного кабинета
     ]
@@ -79,22 +74,14 @@ def generate_keyboard_personal_account():
     return keyboard
 
 
-def generate_inline_keyboard_update_data():
+def generate_inline_keyboard_update_data() -> InlineKeyboardMarkup:
     """
     :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
     """
 
     kb = [
-        [
-            InlineKeyboardButton(
-                text="Мой хабр", url="https://habr.com/ru/users/yakvenalex/"
-            )
-        ],
-        [
-            InlineKeyboardButton(
-                text="Мой Telegram", url="tg://resolve?domain=yakvenalexx"
-            )
-        ],
+        [InlineKeyboardButton(text="Мой хабр", url="https://habr.com/ru/users/yakvenalex/")],
+        [InlineKeyboardButton(text="Мой Telegram", url="tg://resolve?domain=yakvenalexx")],
     ]
     # keyboard = ReplyKeyboardMarkup(
     #     keyboard=kb,

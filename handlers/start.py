@@ -3,19 +3,19 @@
 
 from aiogram import F, Router
 from aiogram.filters import CommandStart
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import CallbackQuery, Message
 
 from data.text import (  # Импорты текстов приветствия и описания.
+    text_authorized_user_greeting,
     text_description,
     text_hello_welcome,
-    text_authorized_user_greeting,
 )
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
 )
 from keyboards.keyboards import (
-    generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
     generate_authorized_user_options_keyboard,
+    generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
 )
 
 router = Router()  # Создание маршрутизатора для обработки команд и сообщений.

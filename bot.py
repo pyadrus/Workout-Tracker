@@ -7,8 +7,10 @@ from aiogram.enums.parse_mode import ParseMode
 
 from data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
 from handlers.start import router  # Импорт маршрутизатора с обработчиками.
-from handlers.personal_acount import routerr
-from handlers.registration_user import routerrrr
+from handlers.personal_acount import routerr  # Импорт маршрутизатора с обработчиками.
+from handlers.registration_user import (
+    routerrrr,
+)  # Импорт маршрутизатора с обработчиками.
 
 
 async def main() -> None:

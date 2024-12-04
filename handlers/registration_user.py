@@ -1,41 +1,23 @@
 from aiogram import F, Router
-from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message
 
-from data.text import (  # Импорты текстов приветствия и описания.
-    text_description,
-    text_hello_welcome,
-    text_authorized_user_greeting,
-)
 from database.database import (
     add_users,  # Импорт функции добавления пользователя в базу
-    get_user_data,  # Импорт функции получения пользователя из базы
-    update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
 from keyboards.keyboards import (
-    generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
-    generate_keyboard_personal_account,
     generate_authorized_user_options_keyboard,
-    create_data_change_buttons,
 )
 
 routerrrr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
 
 class Registration(StatesGroup):
-    name = State()  # Состояние ввода имени.
-    height = State()  # Состояние ввода роста.
-    weight = State()  # Состояние ввода веса.
-    training_experience = State()  # Состояние ввода опыта тренировок.
-
-
-class ChangeData(StatesGroup):
-    name = State()  # Состояние ввода имени.
-    height = State()  # Состояние ввода роста.
-    weight = State()  # Состояние ввода веса.
-    training_experience = State()  # Состояние ввода опыта тренировок.
+    name = State()  # Состояние изменения имени.
+    height = State()  # Состояние изменения роста.
+    weight = State()  # Состояние изменения веса.
+    training_experience = State()  # Состояние изменения опыта тренировок.
 
 
 # Обработчик сообщения с текстом "регистрация", начинающий процесс регистрации.

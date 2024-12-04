@@ -293,13 +293,25 @@
 
     <p>С этим Telegram-ботом вы добьетесь небывалых высот и станете настоящей звездой!</p>
 
-    <!-- Кнопки -->
-    <button class="button2"><a href="{{ url_for('view_results') }}">Посмотреть результаты</a></button>
-    <button class="button2"><a href="view_workouts.html">Посмотреть тренировки</a></button>
-    <button class="button2"><a href="сreate_workouts.html">Сформировать тренировки</a></button>
-    <button class="button2"><a href="my_details.html">Мои данные</a></button>
-    <button class="button2"><a href="basic_exercises.html">Базовые упражнения</a></button>
-    <button class="button2"><a href="nutrition.html">Питание</a></button>
+<!-- Кнопки -->
+<button class="button2">
+    <a href="{{ url_for('view_results') }}">📊 Посмотреть результаты</a>
+</button>
+<button class="button2">
+    <a href="{{ url_for('view_workouts') }}">🏋️ Посмотреть тренировки</a>
+</button>
+<button class="button2">
+    <a href="{{ url_for('сreate_workouts') }}">✍️ Сформировать тренировки</a>
+</button>
+<button class="button2">
+    <a href="{{ url_for('my_details') }}">🧑‍💼 Мои данные</a>
+</button>
+<button class="button2">
+    <a href="{{ url_for('basic_exercises') }}">💪 Базовые упражнения</a>
+</button>
+<button class="button2">
+    <a href="{{ url_for('nutrition') }}">🍎 Питание</a>
+</button>
 
 
     <div class="button-container">

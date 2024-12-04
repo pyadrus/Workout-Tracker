@@ -4,10 +4,9 @@ from aiogram.types import (
     InlineKeyboardMarkup,
     InlineKeyboardButton,
 )
-from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
-def generate_user_options_keyboard() -> ReplyKeyboardMarkup:
+def generate_user_options_keyboard() -> InlineKeyboardMarkup:
     """
     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
 
@@ -16,23 +15,23 @@ def generate_user_options_keyboard() -> ReplyKeyboardMarkup:
 
     kb = [
         [
-            KeyboardButton(
-                text="📝 Регистрация"
+            InlineKeyboardButton(
+                text="📝 Регистрация",
+                callback_data="registration",
             ),  # Кнопка для начала процесса регистрации.
-            KeyboardButton(
-                text="ℹ️ Описание"
+            InlineKeyboardButton(
+                text="ℹ️ Описание",
+                callback_data="description",
             ),  # Кнопка для отображения описания проекта.
         ]
     ]
-    keyboard = ReplyKeyboardMarkup(
-        keyboard=kb,
-        resize_keyboard=True,  # Уменьшает размер кнопок для удобства.
-        input_field_placeholder="👇 Выберите один из вариантов",  # Подсказка в поле ввода.
-    )
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+
     return keyboard
 
 
-def generate_authorized_user_options_keyboard() -> ReplyKeyboardMarkup:
+def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
     """
     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
 
@@ -41,40 +40,42 @@ def generate_authorized_user_options_keyboard() -> ReplyKeyboardMarkup:
 
     kb = [
         [
-            KeyboardButton(
-                text="⚙️ Личный кабинет"
+            InlineKeyboardButton(
+                text="⚙️ Личный кабинет",
+                callback_data="personal_account",
             ),  # Кнопка для начала процесса регистрации.
-            KeyboardButton(
-                text="ℹ️ Описание"
+            InlineKeyboardButton(
+                text="ℹ️ Описание",
+                callback_data="description",
             ),  # Кнопка для отображения описания проекта.
         ]
     ]
-    keyboard = ReplyKeyboardMarkup(
-        keyboard=kb,
-        resize_keyboard=True,  # Уменьшает размер кнопок для удобства.
-        input_field_placeholder="👇 Выберите один из вариантов",  # Подсказка в поле ввода.
-    )
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+
     return keyboard
 
 
-def generate_keyboard_personal_account() -> ReplyKeyboardMarkup:
+def generate_keyboard_personal_account() -> InlineKeyboardMarkup:
     """
     :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
     """
 
     kb = [
         [
-            KeyboardButton(
-                text="📋 Просмотр данных"
+            InlineKeyboardButton(
+                text="📋 Просмотр данных",
+                callback_data="view_data",
             ),  # Кнопка для начала процесса регистрации.
-            KeyboardButton(text="🔙 Назад"),
+            InlineKeyboardButton(
+                text="🔙 Назад",
+                callback_data="back",
+            ),
         ],  # Кнопка для просмотра личного кабинета
     ]
-    keyboard = ReplyKeyboardMarkup(
-        keyboard=kb,
-        resize_keyboard=True,  # Уменьшает размер кнопок для удобства.
-        input_field_placeholder="👇 Выберите один из вариантов",  # Подсказка в поле ввода.
-    )
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+
     return keyboard
 
 
@@ -97,6 +98,12 @@ def create_data_change_buttons() -> InlineKeyboardMarkup:
             InlineKeyboardButton(
                 text="🏋️ Изменить опыт тренировок",
                 callback_data="update_training_experience",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔙 Назад",
+                callback_data="back_personal_account",
             ),
         ],
     ]

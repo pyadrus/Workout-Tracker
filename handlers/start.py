@@ -3,7 +3,7 @@
 
 from aiogram import F, Router
 from aiogram.filters import CommandStart
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 
 from data.text import (  # Импорты текстов приветствия и описания.
     text_description,
@@ -44,13 +44,12 @@ async def start_bot(message: Message) -> None:
         )
 
 
-# Обработчик сообщения с текстом "описание", отправляющий описание бота.
-@router.message(F.text.lower() == "ℹ️ описание")
-async def description(message: Message) -> None:
+@router.callback_query(F.data == "description")
+async def description(callback_query: CallbackQuery) -> None:
     """
     Отправляет описание бота пользователю.
 
     Аргументы:
     :param message: Сообщение пользователя с текстом "описание".
     """
-    await message.answer(f"ℹ️ {text_description()}")
+    await callback_query.message.answer(f"ℹ️ {text_description()}")

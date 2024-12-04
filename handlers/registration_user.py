@@ -1,13 +1,16 @@
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 
 from database.database import (
     add_users,  # Импорт функции добавления пользователя в базу
 )
 from keyboards.keyboards import (
     generate_authorized_user_options_keyboard,
+)
+from data.text import (
+    text_authorized_user_greeting,
 )
 
 routerrrr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
@@ -21,8 +24,8 @@ class Registration(StatesGroup):
 
 
 # Обработчик сообщения с текстом "регистрация", начинающий процесс регистрации.
-@routerrrr.message(F.text.lower() == "📝 регистрация")
-async def registration(message: Message, state: FSMContext) -> None:
+@routerrrr.callback_query(F.data == "registration")
+async def registration(callback_query: CallbackQuery, state: FSMContext) -> None:
     """
     Начинает процесс регистрации пользователя.
 
@@ -31,7 +34,7 @@ async def registration(message: Message, state: FSMContext) -> None:
     :param state: Контекст состояния FSM.
     """
     await state.set_state(Registration.name)
-    await message.answer("✍️ Для регистрации введите своё имя")
+    await callback_query.message.answer("✍️ Для регистрации введите своё имя")
 
 
 # Обработчик состояния ввода имени пользователя.
@@ -92,16 +95,20 @@ async def registration_info(message: Message, state: FSMContext) -> None:
     """
     await state.update_data(training_experience=message.text)
     user_data = await state.get_data()
+    username = message.from_user.username
+    # await message.answer(
+    #     f"Вы успешно зарегистрировались!\n\n"
+    #     f"✅ Данные регистрации:\n"
+    #     f"👤 Имя - {user_data['name']}\n"
+    #     f"📏 Рост - {user_data['height']} см\n"
+    #     f"⚖️ Вес - {user_data['weight']} кг\n"
+    #     f"🏋️ Опыт тренировок - {user_data['training_experience']}",
+    #     reply_markup=generate_authorized_user_options_keyboard(),
+    # )
     await message.answer(
-        f"Вы успешно зарегистрировались!\n\n"
-        f"✅ Данные регистрации:\n"
-        f"👤 Имя - {user_data['name']}\n"
-        f"📏 Рост - {user_data['height']} см\n"
-        f"⚖️ Вес - {user_data['weight']} кг\n"
-        f"🏋️ Опыт тренировок - {user_data['training_experience']}",
+        f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
         reply_markup=generate_authorized_user_options_keyboard(),
     )
-    username = message.from_user.username
     add_users(
         username,
         user_data["name"],

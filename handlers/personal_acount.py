@@ -12,6 +12,9 @@ from keyboards.keyboards import (
     generate_authorized_user_options_keyboard,
     create_data_change_buttons,
 )
+from data.text import (
+    text_authorized_user_greeting,
+)
 
 routerr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
@@ -24,21 +27,21 @@ class ChangeData(StatesGroup):
 
 
 # Обработчик состояния просмотра личного кабинета
-@routerr.message(F.text.lower() == "⚙️ личный кабинет")
-async def users_personal_account(message: Message) -> None:
-    await message.answer(
+@routerr.callback_query(F.data == "personal_account")
+async def users_personal_account(callback_query: CallbackQuery) -> None:
+    await callback_query.message.answer(
         "Вы вошли в личный кабинет", reply_markup=generate_keyboard_personal_account()
     )
 
 
 # Обработчик состояния просмотря личных данных при регистрации
-@routerr.message(F.text.lower() == "📋 просмотр данных")
-async def user_data(message: Message) -> None:
-    username = message.from_user.username
+@routerr.callback_query(F.data == "view_data")
+async def user_data(callback_query: CallbackQuery) -> None:
+    username = callback_query.from_user.username
     data_user = get_user_data(username)
     if data_user:
         _, name, height, weight, training_experience = data_user
-        await message.answer(
+        await callback_query.message.answer(
             f"📋 Ваш профиль:\n"
             f"👤 Имя - {name}\n"
             f"📏 Рост - {height} см\n"
@@ -46,6 +49,16 @@ async def user_data(message: Message) -> None:
             f"🏋️ Опыт тренировок - {training_experience}",
             reply_markup=create_data_change_buttons(),
         )
+
+
+# Обработчик состояния вернутся в основное меню
+@routerr.callback_query(F.data == "back_personal_account")
+async def back_to_personal_account(callback_query: CallbackQuery) -> None:
+    username = callback_query.from_user.username
+    await callback_query.message.answer(
+        "Вы вошли в личный кабинет",
+        reply_markup=generate_keyboard_personal_account(),
+    )
 
 
 # Обработчик состояния изменения имя профиля
@@ -68,8 +81,9 @@ async def update_name(message: Message, state: FSMContext) -> None:
     username = message.from_user.username
     changed_name = state_user_data["name"]
     update_user_data(username=username, name=changed_name)
+    await message.answer("👤 Вы изменили имя")
     await message.answer(
-        "👤 Вы изменили имя",
+        "Вы вошли в личный кабинет",
         reply_markup=generate_keyboard_personal_account(),
     )
     await state.clear()
@@ -95,8 +109,9 @@ async def update_height(message: Message, state: FSMContext) -> None:
     username = message.from_user.username
     changed_height = state_user_data["height"]
     update_user_data(username=username, height=changed_height)
+    await message.answer("📏 Вы изменили рост")
     await message.answer(
-        "📏 Вы изменили рост",
+        "Вы вошли в личный кабинет",
         reply_markup=generate_keyboard_personal_account(),
     )
     await state.clear()
@@ -122,8 +137,9 @@ async def update_weight(message: Message, state: FSMContext) -> None:
     username = message.from_user.username
     changed_weight = state_user_data["weight"]
     update_user_data(username=username, weight=changed_weight)
+    await message.answer("⚖️ Вы изменили вес")
     await message.answer(
-        "⚖️ Вы изменили вес",
+        "Вы вошли в личный кабинет",
         reply_markup=generate_keyboard_personal_account(),
     )
     await state.clear()
@@ -149,17 +165,19 @@ async def update_training_experience(message: Message, state: FSMContext) -> Non
     username = message.from_user.username
     changed_training_experience = state_user_data["training_experience"]
     update_user_data(username=username, training_experience=changed_training_experience)
+    await message.answer("🏋️ Вы изменили опыт тренировок")
     await message.answer(
-        "🏋️ Вы изменили опыт тренировок",
+        "Вы вошли в личный кабинет",
         reply_markup=generate_keyboard_personal_account(),
     )
     await state.clear()
 
 
 # Обработчик состояния вернутся в основное меню
-@routerr.message(F.text.lower() == "🔙 назад")
-async def back_to_main_menu(message: Message) -> None:
-    await message.answer(
-        "Вы вернулись в сновное меню",
+@routerr.callback_query(F.data == "back")
+async def back_to_main_menu(callback_query: CallbackQuery) -> None:
+    username = callback_query.from_user.username
+    await callback_query.message.answer(
+        f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
         reply_markup=generate_authorized_user_options_keyboard(),
     )

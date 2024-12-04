@@ -20,7 +20,10 @@ def generate_user_options_keyboard():
             InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
         ],
         [
-            InlineKeyboardButton(text="В бота", web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"))
+            InlineKeyboardButton(
+                text="В бота",
+                web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
+            )
         ],
     ]
 

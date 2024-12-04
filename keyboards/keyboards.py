@@ -67,11 +67,8 @@ def generate_keyboard_personal_account():
             KeyboardButton(
                 text="📋 Просмотр данных"
             ),  # Кнопка для начала процесса регистрации.
-            KeyboardButton(
-                text="✏️ Изменение данных"
-            ),  # Кнопка для отображения описания проекта.
-        ],
-        [KeyboardButton(text="🔙 Назад")],  # Кнопка для просмотра личного кабинета
+            KeyboardButton(text="🔙 Назад"),
+        ],  # Кнопка для просмотра личного кабинета
     ]
     keyboard = ReplyKeyboardMarkup(
         keyboard=kb,
@@ -81,33 +78,33 @@ def generate_keyboard_personal_account():
     return keyboard
 
 
-def generate_inline_keyboard_update_data():
+def create_data_change_buttons() -> InlineKeyboardMarkup:
     """
-    :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
+    Создает клавиатуру с инлайн кнопками для взаимодействия пользователя с ботом.
+
+    :return: Объект InlineKeyboardMarkup с кнопками для выбора.
     """
 
     kb = [
         [
-            InlineKeyboardButton(
-                text="Мой хабр", url="https://habr.com/ru/users/yakvenalex/"
-            )
+            InlineKeyboardButton(text="👤 Изменить имя", callback_data="update_name"),
+            InlineKeyboardButton(text="📏 Изменить рост", callback_data="height"),
         ],
         [
+            InlineKeyboardButton(text="⚖️ Изменить вес", callback_data="weight"),
             InlineKeyboardButton(
-                text="Мой Telegram", url="tg://resolve?domain=yakvenalexx"
-            )
+                text="🏋️ Изменить опыт тренировок", callback_data="training_experience"
+            ),
         ],
     ]
-    # keyboard = ReplyKeyboardMarkup(
-    #     keyboard=kb,
-    #     resize_keyboard=True,  # Уменьшает размер кнопок для удобства.
-    #     input_field_placeholder="👇 Выберите один из вариантов",  # Подсказка в поле ввода.
-    # )
-    return InlineKeyboardMarkup(inline_keyboard=kb)
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+
+    return keyboard
 
 
 if __name__ == "__main__":
     generate_user_options_keyboard()
     generate_authorized_user_options_keyboard()
     generate_keyboard_personal_account()
-    generate_inline_keyboard_update_data()
+    create_data_change_buttons()

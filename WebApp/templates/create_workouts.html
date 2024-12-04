@@ -259,6 +259,15 @@
             font-size: 20px;
         }
 
+        .weekdays-container { /* Кнопки в 2 столбца */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px 10px; /* 20px — вертикальное расстояние, 10px — горизонтальное */
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
     </style>
 </head>
 
@@ -284,15 +293,17 @@
 
     <p>Сформировать тренировки</p>
 
-    <!-- Кнопки -->
+    <!-- Кнопки в 2 столбца -->
+    <div class="weekdays-container">
     <button class="button2"><a href="day_of_the_week/monday.html">Понедельник</a></button>
     <button class="button2"><a href="day_of_the_week/tuesday.html">Вторник</a></button>
     <button class="button2"><a href="day_of_the_week/wednesday.html">Среда</a></button>
     <button class="button2"><a href="day_of_the_week/thursday.html">Четверг</a></button>
     <button class="button2"><a href="day_of_the_week/friday.html">Пятница</a></button>
     <button class="button2"><a href="day_of_the_week/saturday.html">Суббота</a></button>
-    <button class="button2"><a href="day_of_the_week/sunday.html">Воскресенье</a></button>
 
+</div>
+<button class="button2"><a href="day_of_the_week/sunday.html">Воскресенье</a></button>
 
     <!--    Кнопка возврата в начальное меню-->
     <!-- Кнопка -->

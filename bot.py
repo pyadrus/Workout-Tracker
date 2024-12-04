@@ -7,6 +7,9 @@ from aiogram.enums.parse_mode import ParseMode
 from loguru import logger
 
 from data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
+from handlers.feedback import routerrrrrrr
+from handlers.personal_acount import routerr
+from handlers.registration_user import routerrrr
 from handlers.start import router  # Импорт маршрутизатора с обработчиками.
 
 logger.add("log/log.log")
@@ -20,16 +23,16 @@ async def main() -> None:
     """
     try:
         bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-        dp = (
-            Dispatcher()
-        )  # Создание диспетчера для управления маршрутизацией и обработкой событий.
-        dp.include_router(
-            router
-        )  # Подключение маршрутизаторов с обработчиками команд и сообщений.
+        # Создание диспетчера для управления маршрутизацией и обработкой событий.
+        dp = Dispatcher()
+        # Подключение маршрутизаторов с обработчиками команд и сообщений.
+        dp.include_router(router)
+        dp.include_router(routerrrrrrr)
+        dp.include_router(routerrrr)
+        dp.include_router(routerr)
         await dp.start_polling(bot)  # Запуск опроса обновлений.
     except Exception as error:
         logger.exception(error)
 
 
 asyncio.run(main())  # Запуск основного цикла бота.
-±~

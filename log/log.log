@@ -1,0 +1,822 @@
+2024-12-04 18:53:30.980 | ERROR    | database.database:get_user_data:58 - no such table: users
+Traceback (most recent call last):
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/bot.py", line 34, in <module>
+    asyncio.run(main())  # Запуск основного цикла бота.
+    │       │   └ <function main at 0x1096c9940>
+    │       └ <function run at 0x1055b9c60>
+    └ <module 'asyncio' from '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/__init__.py'>
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           │      │   └ <coroutine object main at 0x109716890>
+           │      └ <function Runner.run at 0x1055ba020>
+           └ <asyncio.runners.Runner object at 0x109785810>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<main() running at /Users/evgenii/Desktop/Workout-Tracker/bot.py:29> wait_for=<Future pendin...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x1055b3ba0>
+           │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x109785810>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x1055b3b00>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x1055b9940>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x1054fb6a0>
+    └ <Handle <TaskStepMethWrapper object at 0x1097526e0>()>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x1097526e0>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x1097526e0>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x1097526e0>()>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+                     │    │           │    │         └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,)}
+                     │    │           │    └ Update(update_id=236769302, message=Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UT...
+                     │    │           └ <aiogram.client.bot.Bot object at 0x109332e10>
+                     │    └ <function Dispatcher.feed_update at 0x1096c8f40>
+                     └ <Dispatcher '0x109785f10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+                     │    │      └ <function TelegramEventObserver.wrap_outer_middleware at 0x1096a7880>
+                     │    └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10978f5d0>
+                     └ <Dispatcher '0x109785f10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769302, message=Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.dispatcher.middlewares.user_context.UserContextMiddleware object at 0x10978fb10>, functools.partia...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769302, message=Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.fsm.middleware.FSMContextMiddleware object at 0x10978fbd0>, <function TelegramEventObserver.trigge...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769302, message=Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UT...
+                 └ <function TelegramEventObserver.trigger at 0x109783a60>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │             └ Update(update_id=236769302, message=Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UT...
+                 └ <function CallableObject.call at 0x1097a7f60>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<bound method Dispatcher._listen_update of <Dispatcher '0x109785f10'>>, Update(update_id=236769302, message...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+                 │    │                           │                  │        └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │    │                           │                  └ Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │    │                           └ 'message'
+                 │    └ <function Router.propagate_event at 0x1096c8540>
+                 └ <Dispatcher '0x109785f10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x10988c040>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x1096a7880>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10978c410>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x1096c85e0>
+                 └ <Dispatcher '0x109785f10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+                     │      │                           │                  │        └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                     │      │                           │                  └ Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │      │                           └ 'message'
+                     │      └ <function Router.propagate_event at 0x1096c8540>
+                     └ <Router '0x10975c350'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x10988c2c0>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x1096a7880>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10974f990>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x1096c85e0>
+                 └ <Router '0x10975c350'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+                     │        │       │        └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                     │        │       └ Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │        └ <function TelegramEventObserver.trigger at 0x1096a79c0>
+                     └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10974f990>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │             └ Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 30, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 └ <function CallableObject.call at 0x10988c360>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<function start_bot at 0x109780e00>, Message(message_id=2820, date=datetime.datetime(2024, 12, 4, 15, 53, 3...
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/handlers/start.py", line 34, in start_bot
+    data_user = get_user_data(username)
+                │             └ 'rntainvaider'
+                └ <function get_user_data at 0x109746f20>
+
+> File "/Users/evgenii/Desktop/Workout-Tracker/database/database.py", line 48, in get_user_data
+    cursor.execute(
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x10717f2c0>
+
+sqlite3.OperationalError: no such table: users
+2024-12-04 18:55:11.645 | ERROR    | database.database:get_user_data:58 - no such table: users
+Traceback (most recent call last):
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/bot.py", line 34, in <module>
+    asyncio.run(main())  # Запуск основного цикла бота.
+    │       │   └ <function main at 0x1096c9940>
+    │       └ <function run at 0x1055b9c60>
+    └ <module 'asyncio' from '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/__init__.py'>
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           │      │   └ <coroutine object main at 0x109716890>
+           │      └ <function Runner.run at 0x1055ba020>
+           └ <asyncio.runners.Runner object at 0x109785810>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<main() running at /Users/evgenii/Desktop/Workout-Tracker/bot.py:29> wait_for=<Future pendin...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x1055b3ba0>
+           │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x109785810>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x1055b3b00>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x1055b9940>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x1054fb6a0>
+    └ <Handle <TaskStepMethWrapper object at 0x108559d50>()>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x108559d50>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x108559d50>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x108559d50>()>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+                     │    │           │    │         └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,)}
+                     │    │           │    └ Update(update_id=236769303, message=Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UT...
+                     │    │           └ <aiogram.client.bot.Bot object at 0x109332e10>
+                     │    └ <function Dispatcher.feed_update at 0x1096c8f40>
+                     └ <Dispatcher '0x109785f10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+                     │    │      └ <function TelegramEventObserver.wrap_outer_middleware at 0x1096a7880>
+                     │    └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10978f5d0>
+                     └ <Dispatcher '0x109785f10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769303, message=Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.dispatcher.middlewares.user_context.UserContextMiddleware object at 0x10978fb10>, functools.partia...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769303, message=Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.fsm.middleware.FSMContextMiddleware object at 0x10978fbd0>, <function TelegramEventObserver.trigge...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769303, message=Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UT...
+                 └ <function TelegramEventObserver.trigger at 0x10988e0c0>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │             └ Update(update_id=236769303, message=Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UT...
+                 └ <function CallableObject.call at 0x10988e2a0>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<bound method Dispatcher._listen_update of <Dispatcher '0x109785f10'>>, Update(update_id=236769303, message...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+                 │    │                           │                  │        └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │    │                           │                  └ Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │    │                           └ 'message'
+                 │    └ <function Router.propagate_event at 0x1096c8540>
+                 └ <Dispatcher '0x109785f10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x10988e340>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x1096a7880>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10978c410>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x1096c85e0>
+                 └ <Dispatcher '0x109785f10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+                     │      │                           │                  │        └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                     │      │                           │                  └ Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │      │                           └ 'message'
+                     │      └ <function Router.propagate_event at 0x1096c8540>
+                     └ <Router '0x10975c350'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x10988e3e0>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x1096a7880>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10974f990>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x1096c85e0>
+                 └ <Router '0x10975c350'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+                     │        │       │        └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                     │        │       └ Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │        └ <function TelegramEventObserver.trigger at 0x1096a79c0>
+                     └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10974f990>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x109785f10'>, 'bots': (<aiogram.client.bot.Bot object at 0x109332e10>,), 'bot': <aiogram.client....
+                 │             └ Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 11, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 └ <function CallableObject.call at 0x10988e480>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<function start_bot at 0x109780e00>, Message(message_id=2822, date=datetime.datetime(2024, 12, 4, 15, 55, 1...
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/handlers/start.py", line 34, in start_bot
+    data_user = get_user_data(username)
+                │             └ 'rntainvaider'
+                └ <function get_user_data at 0x109746f20>
+
+> File "/Users/evgenii/Desktop/Workout-Tracker/database/database.py", line 48, in get_user_data
+    cursor.execute(
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x1082b6140>
+
+sqlite3.OperationalError: no such table: users
+2024-12-04 18:55:27.777 | ERROR    | database.database:get_user_data:58 - no such table: users
+Traceback (most recent call last):
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/bot.py", line 34, in <module>
+    asyncio.run(main())  # Запуск основного цикла бота.
+    │       │   └ <function main at 0x109631940>
+    │       └ <function run at 0x105521c60>
+    └ <module 'asyncio' from '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/__init__.py'>
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           │      │   └ <coroutine object main at 0x10967e980>
+           │      └ <function Runner.run at 0x105522020>
+           └ <asyncio.runners.Runner object at 0x1096aa290>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<main() running at /Users/evgenii/Desktop/Workout-Tracker/bot.py:29> wait_for=<Future pendin...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x10551bba0>
+           │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x1096aa290>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x10551bb00>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x105521940>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x1054636a0>
+    └ <Handle <TaskStepMethWrapper object at 0x1096d3790>()>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x1096d3790>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x1096d3790>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x1096d3790>()>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+                     │    │           │    │         └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,)}
+                     │    │           │    └ Update(update_id=236769304, message=Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UT...
+                     │    │           └ <aiogram.client.bot.Bot object at 0x10929b250>
+                     │    └ <function Dispatcher.feed_update at 0x109630f40>
+                     └ <Dispatcher '0x1092215d0'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+                     │    │      └ <function TelegramEventObserver.wrap_outer_middleware at 0x10960f880>
+                     │    └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x1096fb1d0>
+                     └ <Dispatcher '0x1092215d0'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769304, message=Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.dispatcher.middlewares.user_context.UserContextMiddleware object at 0x1096fb750>, functools.partia...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769304, message=Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.fsm.middleware.FSMContextMiddleware object at 0x1096fb810>, <function TelegramEventObserver.trigge...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769304, message=Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UT...
+                 └ <function TelegramEventObserver.trigger at 0x1096ef9c0>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                 │             └ Update(update_id=236769304, message=Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UT...
+                 └ <function CallableObject.call at 0x109717f60>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<bound method Dispatcher._listen_update of <Dispatcher '0x1092215d0'>>, Update(update_id=236769304, message...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+                 │    │                           │                  │        └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                 │    │                           │                  └ Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │    │                           └ 'message'
+                 │    └ <function Router.propagate_event at 0x109630540>
+                 └ <Dispatcher '0x1092215d0'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x1097f4040>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x10960f880>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10968f150>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x1096305e0>
+                 └ <Dispatcher '0x1092215d0'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+                     │      │                           │                  │        └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                     │      │                           │                  └ Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │      │                           └ 'message'
+                     │      └ <function Router.propagate_event at 0x109630540>
+                     └ <Router '0x1096bbd90'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x1097f4220>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x10960f880>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x1096bbd10>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x1096305e0>
+                 └ <Router '0x1096bbd90'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+                     │        │       │        └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                     │        │       └ Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │        └ <function TelegramEventObserver.trigger at 0x10960f9c0>
+                     └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x1096bbd10>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x1092215d0'>, 'bots': (<aiogram.client.bot.Bot object at 0x10929b250>,), 'bot': <aiogram.client....
+                 │             └ Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 27, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 └ <function CallableObject.call at 0x1097f42c0>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<function start_bot at 0x1096ecd60>, Message(message_id=2824, date=datetime.datetime(2024, 12, 4, 15, 55, 2...
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/handlers/start.py", line 34, in start_bot
+    data_user = get_user_data(username)
+                │             └ 'rntainvaider'
+                └ <function get_user_data at 0x1096aef20>
+
+> File "/Users/evgenii/Desktop/Workout-Tracker/database/database.py", line 48, in get_user_data
+    cursor.execute(
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x109786f40>
+
+sqlite3.OperationalError: no such table: users
+2024-12-04 18:56:43.716 | ERROR    | database.database:get_user_data:58 - no such table: users
+Traceback (most recent call last):
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/bot.py", line 34, in <module>
+    asyncio.run(main())  # Запуск основного цикла бота.
+    │       │   └ <function main at 0x1050d18a0>
+    │       └ <function run at 0x100fc1bc0>
+    └ <module 'asyncio' from '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/__init__.py'>
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           │      │   └ <coroutine object main at 0x10511e7a0>
+           │      └ <function Runner.run at 0x100fc1f80>
+           └ <asyncio.runners.Runner object at 0x105196350>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<main() running at /Users/evgenii/Desktop/Workout-Tracker/bot.py:29> wait_for=<Future pendin...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x100fbbb00>
+           │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x105196350>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x100fbba60>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x100fc18a0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x100f07600>
+    └ <Handle <TaskStepMethWrapper object at 0x105156830>()>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x105156830>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x105156830>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x105156830>()>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+                     │    │           │    │         └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,)}
+                     │    │           │    └ Update(update_id=236769306, message=Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UT...
+                     │    │           └ <aiogram.client.bot.Bot object at 0x104ff9050>
+                     │    └ <function Dispatcher.feed_update at 0x1050d0ea0>
+                     └ <Dispatcher '0x105196810'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+                     │    │      └ <function TelegramEventObserver.wrap_outer_middleware at 0x1050af7e0>
+                     │    └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10519fe10>
+                     └ <Dispatcher '0x105196810'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769306, message=Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.dispatcher.middlewares.user_context.UserContextMiddleware object at 0x1051a43d0>, functools.partia...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769306, message=Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.fsm.middleware.FSMContextMiddleware object at 0x1051a4490>, <function TelegramEventObserver.trigge...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769306, message=Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UT...
+                 └ <function TelegramEventObserver.trigger at 0x1051a0900>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                 │             └ Update(update_id=236769306, message=Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UT...
+                 └ <function CallableObject.call at 0x1051d0f40>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<bound method Dispatcher._listen_update of <Dispatcher '0x105196810'>>, Update(update_id=236769306, message...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+                 │    │                           │                  │        └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                 │    │                           │                  └ Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │    │                           └ 'message'
+                 │    └ <function Router.propagate_event at 0x1050d04a0>
+                 └ <Dispatcher '0x105196810'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x1051d0e00>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x1050af7e0>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x10519ccd0>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x1050d0540>
+                 └ <Dispatcher '0x105196810'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+                     │      │                           │                  │        └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                     │      │                           │                  └ Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │      │                           └ 'message'
+                     │      └ <function Router.propagate_event at 0x1050d04a0>
+                     └ <Router '0x105178290'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x1051d1120>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x1050af7e0>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x105167850>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x1050d0540>
+                 └ <Router '0x105178290'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+                     │        │       │        └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                     │        │       └ Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │        └ <function TelegramEventObserver.trigger at 0x1050af920>
+                     └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x105167850>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x105196810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104ff9050>,), 'bot': <aiogram.client....
+                 │             └ Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 43, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 └ <function CallableObject.call at 0x1051d11c0>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<function start_bot at 0x105175c60>, Message(message_id=2826, date=datetime.datetime(2024, 12, 4, 15, 56, 4...
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/handlers/start.py", line 34, in start_bot
+    data_user = get_user_data(username)
+                │             └ 'rntainvaider'
+                └ <function get_user_data at 0x105174220>
+
+> File "/Users/evgenii/Desktop/Workout-Tracker/database/database.py", line 48, in get_user_data
+    cursor.execute(
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x105236fc0>
+
+sqlite3.OperationalError: no such table: users
+2024-12-04 18:59:25.894 | ERROR    | database.database:get_user_data:58 - no such table: users
+Traceback (most recent call last):
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/bot.py", line 36, in <module>
+    asyncio.run(main())  # Запуск основного цикла бота.
+    │       │   └ <function main at 0x104a459e0>
+    │       └ <function run at 0x100935d00>
+    └ <module 'asyncio' from '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/__init__.py'>
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           │      │   └ <coroutine object main at 0x104a972e0>
+           │      └ <function Runner.run at 0x1009360c0>
+           └ <asyncio.runners.Runner object at 0x104b16b90>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<main() running at /Users/evgenii/Desktop/Workout-Tracker/bot.py:31> wait_for=<Future pendin...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x10092fc40>
+           │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x104b16b90>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x10092fba0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x1009359e0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x100877740>
+    └ <Handle <TaskStepMethWrapper object at 0x104ac5870>()>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x104ac5870>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x104ac5870>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x104ac5870>()>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+                     │    │           │    │         └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,)}
+                     │    │           │    └ Update(update_id=236769310, message=Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UT...
+                     │    │           └ <aiogram.client.bot.Bot object at 0x1034f5550>
+                     │    └ <function Dispatcher.feed_update at 0x104a44fe0>
+                     └ <Dispatcher '0x104b17250'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+                     │    │      └ <function TelegramEventObserver.wrap_outer_middleware at 0x104a23920>
+                     │    └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x104b24450>
+                     └ <Dispatcher '0x104b17250'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769310, message=Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.dispatcher.middlewares.user_context.UserContextMiddleware object at 0x104afd4d0>, functools.partia...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769310, message=Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.fsm.middleware.FSMContextMiddleware object at 0x104b24a50>, <function TelegramEventObserver.trigge...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769310, message=Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UT...
+                 └ <function TelegramEventObserver.trigger at 0x104b21d00>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                 │             └ Update(update_id=236769310, message=Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UT...
+                 └ <function CallableObject.call at 0x104b42340>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<bound method Dispatcher._listen_update of <Dispatcher '0x104b17250'>>, Update(update_id=236769310, message...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+                 │    │                           │                  │        └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                 │    │                           │                  └ Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │    │                           └ 'message'
+                 │    └ <function Router.propagate_event at 0x104a445e0>
+                 └ <Dispatcher '0x104b17250'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x104b42160>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x104a23920>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x104b1d250>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x104a44680>
+                 └ <Dispatcher '0x104b17250'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+                     │      │                           │                  │        └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                     │      │                           │                  └ Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │      │                           └ 'message'
+                     │      └ <function Router.propagate_event at 0x104a445e0>
+                     └ <Router '0x104922c10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x104b42520>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x104a23920>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x104afe150>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x104a44680>
+                 └ <Router '0x104922c10'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+                     │        │       │        └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                     │        │       └ Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │        └ <function TelegramEventObserver.trigger at 0x104a23a60>
+                     └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x104afe150>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x104b17250'>, 'bots': (<aiogram.client.bot.Bot object at 0x1034f5550>,), 'bot': <aiogram.client....
+                 │             └ Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 25, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 └ <function CallableObject.call at 0x104b425c0>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<function start_bot at 0x104aeb060>, Message(message_id=2830, date=datetime.datetime(2024, 12, 4, 15, 59, 2...
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/handlers/start.py", line 34, in start_bot
+    data_user = get_user_data(username)
+                │             └ 'rntainvaider'
+                └ <function get_user_data at 0x104ae82c0>
+
+> File "/Users/evgenii/Desktop/Workout-Tracker/database/database.py", line 48, in get_user_data
+    cursor.execute(
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x104bad9c0>
+
+sqlite3.OperationalError: no such table: users
+2024-12-04 19:13:58.976 | ERROR    | database.database:get_user_data:58 - no such table: users
+Traceback (most recent call last):
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/bot.py", line 38, in <module>
+    asyncio.run(main())  # Запуск основного цикла бота.
+    │       │   └ <function main at 0x104a459e0>
+    │       └ <function run at 0x100935d00>
+    └ <module 'asyncio' from '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/__init__.py'>
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           │      │   └ <coroutine object main at 0x104a971f0>
+           │      └ <function Runner.run at 0x1009360c0>
+           └ <asyncio.runners.Runner object at 0x104b170d0>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<main() running at /Users/evgenii/Desktop/Workout-Tracker/bot.py:33> wait_for=<Future pendin...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x10092fc40>
+           │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x104b170d0>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x10092fba0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x1009359e0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x100877740>
+    └ <Handle <TaskStepMethWrapper object at 0x10374a230>()>
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x10374a230>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x10374a230>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x10374a230>()>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+                     │    │           │    │         └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,)}
+                     │    │           │    └ Update(update_id=236769338, message=Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UT...
+                     │    │           └ <aiogram.client.bot.Bot object at 0x104b16dd0>
+                     │    └ <function Dispatcher.feed_update at 0x104a44fe0>
+                     └ <Dispatcher '0x104b17810'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+                     │    │      └ <function TelegramEventObserver.wrap_outer_middleware at 0x104a23920>
+                     │    └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x104b28cd0>
+                     └ <Dispatcher '0x104b17810'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769338, message=Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.dispatcher.middlewares.user_context.UserContextMiddleware object at 0x104b29250>, functools.partia...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769338, message=Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UT...
+                 └ functools.partial(<aiogram.fsm.middleware.FSMContextMiddleware object at 0x104b29310>, <function TelegramEventObserver.trigge...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                 │       └ Update(update_id=236769338, message=Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UT...
+                 └ <function TelegramEventObserver.trigger at 0x104b1eca0>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                 │             └ Update(update_id=236769338, message=Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UT...
+                 └ <function CallableObject.call at 0x104b432e0>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<bound method Dispatcher._listen_update of <Dispatcher '0x104b17810'>>, Update(update_id=236769338, message...
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+                 │    │                           │                  │        └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                 │    │                           │                  └ Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │    │                           └ 'message'
+                 │    └ <function Router.propagate_event at 0x104a445e0>
+                 └ <Dispatcher '0x104b17810'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x104b43100>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x104a23920>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x104b21b10>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x104a44680>
+                 └ <Dispatcher '0x104b17810'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+                     │      │                           │                  │        └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                     │      │                           │                  └ Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │      │                           └ 'message'
+                     │      └ <function Router.propagate_event at 0x104a445e0>
+                     └ <Router '0x104b12690'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                 │        │                     │               └ Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x104b434c0>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x104a23920>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x104b12710>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x104a44680>
+                 └ <Router '0x104b12690'>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+                     │        │       │        └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                     │        │       └ Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                     │        └ <function TelegramEventObserver.trigger at 0x104a23a60>
+                     └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x104b12710>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x104b17810'>, 'bots': (<aiogram.client.bot.Bot object at 0x104b16dd0>,), 'bot': <aiogram.client....
+                 │             └ Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 58, tzinfo=TzInfo(UTC)), chat=Chat(id=1149708469, type='...
+                 └ <function CallableObject.call at 0x104b43560>
+  File "/Users/evgenii/Desktop/Workout-Tracker/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<function start_bot at 0x104b1c0e0>, Message(message_id=2859, date=datetime.datetime(2024, 12, 4, 16, 13, 5...
+
+  File "/Users/evgenii/Desktop/Workout-Tracker/handlers/start.py", line 34, in start_bot
+    data_user = get_user_data(username)
+                │             └ 'rntainvaider'
+                └ <function get_user_data at 0x104ae4360>
+
+> File "/Users/evgenii/Desktop/Workout-Tracker/database/database.py", line 48, in get_user_data
+    cursor.execute(
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x104bbd440>
+
+sqlite3.OperationalError: no such table: users

@@ -1,8 +1,6 @@
 from aiogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
-    KeyboardButton,
-    ReplyKeyboardMarkup,
     WebAppInfo,
 )
 
@@ -15,21 +13,24 @@ def generate_user_options_keyboard() -> InlineKeyboardMarkup:
     """
     kb = [
         [
-            InlineKeyboardButton(text="📝 Регистрация", callback_data="register"),
+            InlineKeyboardButton(text="📝 Регистрация", callback_data="registration"),
             InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
         ],
         [
+            InlineKeyboardButton(text="Обратная связь", callback_data="feedback"),
             InlineKeyboardButton(
                 text="В бота",
                 web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
-            )
+            ),
         ],
     ]
 
-    return InlineKeyboardMarkup(inline_keyboard=kb)
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+
+    return keyboard
 
 
-def generate_authorized_user_options_keyboard():
+def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
     """
     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
 
@@ -54,45 +55,66 @@ def generate_authorized_user_options_keyboard():
     return keyboard
 
 
-def generate_keyboard_personal_account() -> ReplyKeyboardMarkup:
+def generate_keyboard_personal_account() -> InlineKeyboardMarkup:
     """
     :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
     """
 
     kb = [
         [
-            KeyboardButton(text="📋 Просмотр данных"),  # Кнопка для начала процесса регистрации.
-            KeyboardButton(text="✏️ Изменение данных"),  # Кнопка для отображения описания проекта.
+            InlineKeyboardButton(
+                text="📋 Просмотр данных",
+                callback_data="view_data",
+            ),  # Кнопка для начала процесса регистрации.
+            InlineKeyboardButton(
+                text="✏️ Изменение данных",
+                callback_data="update_name",
+            ),  # Кнопка для отображения описания проекта.
         ],
-        [KeyboardButton(text="🔙 Назад")],  # Кнопка для просмотра личного кабинета
+        [
+            InlineKeyboardButton(
+                text="🔙 Назад",
+                callback_data="back",
+            )
+        ],  # Кнопка для просмотра личного кабинета
     ]
-    keyboard = ReplyKeyboardMarkup(
-        keyboard=kb,
-        resize_keyboard=True,  # Уменьшает размер кнопок для удобства.
-        input_field_placeholder="👇 Выберите один из вариантов",  # Подсказка в поле ввода.
-    )
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
     return keyboard
 
 
-def generate_inline_keyboard_update_data() -> InlineKeyboardMarkup:
+def create_data_change_buttons() -> InlineKeyboardMarkup:
     """
     :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
     """
 
     kb = [
-        [InlineKeyboardButton(text="Мой хабр", url="https://habr.com/ru/users/yakvenalex/")],
-        [InlineKeyboardButton(text="Мой Telegram", url="tg://resolve?domain=yakvenalexx")],
+        [
+            InlineKeyboardButton(
+                text="Изменить имя",
+                callback_data="update_name",
+            ),
+            InlineKeyboardButton(
+                text="Изменить рост",
+                callback_data="update_height",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="Изменить вес",
+                callback_data="update_weight",
+            ),
+            InlineKeyboardButton(
+                text="Изменить опыт тренировок",
+                callback_data="update_training_experience",
+            ),
+        ],
     ]
-    # keyboard = ReplyKeyboardMarkup(
-    #     keyboard=kb,
-    #     resize_keyboard=True,  # Уменьшает размер кнопок для удобства.
-    #     input_field_placeholder="👇 Выберите один из вариантов",  # Подсказка в поле ввода.
-    # )
-    return InlineKeyboardMarkup(inline_keyboard=kb)
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+    return keyboard
 
 
 if __name__ == "__main__":
     generate_user_options_keyboard()
     generate_authorized_user_options_keyboard()
     generate_keyboard_personal_account()
-    generate_inline_keyboard_update_data()
+    create_data_change_buttons()

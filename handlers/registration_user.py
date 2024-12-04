@@ -3,14 +3,14 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message, CallbackQuery
 
+from data.text import (
+    text_authorized_user_greeting,
+)
 from database.database import (
     add_users,  # Импорт функции добавления пользователя в базу
 )
 from keyboards.keyboards import (
     generate_authorized_user_options_keyboard,
-)
-from data.text import (
-    text_authorized_user_greeting,
 )
 
 routerrrr = Router()  # Создание маршрутизатора для обработки команд и сообщений.

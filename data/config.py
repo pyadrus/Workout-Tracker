@@ -1,8 +1,9 @@
-# Файл со всеми параметрами, токен бота и данные подключения к БД
 import os
 
 from dotenv import load_dotenv
+from loguru import logger
 
-_ = load_dotenv()
+load_dotenv()  # Загружаем переменные из .env файла
+BOT_TOKEN = os.getenv("TOKEN")  # Получаем токен бота из переменной окружения
 
-BOT_TOKEN = os.getenv("TOKEN")
+logger.info(BOT_TOKEN)  # Проверка, что токен загружен

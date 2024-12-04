@@ -1,18 +1,23 @@
+from email import message
+
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import CallbackQuery, Message
 
-from data.text import (
+from data.text import (  # Импорты текстов приветствия и описания.
     text_authorized_user_greeting,
+    text_hello_welcome,
 )
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
     update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
 from keyboards.keyboards import (
-    generate_keyboard_personal_account,
+    create_data_change_buttons,
     generate_authorized_user_options_keyboard,
+    generate_keyboard_personal_account,
+    generate_user_options_keyboard,
 )
 
 routerr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
@@ -28,6 +33,7 @@ class ChangeData(StatesGroup):
 # Обработчик состояния просмотра личного кабинета
 @routerr.callback_query(F.data == "personal_account")
 async def users_personal_account(callback_query: CallbackQuery) -> None:
+    print(callback_query.from_user)
     await callback_query.message.answer(
         "Вы вошли в личный кабинет", reply_markup=generate_keyboard_personal_account()
     )
@@ -53,7 +59,6 @@ async def user_data(callback_query: CallbackQuery) -> None:
 # Обработчик состояния вернутся в основное меню
 @routerr.callback_query(F.data == "back_personal_account")
 async def back_to_personal_account(callback_query: CallbackQuery) -> None:
-    username = callback_query.from_user.username
     await callback_query.message.answer(
         "Вы вошли в личный кабинет",
         reply_markup=generate_keyboard_personal_account(),
@@ -62,9 +67,7 @@ async def back_to_personal_account(callback_query: CallbackQuery) -> None:
 
 # Обработчик состояния изменения имя профиля
 @routerr.callback_query(F.data == "update_name")
-async def update_user_data_name(
-    callback_query: CallbackQuery, state: FSMContext
-) -> None:
+async def update_user_data_name(callback_query: CallbackQuery, state: FSMContext) -> None:
     username = callback_query.from_user.username
     data_user = get_user_data(username)
     if data_user:
@@ -90,9 +93,7 @@ async def update_name(message: Message, state: FSMContext) -> None:
 
 # Обработчик состояния изменения рост профиля
 @routerr.callback_query(F.data == "update_height")
-async def update_user_data_height(
-    callback_query: CallbackQuery, state: FSMContext
-) -> None:
+async def update_user_data_height(callback_query: CallbackQuery, state: FSMContext) -> None:
     username = callback_query.from_user.username
     data_user = get_user_data(username)
     if data_user:
@@ -118,14 +119,12 @@ async def update_height(message: Message, state: FSMContext) -> None:
 
 # Обработчик состояния изменения вес профиля
 @routerr.callback_query(F.data == "update_weight")
-async def update_user_data_weight(
-    callback_query: CallbackQuery, state: FSMContext
-) -> None:
+async def update_user_data_weight(callback_query: CallbackQuery, state: FSMContext) -> None:
     username = callback_query.from_user.username
     data_user = get_user_data(username)
     if data_user:
         await state.set_state(ChangeData.weight)
-        await callback_query.message.answer("⚖️ Введите рост на которое нужно изменить")
+        await callback_query.message.answer("⚖️ Введите вес на которое нужно изменить")
 
 
 # Обработчик состояния изменения вес профиля. Продолжение update_user_data_weight
@@ -176,7 +175,14 @@ async def update_training_experience(message: Message, state: FSMContext) -> Non
 @routerr.callback_query(F.data == "back")
 async def back_to_main_menu(callback_query: CallbackQuery) -> None:
     username = callback_query.from_user.username
-    await callback_query.message.answer(
-        f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
-        reply_markup=generate_authorized_user_options_keyboard(),
-    )
+    data_user = get_user_data(username)
+    if data_user:
+        await callback_query.message.answer(
+            f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
+            reply_markup=generate_authorized_user_options_keyboard(),
+        )
+    else:
+        await callback_query.message.answer(
+            f"👋 Приветствую тебя, @{username}{text_hello_welcome()}",
+            reply_markup=generate_user_options_keyboard(),
+        )

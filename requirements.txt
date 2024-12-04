@@ -3,5 +3,4 @@ python-multipart
 uvicorn[standard]
 aiogram
 python-dotenv
-aiogram
 loguru

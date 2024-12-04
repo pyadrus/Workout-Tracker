@@ -1,9 +1,8 @@
 from aiogram.types import (
-    KeyboardButton,
-    ReplyKeyboardMarkup,
     InlineKeyboardMarkup,
     InlineKeyboardButton,
 )
+from aiogram.types.web_app_info import WebAppInfo
 
 
 def generate_user_options_keyboard() -> InlineKeyboardMarkup:
@@ -55,8 +54,8 @@ def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
                 callback_data="feedback",
             ),  # Кнопка для начала процесса регистрации.
             InlineKeyboardButton(
-                text="🏠 WebAPP",
-                callback_data="____",
+                text="🏠 В бота",
+                web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
             ),  # Кнопка для отображения описания проекта.
         ],
     ]

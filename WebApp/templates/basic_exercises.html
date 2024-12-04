@@ -259,6 +259,17 @@
             font-size: 20px;
         }
 
+
+         .weekdays-container { /* Кнопки в 2 столбца */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px 10px; /* 20px — вертикальное расстояние, 10px — горизонтальное */
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+
     </style>
 </head>
 
@@ -285,16 +296,25 @@
     <p>Базовые упражнения</p>
 
 
-    <button class="button2"><a href="basic_exercises/deltoid.html">Дельтовидные мышцы</a></button>
+    <!-- Кнопки в 2 столбца -->
+    <div class="weekdays-container">
+        <button class="button2"><a href="basic_exercises/deltoid.html">Дельтовидные мышцы</a></button>
     <button class="button2"><a href="basic_exercises/abs.html">Живот (Пресс)</a></button>
     <button class="button2"><a href="basic_exercises/chest.html">Мышцы груди</a></button>
     <button class="button2"><a href="basic_exercises/legs.html">Мышцы ног</a></button>
     <button class="button2"><a href="basic_exercises/back.html">Мышцы спины</a></button>
     <button class="button2"><a href="basic_exercises/arms.html">Руки</a></button>
+
+
+    </div>
+
+
     <button class="button2"><a href="basic_exercises/trapezius.html">Трапеция</a></button>
 
-    <!-- Кнопки -->
-    <button class="button2"><a href="index.html">В главное меню</a></button>
+    <!-- Кнопка -->
+    <button class="button2">
+        <a href="{{ url_for('index') }}">🏠 В главное меню</a>
+    </button>
 
     <div class="button-container">
         <button class="button">

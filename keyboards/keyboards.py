@@ -7,7 +7,7 @@ from aiogram.types import (
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
-def generate_user_options_keyboard():
+def generate_user_options_keyboard() -> ReplyKeyboardMarkup:
     """
     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
 
@@ -32,7 +32,7 @@ def generate_user_options_keyboard():
     return keyboard
 
 
-def generate_authorized_user_options_keyboard():
+def generate_authorized_user_options_keyboard() -> ReplyKeyboardMarkup:
     """
     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
 
@@ -57,7 +57,7 @@ def generate_authorized_user_options_keyboard():
     return keyboard
 
 
-def generate_keyboard_personal_account():
+def generate_keyboard_personal_account() -> ReplyKeyboardMarkup:
     """
     :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
     """
@@ -88,12 +88,14 @@ def create_data_change_buttons() -> InlineKeyboardMarkup:
     kb = [
         [
             InlineKeyboardButton(text="👤 Изменить имя", callback_data="update_name"),
-            InlineKeyboardButton(text="📏 Изменить рост", callback_data="height"),
+            InlineKeyboardButton(
+                text="📏 Изменить рост", callback_data="update_height"
+            ),
         ],
         [
-            InlineKeyboardButton(text="⚖️ Изменить вес", callback_data="weight"),
+            InlineKeyboardButton(text="⚖️ Изменить вес", callback_data="update_weight"),
             InlineKeyboardButton(
-                text="🏋️ Изменить опыт тренировок", callback_data="training_experience"
+                text="🏋️ Изменить опыт тренировок", callback_data="update_training_experience"
             ),
         ],
     ]

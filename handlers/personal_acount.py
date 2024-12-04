@@ -3,8 +3,9 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
 
-from data.text import (
+from data.text import (  # Импорты текстов приветствия и описания.
     text_authorized_user_greeting,
+    text_hello_welcome,
 )
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
@@ -14,6 +15,7 @@ from keyboards.keyboards import (
     create_data_change_buttons,
     generate_authorized_user_options_keyboard,
     generate_keyboard_personal_account,
+    generate_user_options_keyboard,
 )
 
 routerr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
@@ -171,7 +173,14 @@ async def update_training_experience(message: Message, state: FSMContext) -> Non
 @routerr.callback_query(F.data == "back")
 async def back_to_main_menu(callback_query: CallbackQuery) -> None:
     username = callback_query.from_user.username
-    await callback_query.message.answer(
-        f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
-        reply_markup=generate_authorized_user_options_keyboard(),
-    )
+    data_user = get_user_data(username)
+    if data_user:
+        await callback_query.message.answer(
+            f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
+            reply_markup=generate_authorized_user_options_keyboard(),
+        )
+    else:
+        await callback_query.message.answer(
+            f"👋 Приветствую тебя, @{username}{text_hello_welcome()}",
+            reply_markup=generate_user_options_keyboard(),
+        )

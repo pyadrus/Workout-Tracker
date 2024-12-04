@@ -62,6 +62,18 @@ def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
     return keyboard
 
 
+def generate_authorized_user_discription() -> None:
+    kb = [
+        [
+            InlineKeyboardButton(text="🔙 Назад", callback_data="back"),
+        ]
+    ]
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+
+    return keyboard
+
+
 def generate_keyboard_personal_account() -> InlineKeyboardMarkup:
     """
     :return: Объект ReplyKeyboardMarkup с кнопками для выбора.

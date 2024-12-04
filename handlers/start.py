@@ -14,6 +14,7 @@ from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
 )
 from keyboards.keyboards import (
+    generate_authorized_user_discription,
     generate_authorized_user_options_keyboard,
     generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
 )
@@ -52,4 +53,7 @@ async def description(callback_query: CallbackQuery) -> None:
     Аргументы:
     :param message: Сообщение пользователя с текстом "описание".
     """
-    await callback_query.message.answer(f"ℹ️ {text_description()}")
+    await callback_query.message.answer(
+        f"ℹ️ {text_description()}",
+        reply_markup=generate_authorized_user_discription(),
+    )

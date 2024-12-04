@@ -120,7 +120,7 @@ async def update_user_data_weight(callback_query: CallbackQuery, state: FSMConte
     data_user = get_user_data(username)
     if data_user:
         await state.set_state(ChangeData.weight)
-        await callback_query.message.answer("⚖️ Введите рост на которое нужно изменить")
+        await callback_query.message.answer("⚖️ Введите вес на которое нужно изменить")
 
 
 # Обработчик состояния изменения вес профиля. Продолжение update_user_data_weight

@@ -16,13 +16,13 @@ def generate_user_options_keyboard() -> InlineKeyboardMarkup:
             InlineKeyboardButton(text="📝 Регистрация", callback_data="registration"),
             InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
         ],
-        [
-            InlineKeyboardButton(text="Обратная связь", callback_data="feedback"),
-            InlineKeyboardButton(
-                text="В бота",
-                web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
-            ),
-        ],
+        # [
+        #     InlineKeyboardButton(text="Обратная связь", callback_data="feedback"),
+        #     InlineKeyboardButton(
+        #         text="В бота",
+        #         web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
+        #     ),
+        # ],
     ]
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
@@ -47,7 +47,14 @@ def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
                 text="ℹ️ Описание",
                 callback_data="description",
             ),  # Кнопка для отображения описания проекта.
-        ]
+        ],
+        [
+            InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
+            InlineKeyboardButton(
+                text="🤖 В бота",
+                web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
+            ),
+        ],
     ]
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
@@ -67,15 +74,9 @@ def generate_keyboard_personal_account() -> InlineKeyboardMarkup:
                 callback_data="view_data",
             ),  # Кнопка для начала процесса регистрации.
             InlineKeyboardButton(
-                text="✏️ Изменение данных",
-                callback_data="update_name",
-            ),  # Кнопка для отображения описания проекта.
-        ],
-        [
-            InlineKeyboardButton(
                 text="🔙 Назад",
                 callback_data="back",
-            )
+            ),
         ],  # Кнопка для просмотра личного кабинета
     ]
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
@@ -90,22 +91,28 @@ def create_data_change_buttons() -> InlineKeyboardMarkup:
     kb = [
         [
             InlineKeyboardButton(
-                text="Изменить имя",
+                text="✍️ Изменить имя",
                 callback_data="update_name",
             ),
             InlineKeyboardButton(
-                text="Изменить рост",
+                text="📏 Изменить рост",
                 callback_data="update_height",
             ),
         ],
         [
             InlineKeyboardButton(
-                text="Изменить вес",
+                text="⚖️ Изменить вес",
                 callback_data="update_weight",
             ),
             InlineKeyboardButton(
-                text="Изменить опыт тренировок",
+                text="🏋️ Изменить опыт тренировок",
                 callback_data="update_training_experience",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔙 Назад",
+                callback_data="back_personal_account",
             ),
         ],
     ]

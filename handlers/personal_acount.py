@@ -3,6 +3,9 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message, CallbackQuery
 
+from data.text import (
+    text_authorized_user_greeting,
+)
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
     update_user_data,  # Импорт функции изменения данных пользователя в базе
@@ -10,10 +13,6 @@ from database.database import (
 from keyboards.keyboards import (
     generate_keyboard_personal_account,
     generate_authorized_user_options_keyboard,
-    create_data_change_buttons,
-)
-from data.text import (
-    text_authorized_user_greeting,
 )
 
 routerr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
@@ -64,7 +63,7 @@ async def back_to_personal_account(callback_query: CallbackQuery) -> None:
 # Обработчик состояния изменения имя профиля
 @routerr.callback_query(F.data == "update_name")
 async def update_user_data_name(
-    callback_query: CallbackQuery, state: FSMContext
+        callback_query: CallbackQuery, state: FSMContext
 ) -> None:
     username = callback_query.from_user.username
     data_user = get_user_data(username)
@@ -92,7 +91,7 @@ async def update_name(message: Message, state: FSMContext) -> None:
 # Обработчик состояния изменения рост профиля
 @routerr.callback_query(F.data == "update_height")
 async def update_user_data_height(
-    callback_query: CallbackQuery, state: FSMContext
+        callback_query: CallbackQuery, state: FSMContext
 ) -> None:
     username = callback_query.from_user.username
     data_user = get_user_data(username)
@@ -120,7 +119,7 @@ async def update_height(message: Message, state: FSMContext) -> None:
 # Обработчик состояния изменения вес профиля
 @routerr.callback_query(F.data == "update_weight")
 async def update_user_data_weight(
-    callback_query: CallbackQuery, state: FSMContext
+        callback_query: CallbackQuery, state: FSMContext
 ) -> None:
     username = callback_query.from_user.username
     data_user = get_user_data(username)
@@ -148,7 +147,7 @@ async def update_weight(message: Message, state: FSMContext) -> None:
 # Обработчик состояния изменения опыт тренировок профиля
 @routerr.callback_query(F.data == "update_training_experience")
 async def update_user_data_training_experience(
-    callback_query: CallbackQuery, state: FSMContext
+        callback_query: CallbackQuery, state: FSMContext
 ) -> None:
     username = callback_query.from_user.username
     data_user = get_user_data(username)

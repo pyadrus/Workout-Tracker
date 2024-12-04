@@ -5,12 +5,12 @@ from aiogram import F, Router
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import Message, ReplyKeyboardRemove
+from aiogram.types import Message
+from loguru import logger
 
 from data.text import (  # Импорты текстов приветствия и описания.
     text_description,
     text_hello_welcome,
-    text_authorized_user_greeting,
 )
 from database.database import (
     add_users,  # Импорт функции добавления пользователя в базу
@@ -23,8 +23,6 @@ from keyboards.keyboards import (
     generate_authorized_user_options_keyboard,
     generate_inline_keyboard_update_data,
 )
-
-from loguru import logger
 
 router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 

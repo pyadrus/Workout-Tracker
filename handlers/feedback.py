@@ -1,7 +1,5 @@
 from aiogram import F, Router
-from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import CallbackQuery
 
 routerrrrrrr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 

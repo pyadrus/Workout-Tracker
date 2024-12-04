@@ -1,3 +1,5 @@
+from email import message
+
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -31,6 +33,7 @@ class ChangeData(StatesGroup):
 # Обработчик состояния просмотра личного кабинета
 @routerr.callback_query(F.data == "personal_account")
 async def users_personal_account(callback_query: CallbackQuery) -> None:
+    print(callback_query.from_user)
     await callback_query.message.answer(
         "Вы вошли в личный кабинет", reply_markup=generate_keyboard_personal_account()
     )
@@ -56,7 +59,6 @@ async def user_data(callback_query: CallbackQuery) -> None:
 # Обработчик состояния вернутся в основное меню
 @routerr.callback_query(F.data == "back_personal_account")
 async def back_to_personal_account(callback_query: CallbackQuery) -> None:
-    username = callback_query.from_user.username
     await callback_query.message.answer(
         "Вы вошли в личный кабинет",
         reply_markup=generate_keyboard_personal_account(),

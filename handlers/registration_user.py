@@ -67,9 +67,9 @@ async def get_height(message: Message, state: FSMContext) -> None:
     await message.answer("⚖️ Введите свой вес в килограммах")
 
 
-def is_float(value: str):
+def is_float(value: str) -> bool:
     try:
-        float(value)
+        _ = float(value)
         return True
     except ValueError:
         return False
@@ -77,7 +77,7 @@ def is_float(value: str):
 
 def is_int(value: str) -> bool:
     try:
-        int(value)
+        _ = int(value)
         return True
     except ValueError:
         return False

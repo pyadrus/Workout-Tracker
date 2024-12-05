@@ -1,3 +1,5 @@
+import json
+
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -14,6 +16,10 @@ from keyboards.keyboards import (
 )
 
 routerrrr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
+
+# Чтение файла json для выборки текстов
+with open("data/text.json", "r", encoding="utf-8") as file:
+    texts = json.load(file)
 
 
 class Registration(StatesGroup):
@@ -129,8 +135,12 @@ async def registration_info(message: Message, state: FSMContext) -> None:
     #     f"🏋️ Опыт тренировок - {user_data['training_experience']}",
     #     reply_markup=generate_authorized_user_options_keyboard(),
     # )
+    # await message.answer(
+    #     f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
+    #     reply_markup=generate_authorized_user_options_keyboard(),
+    # )
     await message.answer(
-        f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
+        f"👋 Приветствую тебя, @{username}{texts['text_authorized_user_greeting']}",
         reply_markup=generate_authorized_user_options_keyboard(),
     )
     add_users(

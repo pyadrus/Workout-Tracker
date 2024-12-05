@@ -4,12 +4,13 @@ from loguru import logger
 
 
 def add_users(
-    username: str, name: str, height: str, weight: str, training_experience: str
+    id_user_telegram: str, name: str, height: str, weight: str, training_experience: str
 ) -> None:
     """
     Добавляет нового пользователя
 
     Аргументы:
+    :id_user_telegram: id пользователя телеграмма
     :param name: имя пользователя
     :param height: рост пользователя
     :param weight: вес пользователя
@@ -21,7 +22,7 @@ def add_users(
             cursor.execute(
                 """CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT,
+                    id_user_telegram TEXT,
                     name TEXT,
                     registered_at TEXT DEFAULT CURRENT_TIMESTAMP,
                     height TEXT,
@@ -29,30 +30,30 @@ def add_users(
                     training_experience TEXT)"""
             )
             cursor.execute(
-                """INSERT INTO users (username, name, height, weight, training_experience) VALUES (?, ?, ?, ?, ?)""",
-                (username, name, height, weight, training_experience),
+                """INSERT INTO users (id_user_telegram, name, height, weight, training_experience) VALUES (?, ?, ?, ?, ?)""",
+                (id_user_telegram, name, height, weight, training_experience),
             )
             connection.commit()
     except Exception as error:
         logger.exception(error)
 
 
-def get_user_data(username: str) -> None:
+def get_user_data(id_user_telegram: str) -> None:
     """
     Получает пользователя из базы
 
     Аргументы:
-    :param username: логин пользователя в телеграмме
+    :param id_user_telegram: логин пользователя в телеграмме
     """
     try:
         with sqlite3.connect("sqlite3.db") as connection:
             cursor = connection.cursor()
             cursor.execute(
-                """SELECT username, name, height, weight, training_experience
+                """SELECT id_user_telegram, name, height, weight, training_experience
                 FROM users
-                WHERE username = ?
+                WHERE id_user_telegram = ?
                 """,
-                (username,),
+                (id_user_telegram,),
             )
             return cursor.fetchone()
 
@@ -61,7 +62,7 @@ def get_user_data(username: str) -> None:
 
 
 def update_user_data(
-    username: str,
+    id_user_telegram: str,
     name: str = None,
     height: str = None,
     weight: str = None,
@@ -71,7 +72,7 @@ def update_user_data(
     Редактировать пользователя из базы
 
     Аргументы:
-    :param username: логин пользователя в телеграмме
+    :param id_user_telegram: id пользователя в телеграмме
     :param name: имя пользователя
     :param height: рост пользователя
     :param weight: вес пользователя
@@ -96,10 +97,10 @@ def update_user_data(
                 values.append(training_experience)
 
             # Добавляем ID в список значений
-            values.append(username)
+            values.append(id_user_telegram)
 
             cursor = connection.cursor()
-            query = f"UPDATE users SET {', '.join(updates)} WHERE username = ?"
+            query = f"UPDATE users SET {', '.join(updates)} WHERE id_user_telegram = ?"
             cursor.execute(query, values)
 
     except Exception as error:

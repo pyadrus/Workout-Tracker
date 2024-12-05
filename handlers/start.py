@@ -32,7 +32,8 @@ async def start_bot(message: Message) -> None:
     :param message: Сообщение пользователя с командой /start.
     """
     username = message.from_user.username
-    data_user = get_user_data(username)
+    user_id = message.from_user.id
+    data_user = get_user_data(user_id)
     if not data_user:
         await message.answer(
             f"👋 Приветствую тебя, @{username}{text_hello_welcome()}",

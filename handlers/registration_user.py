@@ -67,6 +67,7 @@ async def get_height(message: Message, state: FSMContext) -> None:
     await message.answer("⚖️ Введите свой вес в килограммах")
 
 
+# Проверка веса на float
 def is_float(value: str) -> bool:
     try:
         _ = float(value)
@@ -75,6 +76,7 @@ def is_float(value: str) -> bool:
         return False
 
 
+# Проверка веса на int
 def is_int(value: str) -> bool:
     try:
         _ = int(value)
@@ -93,9 +95,9 @@ async def get_training_experience(message: Message, state: FSMContext) -> None:
     :param message: Сообщение пользователя с весом.
     :param state: Контекст состояния FSM.
     """
-    weight = message.text
-    if is_int(weight) or is_float(weight):
-        await state.update_data(weight=weight)
+    input_weight = message.text
+    if is_int(input_weight) or is_float(input_weight):
+        await state.update_data(weight=input_weight)
         await state.set_state(Registration.training_experience)
         await message.answer("🏋️ Введите свой опыт в тренировках")
     else:
@@ -117,6 +119,7 @@ async def registration_info(message: Message, state: FSMContext) -> None:
     await state.update_data(training_experience=message.text)
     user_data = await state.get_data()
     username = message.from_user.username
+    user_id = message.from_user.id
     # await message.answer(
     #     f"Вы успешно зарегистрировались!\n\n"
     #     f"✅ Данные регистрации:\n"
@@ -131,7 +134,7 @@ async def registration_info(message: Message, state: FSMContext) -> None:
         reply_markup=generate_authorized_user_options_keyboard(),
     )
     add_users(
-        username,
+        user_id,
         user_data["name"],
         user_data["height"],
         user_data["weight"],

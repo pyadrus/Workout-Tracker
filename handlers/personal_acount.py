@@ -3,10 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
 
-from data.text import (  # Импорты текстов приветствия и описания.
-    text_authorized_user_greeting,
-    text_hello_welcome,
-)
+from handlers.start import load_text_form_file
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
     update_user_data,  # Импорт функции изменения данных пользователя в базе
@@ -17,6 +14,7 @@ from keyboards.keyboards import (
     generate_keyboard_personal_account,
     generate_user_options_keyboard,
 )
+
 
 routerr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
@@ -184,11 +182,11 @@ async def back_to_main_menu(callback_query: CallbackQuery) -> None:
     data_user = get_user_data(user_id)
     if data_user:
         await callback_query.message.answer(
-            f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
+            f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
             reply_markup=generate_authorized_user_options_keyboard(),
         )
     else:
         await callback_query.message.answer(
-            f"👋 Приветствую тебя, @{username}{text_hello_welcome()}",
+            f"👋 Приветствую тебя, @{username}{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_user_options_keyboard(),
         )

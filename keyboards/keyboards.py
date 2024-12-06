@@ -127,6 +127,12 @@ def create_data_change_buttons() -> InlineKeyboardMarkup:
                 callback_data="back_personal_account",
             ),
         ],
+        [
+            InlineKeyboardButton(
+                text="🔙 В главное меню",
+                callback_data="back",
+            ),
+        ],
     ]
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
     return keyboard

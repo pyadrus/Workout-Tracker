@@ -24,10 +24,10 @@ def add_users(
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     id_user_telegram TEXT,
                     name TEXT,
-                    registered_at TEXT DEFAULT CURRENT_TIMESTAMP,
                     height TEXT,
                     weight TEXT,
-                    training_experience TEXT)"""
+                    training_experience TEXT,
+                    registered_at TEXT DEFAULT CURRENT_TIMESTAMP)"""
             )
             cursor.execute(
                 """INSERT INTO users (id_user_telegram, name, height, weight, training_experience) VALUES (?, ?, ?, ?, ?)""",

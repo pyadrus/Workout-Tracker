@@ -3,6 +3,7 @@
 
 import json
 from pathlib import Path
+
 from aiogram import F, Router
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery, Message

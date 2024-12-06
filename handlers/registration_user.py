@@ -5,9 +5,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
 
-from data.text import (
-    text_authorized_user_greeting,
-)
+from handlers.start import load_text_form_file
 from database.database import (
     add_users,  # Импорт функции добавления пользователя в базу
 )
@@ -18,8 +16,8 @@ from keyboards.keyboards import (
 routerrrr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
 # Чтение файла json для выборки текстов
-with open("data/text.json", "r", encoding="utf-8") as file:
-    texts = json.load(file)
+# with open("data/text.json", "r", encoding="utf-8") as file:
+#     texts = json.load(file)
 
 
 class Registration(StatesGroup):
@@ -140,7 +138,7 @@ async def registration_info(message: Message, state: FSMContext) -> None:
     #     reply_markup=generate_authorized_user_options_keyboard(),
     # )
     await message.answer(
-        f"👋 Приветствую тебя, @{username}{texts['text_authorized_user_greeting']}",
+        f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
         reply_markup=generate_authorized_user_options_keyboard(),
     )
     add_users(

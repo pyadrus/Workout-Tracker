@@ -7,10 +7,10 @@ def add_users(
     id_user_telegram: str, name: str, height: str, weight: str, training_experience: str
 ) -> None:
     """
-    Добавляет нового пользователя
+    Добавляет нового авторизованного пользователя
 
     Аргументы:
-    :id_user_telegram: id пользователя телеграмма
+    :param id_user_telegram: id пользователя телеграмма
     :param name: имя пользователя
     :param height: рост пользователя
     :param weight: вес пользователя
@@ -20,7 +20,7 @@ def add_users(
         with sqlite3.connect("sqlite3.db") as connection:
             cursor = connection.cursor()
             cursor.execute(
-                """CREATE TABLE IF NOT EXISTS users (
+                """CREATE TABLE IF NOT EXISTS authorized_user (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     id_user_telegram TEXT,
                     name TEXT,
@@ -30,7 +30,7 @@ def add_users(
                     registered_at TEXT DEFAULT CURRENT_TIMESTAMP)"""
             )
             cursor.execute(
-                """INSERT INTO users (id_user_telegram, name, height, weight, training_experience) VALUES (?, ?, ?, ?, ?)""",
+                """INSERT INTO authorized_user (id_user_telegram, name, height, weight, training_experience) VALUES (?, ?, ?, ?, ?)""",
                 (id_user_telegram, name, height, weight, training_experience),
             )
             connection.commit()
@@ -50,7 +50,7 @@ def get_user_data(id_user_telegram: str) -> None:
             cursor = connection.cursor()
             cursor.execute(
                 """SELECT id_user_telegram, name, height, weight, training_experience
-                FROM users
+                FROM authorized_user
                 WHERE id_user_telegram = ?
                 """,
                 (id_user_telegram,),
@@ -100,8 +100,53 @@ def update_user_data(
             values.append(id_user_telegram)
 
             cursor = connection.cursor()
-            query = f"UPDATE users SET {', '.join(updates)} WHERE id_user_telegram = ?"
+            query = f"UPDATE authorized_user SET {', '.join(updates)} WHERE id_user_telegram = ?"
             cursor.execute(query, values)
 
+    except Exception as error:
+        logger.exception(error)
+
+
+def add_user_starting_the_bot(id_user_telegram: str, username: str) -> None:
+    """
+    Добавляет нового авторизованного пользователя
+
+    Аргументы:
+    :param id_user_telegram: id пользователя телеграмма
+    :param username: имя пользователя телеграмма
+    """
+    try:
+        with sqlite3.connect("sqlite3.db") as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                """CREATE TABLE IF NOT EXISTS not_authorized_user (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_user_telegram TEXT UNIQUE,
+                username TEXT)"""
+            )
+            cursor.execute(
+                """INSERT INTO not_authorized_user (id_user_telegram, username) VALUES (?, ?)""",
+                (id_user_telegram, username),
+            )
+            connection.commit()
+
+    except Exception as error:
+        logger.exception(error)
+
+
+def get_user_starting_the_bot():
+    """
+    Получение не авторизованного пользователя
+
+    Аргументы:
+    :param id_user_telegram: id пользователя телеграмма
+    """
+    try:
+        with sqlite3.connect("sqlite3.db") as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                """SELECT id_user_telegram FROM not_authorized_user""",
+            )
+            return cursor.fetchall()
     except Exception as error:
         logger.exception(error)

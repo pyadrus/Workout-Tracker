@@ -22,6 +22,7 @@ async def main() -> None:
     Создает экземпляр бота, регистрирует маршрутизаторы и запускает процесс опроса обновлений (polling).
     """
     try:
+        global bot
         bot = Bot(
             token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML)
         )
@@ -37,4 +38,5 @@ async def main() -> None:
         logger.exception(error)
 
 
-asyncio.run(main())  # Запуск основного цикла бота.
+if __name__ == "__main__":
+    asyncio.run(main())  # Запуск основного цикла бота.

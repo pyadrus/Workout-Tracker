@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
 
-from handlers.start import load_text_form_file
+from handlers.start import ADMIN_USER_ID, load_text_form_file
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
     update_user_data,  # Импорт функции изменения данных пользователя в базе
@@ -13,6 +13,8 @@ from keyboards.keyboards import (
     generate_authorized_user_options_keyboard,
     generate_keyboard_personal_account,
     generate_user_options_keyboard,
+    generate_admin_panel_keyboard,
+    generate_admin_button,
 )
 
 
@@ -181,12 +183,38 @@ async def back_to_main_menu(callback_query: CallbackQuery) -> None:
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
     if data_user:
-        await callback_query.message.answer(
-            f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
-            reply_markup=generate_authorized_user_options_keyboard(),
-        )
+        if get_user_data(ADMIN_USER_ID):
+            await callback_query.message.answer(
+                f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
+                reply_markup=generate_admin_button(),
+            )
+        else:
+            await callback_query.message.answer(
+                f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
+                reply_markup=generate_authorized_user_options_keyboard(),
+            )
     else:
         await callback_query.message.answer(
             f"👋 Приветствую тебя, @{username}{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_user_options_keyboard(),
         )
+
+
+# Обработчик состояния админской-панели
+@routerr.callback_query(F.data == "admin_panel")
+async def login_to_the_admin_panel(callback_query: CallbackQuery) -> None:
+    await callback_query.message.answer(
+        "Админ-панель", reply_markup=generate_admin_panel_keyboard()
+    )
+
+
+# Обработчик состояния рассылка сообщений пользователям
+@routerr.callback_query(F.data == "sending_messages")
+async def sending_messages_by_user(callback_query: CallbackQuery) -> None:
+    await callback_query.message.answer("Разослать сообщения")
+
+
+# Обработчик состояния статистики
+@routerr.callback_query(F.data == "statistics")
+async def user_activity_analysis(callback_query: CallbackQuery) -> None:
+    await callback_query.message.answer("Статистика")

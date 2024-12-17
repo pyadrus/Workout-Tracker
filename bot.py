@@ -11,6 +11,7 @@ from handlers.feedback import routerrrrrrr
 from handlers.personal_acount import routerr
 from handlers.registration_user import routerrrr
 from handlers.start import router  # Импорт маршрутизатора с обработчиками.
+from handlers.administration_panel import routerrrrrrrrr
 
 logger.add("log/log.log")
 
@@ -33,6 +34,7 @@ async def main() -> None:
         dp.include_router(routerrrrrrr)
         dp.include_router(routerrrr)
         dp.include_router(routerr)
+        dp.include_router(routerrrrrrrrr)
         await dp.start_polling(bot)  # Запуск опроса обновлений.
     except Exception as error:
         logger.exception(error)

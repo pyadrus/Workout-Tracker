@@ -198,23 +198,3 @@ async def back_to_main_menu(callback_query: CallbackQuery) -> None:
             f"👋 Приветствую тебя, @{username}{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_user_options_keyboard(),
         )
-
-
-# Обработчик состояния админской-панели
-@routerr.callback_query(F.data == "admin_panel")
-async def login_to_the_admin_panel(callback_query: CallbackQuery) -> None:
-    await callback_query.message.answer(
-        "Админ-панель", reply_markup=generate_admin_panel_keyboard()
-    )
-
-
-# Обработчик состояния рассылка сообщений пользователям
-@routerr.callback_query(F.data == "sending_messages")
-async def sending_messages_by_user(callback_query: CallbackQuery) -> None:
-    await callback_query.message.answer("Разослать сообщения")
-
-
-# Обработчик состояния статистики
-@routerr.callback_query(F.data == "statistics")
-async def user_activity_analysis(callback_query: CallbackQuery) -> None:
-    await callback_query.message.answer("Статистика")

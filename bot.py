@@ -22,7 +22,9 @@ async def main() -> None:
     Создает экземпляр бота, регистрирует маршрутизаторы и запускает процесс опроса обновлений (polling).
     """
     try:
-        bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+        bot = Bot(
+            token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML)
+        )
         # Создание диспетчера для управления маршрутизацией и обработкой событий.
         dp = Dispatcher()
         # Подключение маршрутизаторов с обработчиками команд и сообщений.

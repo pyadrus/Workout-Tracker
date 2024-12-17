@@ -4,7 +4,6 @@ from aiogram.types import CallbackQuery
 from handlers.start import ADMIN_USER_ID, load_text_form_file
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
-    update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
 from keyboards.keyboards import (
     generate_admin_panel_keyboard,

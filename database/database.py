@@ -1,4 +1,5 @@
 import sqlite3
+from typing import Any
 
 from loguru import logger
 
@@ -134,9 +135,9 @@ def add_user_starting_the_bot(id_user_telegram: str, username: str) -> None:
         logger.exception(error)
 
 
-def get_user_starting_the_bot():
+def get_user_starting_the_bot() -> list[Any] | None:
     """
-    Получение не авторизованного пользователя
+    Получение не авторизованных пользователей
 
     Аргументы:
     :param id_user_telegram: id пользователя телеграмма

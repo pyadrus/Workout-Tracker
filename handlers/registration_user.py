@@ -124,19 +124,6 @@ async def registration_info(message: Message, state: FSMContext) -> None:
     user_data = await state.get_data()
     username = message.from_user.username
     user_id = message.from_user.id
-    # await message.answer(
-    #     f"Вы успешно зарегистрировались!\n\n"
-    #     f"✅ Данные регистрации:\n"
-    #     f"👤 Имя - {user_data['name']}\n"
-    #     f"📏 Рост - {user_data['height']} см\n"
-    #     f"⚖️ Вес - {user_data['weight']} кг\n"
-    #     f"🏋️ Опыт тренировок - {user_data['training_experience']}",
-    #     reply_markup=generate_authorized_user_options_keyboard(),
-    # )
-    # await message.answer(
-    #     f"👋 Приветствую тебя, @{username}{text_authorized_user_greeting()}",
-    #     reply_markup=generate_authorized_user_options_keyboard(),
-    # )
     await message.answer(
         f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
         reply_markup=generate_authorized_user_options_keyboard(),

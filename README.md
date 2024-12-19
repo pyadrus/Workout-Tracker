@@ -26,8 +26,8 @@ git clone https://github.com/username/workout-tracker.git cd workout-tracker
 Создайте виртуальное окружение и активируйте его:
 
 ```bash
-python -m venv venv 
-source venv/bin/activate  # Для Linux/macOS 
+python -m venv venv
+source venv/bin/activate  # Для Linux/macOS
 venv\Scripts\activate     # Для Windows
 ```
 
@@ -92,4 +92,4 @@ workout-tracker/
 Установка бота
 
 1. установить зависимости requirements.txt
-2. создать файл .env и туда записать переменную TOKEN="токен вашего бота"
+2. создать файл .env и туда записать переменную TOKEN="токен вашего бота" и ADMIN_ID=id_вашего телеграмма - чтобы работало админка

@@ -16,13 +16,6 @@ def generate_user_options_keyboard() -> InlineKeyboardMarkup:
             InlineKeyboardButton(text="📝 Регистрация", callback_data="registration"),
             InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
         ],
-        # [
-        #     InlineKeyboardButton(text="Обратная связь", callback_data="feedback"),
-        #     InlineKeyboardButton(
-        #         text="В бота",
-        #         web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
-        #     ),
-        # ],
     ]
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
@@ -34,7 +27,7 @@ def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
     """
     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
 
-    :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
+    :return: Объект InlineKeyboardMarkup с кнопками для выбора.
     """
 
     kb = [
@@ -62,6 +55,75 @@ def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
     return keyboard
 
 
+def generate_admin_button() -> InlineKeyboardMarkup:
+    """
+    Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
+
+    :return: Объект InlineKeyboardMarkup с кнопками для выбора.
+    """
+
+    kb = [
+        [
+            InlineKeyboardButton(
+                text="⚙️ Личный кабинет",
+                callback_data="personal_account",
+            ),  # Кнопка для входа в личный кабинет.
+            InlineKeyboardButton(
+                text="ℹ️ Описание",
+                callback_data="description",
+            ),  # Кнопка для отображения описания проекта.
+        ],
+        [
+            InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
+            InlineKeyboardButton(
+                text="🤖 В бота",
+                web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔧 Админ-панель",
+                callback_data="admin_panel",
+            ),  # Кнопка для входа в админское меню
+        ],
+    ]
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+
+    return keyboard
+
+
+def generate_admin_panel_keyboard() -> InlineKeyboardMarkup:
+    """
+    Создает клавиатуру с кнопками для ажминистратора.
+
+    :return: Объект InlineKeyboardMarkup с кнопками для выбора.
+    """
+
+    kb = [
+        [
+            InlineKeyboardButton(
+                text="Рассылка сообщений пользователям",
+                callback_data="sending_messages",
+            ),  # Кнопка для рассылки сообщений пользователям.
+            InlineKeyboardButton(
+                text="Статистика",
+                callback_data="statistics",
+            ),  # Кнопка для отображения статистики.
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔙 Назад",
+                callback_data="back",
+            ),  # Кнопка для начала процесса регистрации.
+        ],
+    ]
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
+
+    return keyboard
+
+
 def generate_authorized_user_discription() -> None:
     kb = [
         [
@@ -76,7 +138,7 @@ def generate_authorized_user_discription() -> None:
 
 def generate_keyboard_personal_account() -> InlineKeyboardMarkup:
     """
-    :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
+    :return: Объект InlineKeyboardMarkup с кнопками для выбора.
     """
 
     kb = [
@@ -97,7 +159,7 @@ def generate_keyboard_personal_account() -> InlineKeyboardMarkup:
 
 def create_data_change_buttons() -> InlineKeyboardMarkup:
     """
-    :return: Объект ReplyKeyboardMarkup с кнопками для выбора.
+    :return: Объект InlineKeyboardMarkup с кнопками для выбора.
     """
 
     kb = [

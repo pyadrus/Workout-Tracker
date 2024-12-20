@@ -49,24 +49,42 @@ async def start_bot(message: Message) -> None:
     Аргументы:
     :param message: Сообщение пользователя с командой /start.
     """
-    username = message.from_user.username
-    user_id = message.from_user.id
-    data_user = get_user_data(user_id)
+    user_data = dict()  # В словаре хранятся данные пользователя из телеграмм.
+    for key, value in message.from_user:
+        user_data[key] = value
+
+    data_user = get_user_data(user_data["id"])
     if not data_user:
         await message.answer(
-            f"👋 Приветствую тебя, @{username}{load_text_form_file('text_hello_welcome.json')}",
+            f"👋 Приветствую тебя, @{user_data['username']}{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_user_options_keyboard(),
         )
-        add_user_starting_the_bot(id_user_telegram=user_id, username=username)
+
+        add_user_starting_the_bot(
+            id_user=user_data["id"],
+            is_bot=user_data["is_bot"],
+            first_name=user_data["first_name"],
+            last_name=user_data["last_name"],
+            username=user_data["username"],
+            language_code=user_data["language_code"],
+            is_premium=user_data["is_premium"],
+            added_to_attachment_menu=user_data["added_to_attachment_menu"],
+            can_join_groups=user_data["can_join_groups"],
+            can_read_all_group_messages=user_data["can_read_all_group_messages"],
+            supports_inline_queries=user_data["supports_inline_queries"],
+            can_connect_to_business=user_data["can_connect_to_business"],
+            has_main_web_app=user_data["has_main_web_app"],
+        )
+
     else:
         if get_user_data(ADMIN_USER_ID):
             await message.answer(
-                f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
+                f"👋 Приветствую тебя, @{user_data['username']}{load_text_form_file('text_authorized_user_greeting.json')}",
                 reply_markup=generate_admin_button(),
             )
         else:
             await message.answer(
-                f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
+                f"👋 Приветствую тебя, @{user_data['username']}{load_text_form_file('text_authorized_user_greeting.json')}",
                 reply_markup=generate_authorized_user_options_keyboard(),
             )
 

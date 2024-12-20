@@ -146,7 +146,7 @@ def get_user_starting_the_bot() -> list[Any] | None:
         with sqlite3.connect("sqlite3.db") as connection:
             cursor = connection.cursor()
             cursor.execute(
-                """SELECT id_user_telegram FROM not_authorized_user""",
+                """SELECT id_user_telegram, username FROM not_authorized_user""",
             )
             return cursor.fetchall()
     except Exception as error:

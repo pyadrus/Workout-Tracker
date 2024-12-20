@@ -24,7 +24,7 @@ async def login_to_the_admin_panel(callback_query: CallbackQuery) -> None:
     Переходит в админское меню
 
     Аргументы:
-    :param callback_query:
+    :param callback_query: Сообщение пользователю
     """
     await callback_query.message.answer(
         f"{load_text_form_file('text_admin_panel.json')}",
@@ -39,7 +39,7 @@ async def messages_by_user(callback_query: CallbackQuery, state: FSMContext) -> 
     Начинает процесс регистрации сообщения для отправки пользователям
 
     Аргументы:
-    :param callback_query:
+    :param callback_query: Сообщение пользователя
     :param state:
     """
     await state.set_state(MessageStorage.message_to_be_sent)
@@ -57,7 +57,7 @@ async def sending_messages_by_user(
     Отправляет сообщения пользователям
 
     Аргументы:
-    :param message:
+    :param message: Сообщение пользователя
     :param state:
     :param bot:
     """

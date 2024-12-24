@@ -5,7 +5,7 @@ from loguru import logger
 
 
 def add_users(
-    id_user_telegram: str, name: str, height: str, weight: str, training_experience: str
+    id_user_telegram: int, name: str, height: str, weight: str, training_experience: str
 ) -> None:
     """
     Добавляет нового авторизованного пользователя
@@ -108,12 +108,26 @@ def update_user_data(
         logger.exception(error)
 
 
-def add_user_starting_the_bot(id_user_telegram: str, username: str) -> None:
+def add_user_starting_the_bot(
+    id_user: str,
+    is_bot: str,
+    first_name: str,
+    last_name: str,
+    username: str,
+    language_code: str,
+    is_premium: str,
+    added_to_attachment_menu: str,
+    can_join_groups: str,
+    can_read_all_group_messages: str,
+    supports_inline_queries: str,
+    can_connect_to_business: str,
+    has_main_web_app: str,
+) -> None:
     """
-    Добавляет нового авторизованного пользователя
+    Добавляет нового не авторизованного пользователя
 
     Аргументы:
-    :param id_user_telegram: id пользователя телеграмма
+    :param id_user: id пользователя телеграмма
     :param username: имя пользователя телеграмма
     """
     try:
@@ -122,12 +136,50 @@ def add_user_starting_the_bot(id_user_telegram: str, username: str) -> None:
             cursor.execute(
                 """CREATE TABLE IF NOT EXISTS not_authorized_user (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                id_user_telegram TEXT UNIQUE,
-                username TEXT)"""
+                id_user TEXT UNIQUE,
+                is_bot,
+                first_name,
+                last_name,
+                username,
+                language_code,
+                is_premium,
+                added_to_attachment_menu,
+                can_join_groups,
+                can_read_all_group_messages,
+                supports_inline_queries,
+                can_connect_to_business,
+                has_main_web_app)"""
             )
             cursor.execute(
-                """INSERT INTO not_authorized_user (id_user_telegram, username) VALUES (?, ?)""",
-                (id_user_telegram, username),
+                """INSERT INTO not_authorized_user (
+                    id_user,
+                    is_bot,
+                    first_name,
+                    last_name,
+                    username,
+                    language_code,
+                    is_premium,
+                    added_to_attachment_menu,
+                    can_join_groups,
+                    can_read_all_group_messages,
+                    supports_inline_queries,
+                    can_connect_to_business,
+                    has_main_web_app) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    id_user,
+                    is_bot,
+                    first_name,
+                    last_name,
+                    username,
+                    language_code,
+                    is_premium,
+                    added_to_attachment_menu,
+                    can_join_groups,
+                    can_read_all_group_messages,
+                    supports_inline_queries,
+                    can_connect_to_business,
+                    has_main_web_app,
+                ),
             )
             connection.commit()
 
@@ -140,13 +192,13 @@ def get_user_starting_the_bot() -> list[Any] | None:
     Получение не авторизованных пользователей
 
     Аргументы:
-    :param id_user_telegram: id пользователя телеграмма
+    :param id_user: id пользователя телеграмма
     """
     try:
         with sqlite3.connect("sqlite3.db") as connection:
             cursor = connection.cursor()
             cursor.execute(
-                """SELECT id_user_telegram FROM not_authorized_user""",
+                """SELECT id_user, username FROM not_authorized_user""",
             )
             return cursor.fetchall()
     except Exception as error:

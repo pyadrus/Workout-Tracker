@@ -7,11 +7,9 @@ from pathlib import Path
 from aiogram import F, Router
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery, Message
-from dotenv import load_dotenv
-import os
 
 from database.database import (
-    get_user_data,  # Импорт функции получения пользователя из базы
+    get_user_data,  # Импорт функции получения авторизованного пользователя из базы
     add_user_starting_the_bot,  # Импорт функции добавления не авторизованного пользователя
 )
 from keyboards.keyboards import (
@@ -20,12 +18,9 @@ from keyboards.keyboards import (
     generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
     generate_admin_button,
 )
+from data.config import ADMIN_USER_ID
 
-router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
-
-load_dotenv()
-
-ADMIN_USER_ID = os.getenv("ADMIN_ID")
+main_router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
 
 # Чтение файла json для выборки текстов
@@ -40,8 +35,8 @@ def load_text_form_file(file_name):
 
 
 # Обработчик команды /start, отправляющий приветственное сообщение и клавиатуру с вариантами.
-@router.message(CommandStart())
-async def start_bot(message: Message) -> None:
+@main_router.message(CommandStart())
+async def start_bot_command(message: Message) -> None:
     """
     Отправляет приветственное сообщение пользователю при старте бота.
     Так же добавляет не авторизованного пользователя в таблицу.
@@ -49,37 +44,59 @@ async def start_bot(message: Message) -> None:
     Аргументы:
     :param message: Сообщение пользователя с командой /start.
     """
-    username = message.from_user.username
-    user_id = message.from_user.id
-    data_user = get_user_data(user_id)
-    if not data_user:
+    telegram_user_data: dict[str, str] = (
+        dict()
+    )  # В словаре хранятся данные пользователя из телеграмм.
+    for key, value in message.from_user:
+        telegram_user_data[key] = value
+
+    user_data_from_database = get_user_data(telegram_user_data["id"])
+    if not user_data_from_database:
         await message.answer(
-            f"👋 Приветствую тебя, @{username}{load_text_form_file('text_hello_welcome.json')}",
+            f"{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_user_options_keyboard(),
         )
-        add_user_starting_the_bot(id_user_telegram=user_id, username=username)
+
+        add_user_starting_the_bot(
+            id_user=telegram_user_data["id"],
+            is_bot=telegram_user_data["is_bot"],
+            first_name=telegram_user_data["first_name"],
+            last_name=telegram_user_data["last_name"],
+            username=telegram_user_data["username"],
+            language_code=telegram_user_data["language_code"],
+            is_premium=telegram_user_data["is_premium"],
+            added_to_attachment_menu=telegram_user_data["added_to_attachment_menu"],
+            can_join_groups=telegram_user_data["can_join_groups"],
+            can_read_all_group_messages=telegram_user_data[
+                "can_read_all_group_messages"
+            ],
+            supports_inline_queries=telegram_user_data["supports_inline_queries"],
+            can_connect_to_business=telegram_user_data["can_connect_to_business"],
+            has_main_web_app=telegram_user_data["has_main_web_app"],
+        )  # Добавление пользователя при запуске бота.
+
     else:
         if get_user_data(ADMIN_USER_ID):
             await message.answer(
-                f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
+                f"{load_text_form_file('text_authorized_user_greeting.json')}",
                 reply_markup=generate_admin_button(),
             )
         else:
             await message.answer(
-                f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
+                f"{load_text_form_file('text_authorized_user_greeting.json')}",
                 reply_markup=generate_authorized_user_options_keyboard(),
             )
 
 
-@router.callback_query(F.data == "description")
-async def description(callback_query: CallbackQuery) -> None:
+@main_router.callback_query(F.data == "description")
+async def bot_description(callback_query: CallbackQuery) -> None:
     """
     Отправляет описание бота пользователю.
 
     Аргументы:
     :param message: Сообщение пользователя с текстом "описание".
     """
-    await callback_query.message.answer(
+    await callback_query.message.edit_text(
         f"{load_text_form_file('text_description.json')}",
         reply_markup=generate_authorized_user_discription(),
     )

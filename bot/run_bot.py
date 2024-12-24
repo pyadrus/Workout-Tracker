@@ -9,11 +9,11 @@ from loguru import logger
 from data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
 from handlers.feedback import routerrrrrrr
 from handlers.personal_acount import routerr
-from handlers.registration_user import routerrrr
-from handlers.start import router  # Импорт маршрутизатора с обработчиками.
+from handlers.registration_user import registration_user_router
+from handlers.launch_bot import main_router  # Импорт маршрутизатора с обработчиками.
 from handlers.administration_panel import routerrrrrrrrr
 
-logger.add("log/log.log")
+logger.add("logs/log.log")
 
 
 async def main() -> None:
@@ -30,9 +30,9 @@ async def main() -> None:
         # Создание диспетчера для управления маршрутизацией и обработкой событий.
         dp = Dispatcher()
         # Подключение маршрутизаторов с обработчиками команд и сообщений.
-        dp.include_router(router)
+        dp.include_router(main_router)
         dp.include_router(routerrrrrrr)
-        dp.include_router(routerrrr)
+        dp.include_router(registration_user_router)
         dp.include_router(routerr)
         dp.include_router(routerrrrrrrrr)
         await dp.start_polling(bot)  # Запуск опроса обновлений.

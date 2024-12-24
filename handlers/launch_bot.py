@@ -18,15 +18,9 @@ from keyboards.keyboards import (
     generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
     generate_admin_button,
 )
-
-from dotenv import load_dotenv
-import os
+from data.config import ADMIN_USER_ID
 
 main_router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
-
-load_dotenv()
-
-ADMIN_USER_ID = os.getenv("ADMIN_ID")
 
 
 # Чтение файла json для выборки текстов
@@ -42,7 +36,7 @@ def load_text_form_file(file_name):
 
 # Обработчик команды /start, отправляющий приветственное сообщение и клавиатуру с вариантами.
 @main_router.message(CommandStart())
-async def start_bot(message: Message) -> None:
+async def start_bot_command(message: Message) -> None:
     """
     Отправляет приветственное сообщение пользователю при старте бота.
     Так же добавляет не авторизованного пользователя в таблицу.

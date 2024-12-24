@@ -50,7 +50,9 @@ async def start_bot(message: Message) -> None:
     Аргументы:
     :param message: Сообщение пользователя с командой /start.
     """
-    telegram_user_data = dict()  # В словаре хранятся данные пользователя из телеграмм.
+    telegram_user_data: dict[str, str] = (
+        dict()
+    )  # В словаре хранятся данные пользователя из телеграмм.
     for key, value in message.from_user:
         telegram_user_data[key] = value
 
@@ -70,8 +72,8 @@ async def start_bot(message: Message) -> None:
         has_main_web_app=telegram_user_data["has_main_web_app"],
     )  # Добавление пользователя при запуске бота.
 
-    data_user = get_user_data(telegram_user_data["id"])
-    if not data_user:
+    user_data_from_database = get_user_data(telegram_user_data["id"])
+    if not user_data_from_database:
         await message.answer(
             f"{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_user_options_keyboard(),

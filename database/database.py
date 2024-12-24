@@ -109,19 +109,19 @@ def update_user_data(
 
 
 def add_user_starting_the_bot(
-    id_user,
-    is_bot,
-    first_name,
-    last_name,
-    username,
-    language_code,
-    is_premium,
-    added_to_attachment_menu,
-    can_join_groups,
-    can_read_all_group_messages,
-    supports_inline_queries,
-    can_connect_to_business,
-    has_main_web_app,
+    id_user: str,
+    is_bot: str,
+    first_name: str,
+    last_name: str,
+    username: str,
+    language_code: str,
+    is_premium: str,
+    added_to_attachment_menu: str,
+    can_join_groups: str,
+    can_read_all_group_messages: str,
+    supports_inline_queries: str,
+    can_connect_to_business: str,
+    has_main_web_app: str,
 ) -> None:
     """
     Добавляет нового не авторизованного пользователя

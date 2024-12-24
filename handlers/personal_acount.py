@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
 
-from handlers.start import ADMIN_USER_ID, load_text_form_file
+from handlers.start_bot import ADMIN_USER_ID, load_text_form_file
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
     update_user_data,  # Импорт функции изменения данных пользователя в базе
@@ -31,7 +31,7 @@ class ChangeData(StatesGroup):
 # Обработчик состояния просмотра личного кабинета
 @routerr.callback_query(F.data == "personal_account")
 async def users_personal_account(callback_query: CallbackQuery) -> None:
-    await callback_query.message.answer(
+    await callback_query.message.edit_text(
         "Вы вошли в личный кабинет", reply_markup=generate_keyboard_personal_account()
     )
 
@@ -43,7 +43,7 @@ async def user_data(callback_query: CallbackQuery) -> None:
     data_user = get_user_data(user_id)
     if data_user:
         _, name, height, weight, training_experience = data_user
-        await callback_query.message.answer(
+        await callback_query.message.edit_text(
             f"📋 Ваш профиль:\n"
             f"👤 Имя - {name}\n"
             f"📏 Рост - {height} см\n"
@@ -56,7 +56,7 @@ async def user_data(callback_query: CallbackQuery) -> None:
 # Обработчик состояния вернутся в основное меню
 @routerr.callback_query(F.data == "back_personal_account")
 async def back_to_personal_account(callback_query: CallbackQuery) -> None:
-    await callback_query.message.answer(
+    await callback_query.message.edit_text(
         "Вы вошли в личный кабинет",
         reply_markup=generate_keyboard_personal_account(),
     )
@@ -184,17 +184,17 @@ async def back_to_main_menu(callback_query: CallbackQuery) -> None:
     data_user = get_user_data(user_id)
     if data_user:
         if get_user_data(ADMIN_USER_ID):
-            await callback_query.message.answer(
+            await callback_query.message.edit_text(
                 f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
                 reply_markup=generate_admin_button(),
             )
         else:
-            await callback_query.message.answer(
+            await callback_query.message.edit_text(
                 f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
                 reply_markup=generate_authorized_user_options_keyboard(),
             )
     else:
-        await callback_query.message.answer(
+        await callback_query.message.edit_text(
             f"👋 Приветствую тебя, @{username}{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_user_options_keyboard(),
         )

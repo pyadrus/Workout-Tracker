@@ -2,7 +2,7 @@ from aiogram import F, Router, Bot
 from aiogram.types import CallbackQuery, Message
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
-from handlers.start import ADMIN_USER_ID, load_text_form_file
+from handlers.start_bot import ADMIN_USER_ID, load_text_form_file
 from database.database import (
     get_user_starting_the_bot,  # Импорт функции для получения не авторизованных пользователей
 )
@@ -26,7 +26,7 @@ async def login_to_the_admin_panel(callback_query: CallbackQuery) -> None:
     Аргументы:
     :param callback_query: Сообщение пользователю
     """
-    await callback_query.message.answer(
+    await callback_query.message.edit_text(
         f"{load_text_form_file('text_admin_panel.json')}",
         reply_markup=generate_admin_panel_keyboard(),
     )

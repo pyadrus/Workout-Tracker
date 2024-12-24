@@ -10,7 +10,7 @@ from data.config import BOT_TOKEN  # Импорт токена бота из ф�
 from handlers.feedback import routerrrrrrr
 from handlers.personal_acount import routerr
 from handlers.registration_user import routerrrr
-from handlers.start_bot import router  # Импорт маршрутизатора с обработчиками.
+from handlers.launch_bot import main_router  # Импорт маршрутизатора с обработчиками.
 from handlers.administration_panel import routerrrrrrrrr
 
 logger.add("log/log.log")
@@ -30,7 +30,7 @@ async def main() -> None:
         # Создание диспетчера для управления маршрутизацией и обработкой событий.
         dp = Dispatcher()
         # Подключение маршрутизаторов с обработчиками команд и сообщений.
-        dp.include_router(router)
+        dp.include_router(main_router)
         dp.include_router(routerrrrrrr)
         dp.include_router(routerrrr)
         dp.include_router(routerr)

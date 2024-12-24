@@ -5,7 +5,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
 
-from handlers.start_bot import load_text_form_file
+from handlers.launch_bot import load_text_form_file
 from database.database import (
     add_users,  # Импорт функции добавления пользователя в базу
 )

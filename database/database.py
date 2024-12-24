@@ -5,7 +5,7 @@ from loguru import logger
 
 
 def add_users(
-    id_user_telegram: str, name: str, height: str, weight: str, training_experience: str
+    id_user_telegram: int, name: str, height: str, weight: str, training_experience: str
 ) -> None:
     """
     Добавляет нового авторизованного пользователя

@@ -56,28 +56,31 @@ async def start_bot(message: Message) -> None:
     for key, value in message.from_user:
         telegram_user_data[key] = value
 
-    add_user_starting_the_bot(
-        id_user=telegram_user_data["id"],
-        is_bot=telegram_user_data["is_bot"],
-        first_name=telegram_user_data["first_name"],
-        last_name=telegram_user_data["last_name"],
-        username=telegram_user_data["username"],
-        language_code=telegram_user_data["language_code"],
-        is_premium=telegram_user_data["is_premium"],
-        added_to_attachment_menu=telegram_user_data["added_to_attachment_menu"],
-        can_join_groups=telegram_user_data["can_join_groups"],
-        can_read_all_group_messages=telegram_user_data["can_read_all_group_messages"],
-        supports_inline_queries=telegram_user_data["supports_inline_queries"],
-        can_connect_to_business=telegram_user_data["can_connect_to_business"],
-        has_main_web_app=telegram_user_data["has_main_web_app"],
-    )  # Добавление пользователя при запуске бота.
-
     user_data_from_database = get_user_data(telegram_user_data["id"])
     if not user_data_from_database:
         await message.answer(
             f"{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_user_options_keyboard(),
         )
+
+        add_user_starting_the_bot(
+            id_user=telegram_user_data["id"],
+            is_bot=telegram_user_data["is_bot"],
+            first_name=telegram_user_data["first_name"],
+            last_name=telegram_user_data["last_name"],
+            username=telegram_user_data["username"],
+            language_code=telegram_user_data["language_code"],
+            is_premium=telegram_user_data["is_premium"],
+            added_to_attachment_menu=telegram_user_data["added_to_attachment_menu"],
+            can_join_groups=telegram_user_data["can_join_groups"],
+            can_read_all_group_messages=telegram_user_data[
+                "can_read_all_group_messages"
+            ],
+            supports_inline_queries=telegram_user_data["supports_inline_queries"],
+            can_connect_to_business=telegram_user_data["can_connect_to_business"],
+            has_main_web_app=telegram_user_data["has_main_web_app"],
+        )  # Добавление пользователя при запуске бота.
+
     else:
         if get_user_data(ADMIN_USER_ID):
             await message.answer(

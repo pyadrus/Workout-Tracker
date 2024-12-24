@@ -13,7 +13,7 @@ from handlers.registration_user import registration_user_router
 from handlers.launch_bot import main_router  # Импорт маршрутизатора с обработчиками.
 from handlers.administration_panel import routerrrrrrrrr
 
-logger.add("log/log.log")
+logger.add("logs/log.log")
 
 
 async def main() -> None:

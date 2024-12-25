@@ -6,9 +6,13 @@ import uvicorn
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")  # Подключаем статические файлы
+app.mount(
+    "/static", StaticFiles(directory="WebApp/static"), name="static"
+)  # Подключаем статические файлы
 
-templates = Jinja2Templates(directory="templates")  # Указываем директорию с шаблонами.
+templates = Jinja2Templates(
+    directory="WebApp/templates"
+)  # Указываем директорию с шаблонами.
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -146,6 +150,19 @@ async def create_workouts(request: Request):
     :return: HTML-страница с информацией о проекте.
     """
     return templates.TemplateResponse("create_workouts.html", {"request": request})
+
+
+async def start_web() -> None:
+    config = uvicorn.Config(
+        "WebApp.main:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=True,
+        ssl_certfile="certificates/cert.pem",
+        ssl_keyfile="certificates/key.pem",
+    )
+    server = uvicorn.Server(config)
+    await server.serve()
 
 
 if __name__ == "__main__":

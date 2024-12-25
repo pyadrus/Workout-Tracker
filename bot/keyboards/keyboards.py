@@ -3,6 +3,7 @@ from aiogram.types import (
     InlineKeyboardMarkup,
     WebAppInfo,
 )
+from bot.data.config import BASE_SITE_URL
 
 
 def generate_user_options_keyboard() -> InlineKeyboardMarkup:
@@ -45,7 +46,7 @@ def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
             InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
             InlineKeyboardButton(
                 text="🤖 В бота",
-                web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
+                web_app=WebAppInfo(url=BASE_SITE_URL),
             ),
         ],
     ]
@@ -77,7 +78,7 @@ def generate_admin_button() -> InlineKeyboardMarkup:
             InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
             InlineKeyboardButton(
                 text="🤖 В бота",
-                web_app=WebAppInfo(url="https://c667-109-254-149-114.ngrok-free.app/"),
+                web_app=WebAppInfo(url=BASE_SITE_URL),
             ),
         ],
         [

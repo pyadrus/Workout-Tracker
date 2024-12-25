@@ -57,6 +57,58 @@ uvicorn main:app
 ---
 
 ## **Файловая структура:**
+```csharp
+workout-tracker/
+├── bot/
+│   ├── data/
+│   │   ├── __init__.py
+│   │   └── config.py
+│   ├── database/
+│   │   ├── __init__.py
+│   │   └── database.py
+│   ├── handlers/
+│   │   ├── __init__.py
+│   │   ├── administration_panel.py
+│   │   ├── feedback.py
+│   │   ├── launch_bot.py
+│   │   ├── personal_acount.py
+│   │   └── registration_user.py
+│   ├── keyboards/
+│   │   ├── __init__.py
+│   │   └── keyboards.py
+│   ├── messages/
+│   │   ├── text_admin_panel.json
+│   │   ├── text_authorized_user_greeting.json
+│   │   ├── text_description.json
+│   │   ├── text_hello_welcome.json
+│   │   ├── text_input_height_error.json
+│   │   ├── text_input_height.json
+│   │   ├── text_input_name.json
+│   │   ├── text_input_training_experience.json
+│   │   ├── text_input_weight_error.json
+│   │   ├── text_input_weight.json
+│   │   └── text_sending_message.json
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   └── validators.py
+│   └── run_bot.py
+├── WebApp/
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   ├── images/
+│   │   │   └── avatar.jpg
+│   ├── templates/
+│   │   ├── basic_exercises/
+│   │   ├── day_of_the_week/
+│   └── main.py
+├── .gitignore
+├── main.py
+├── README.md
+├── requirements.txt
+├── sqlite3.db
+├── TODO.md
+```
 
 ```csharp
 
@@ -92,4 +144,4 @@ workout-tracker/
 Установка бота
 
 1. установить зависимости requirements.txt
-2. создать файл .env и туда записать переменную TOKEN="токен вашего бота" и ADMIN_ID=id_вашего телеграмма - чтобы работало админка
+2. создать файл .env и туда записать переменную TOKEN="токен вашего бота" и ADMIN_ID=id_вашего телеграмма - чтобы работало админка и BASE_SITE=url_вашего_сайта

@@ -3,12 +3,12 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
 
-from handlers.launch_bot import ADMIN_USER_ID, load_text_form_file
-from database.database import (
+from bot.handlers.launch_bot import ADMIN_USER_ID, load_text_form_file
+from bot.database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
     update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
-from keyboards.keyboards import (
+from bot.keyboards.keyboards import (
     create_data_change_buttons,
     generate_authorized_user_options_keyboard,
     generate_keyboard_personal_account,

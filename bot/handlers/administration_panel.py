@@ -2,11 +2,11 @@ from aiogram import F, Router, Bot
 from aiogram.types import CallbackQuery, Message
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
-from handlers.launch_bot import load_text_form_file
-from database.database import (
+from bot.handlers.launch_bot import load_text_form_file
+from bot.database.database import (
     get_user_starting_the_bot,  # Импорт функции для получения не авторизованных пользователей
 )
-from keyboards.keyboards import (
+from bot.keyboards.keyboards import (
     generate_admin_panel_keyboard,
 )
 

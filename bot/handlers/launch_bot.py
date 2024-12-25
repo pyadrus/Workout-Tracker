@@ -8,17 +8,17 @@ from aiogram import F, Router
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery, Message
 
-from database.database import (
+from bot.database.database import (
     get_user_data,  # Импорт функции получения авторизованного пользователя из базы
     add_user_starting_the_bot,  # Импорт функции добавления не авторизованного пользователя
 )
-from keyboards.keyboards import (
+from bot.keyboards.keyboards import (
     generate_authorized_user_discription,
     generate_authorized_user_options_keyboard,
     generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
     generate_admin_button,
 )
-from data.config import ADMIN_USER_ID
+from bot.data.config import ADMIN_USER_ID
 
 main_router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 

@@ -9,4 +9,6 @@ BOT_TOKEN = os.getenv("TOKEN")  # Получаем токен бота из пе
 
 ADMIN_USER_ID = os.getenv("ADMIN_ID")
 
+BASE_SITE_URL = os.getenv("BASE_SITE")
+
 logger.info(BOT_TOKEN)  # Проверка, что токен загружен

@@ -3,14 +3,14 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
 
-from handlers.launch_bot import load_text_form_file
-from database.database import (
+from bot.handlers.launch_bot import load_text_form_file
+from bot.database.database import (
     add_users,  # Импорт функции добавления зарегистрированного пользователя в базу.
 )
-from keyboards.keyboards import (
+from bot.keyboards.keyboards import (
     generate_authorized_user_options_keyboard,
 )
-from utils.validators import (
+from bot.utils.validators import (
     is_float,  # Имфорт функции валидации вещественных чисел.
     is_int,  # Имфорт функций валидации целых чисел.
 )

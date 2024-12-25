@@ -10,10 +10,8 @@ from bot.data.config import BOT_TOKEN  # Импорт токена бота из
 from bot.handlers.feedback import router_feedback
 from bot.handlers.personal_acount import routerr
 from bot.handlers.registration_user import router_registration_user
-from bot.handlers.launch_bot import (
-    router_main,
-)  # Импорт маршрутизатора с обработчиками.
-from bot.handlers.administration_panel import routerrrrrrrrr
+from bot.handlers.launch_bot import router_main
+from bot.handlers.administration_panel import router_administration_panel
 
 logger.add("logs/log.log")
 
@@ -36,7 +34,7 @@ async def start_bot() -> None:
         dp.include_router(router_feedback)
         dp.include_router(router_registration_user)
         dp.include_router(routerr)
-        dp.include_router(routerrrrrrrrr)
+        dp.include_router(router_administration_panel)
         await dp.start_polling(bot)  # Запуск опроса обновлений.
     except Exception as error:
         logger.exception(error)

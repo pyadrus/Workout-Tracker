@@ -2,7 +2,7 @@ from aiogram import F, Router, Bot
 from aiogram.types import CallbackQuery, Message
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
-from bot.handlers.launch_bot import load_text_form_file
+from bot.utils.read_text import load_text_form_file
 from bot.database.database import (
     get_user_starting_the_bot,  # Импорт функции для получения не авторизованных пользователей
 )
@@ -10,7 +10,9 @@ from bot.keyboards.keyboards import (
     generate_admin_panel_keyboard,
 )
 
-routerrrrrrrrr = Router()  # Создание маршрутизатора для обработки команд и сообщений.
+router_administration_panel = (
+    Router()
+)  # Создание маршрутизатора для обработки команд и сообщений.
 
 
 class MessageStorage(StatesGroup):
@@ -18,7 +20,7 @@ class MessageStorage(StatesGroup):
 
 
 # Обработчик состояния админской-панели
-@routerrrrrrrrr.callback_query(F.data == "admin_panel")
+@router_administration_panel.callback_query(F.data == "admin_panel")
 async def login_to_the_admin_panel(callback_query: CallbackQuery) -> None:
     """
     Переходит в админское меню
@@ -33,8 +35,8 @@ async def login_to_the_admin_panel(callback_query: CallbackQuery) -> None:
 
 
 # Обработчик состояния подготовки сообщения пользователям
-@routerrrrrrrrr.callback_query(F.data == "sending_messages")
-async def messages_by_user(callback_query: CallbackQuery, state: FSMContext) -> None:
+@router_administration_panel.callback_query(F.data == "sending_messages")
+async def messages_for_user(callback_query: CallbackQuery, state: FSMContext) -> None:
     """
     Начинает процесс регистрации сообщения для отправки пользователям
 
@@ -44,13 +46,13 @@ async def messages_by_user(callback_query: CallbackQuery, state: FSMContext) -> 
     """
     await state.set_state(MessageStorage.message_to_be_sent)
     await callback_query.message.answer(
-        "💬 Чтобы вы хотели разослать пользователям телеграм бота?"
+        f"{load_text_form_file('text_what_do_you_sending_message.json')}"
     )
 
 
 # Обработчик состояния отправки сообщения пользователям
-@routerrrrrrrrr.message(MessageStorage.message_to_be_sent)
-async def sending_messages_by_user(
+@router_administration_panel.message(MessageStorage.message_to_be_sent)
+async def sending_messages_for_user(
     message: Message, state: FSMContext, bot: Bot
 ) -> None:
     """
@@ -78,7 +80,7 @@ async def sending_messages_by_user(
 
 
 # Обработчик состояния статистики
-@routerrrrrrrrr.callback_query(F.data == "statistics")
+@router_administration_panel.callback_query(F.data == "statistics")
 async def user_activity_analysis(callback_query: CallbackQuery) -> None:
     """
     Статистика
@@ -86,4 +88,6 @@ async def user_activity_analysis(callback_query: CallbackQuery) -> None:
     Аргументы:
     :param callback_query:
     """
-    await callback_query.message.answer("Статистика")
+    await callback_query.message.answer(
+        f"{load_text_form_file('text_statistics.json')}"
+    )

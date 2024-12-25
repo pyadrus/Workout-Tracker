@@ -185,16 +185,16 @@ async def back_to_main_menu(callback_query: CallbackQuery) -> None:
     if data_user:
         if get_user_data(ADMIN_USER_ID):
             await callback_query.message.edit_text(
-                f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
+                f"{load_text_form_file('text_authorized_user_greeting.json')}",
                 reply_markup=generate_admin_button(),
             )
         else:
             await callback_query.message.edit_text(
-                f"👋 Приветствую тебя, @{username}{load_text_form_file('text_authorized_user_greeting.json')}",
+                f"{load_text_form_file('text_authorized_user_greeting.json')}",
                 reply_markup=generate_authorized_user_options_keyboard(),
             )
     else:
         await callback_query.message.edit_text(
-            f"👋 Приветствую тебя, @{username}{load_text_form_file('text_hello_welcome.json')}",
+            f"{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_user_options_keyboard(),
         )

@@ -2,7 +2,6 @@ from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
-
 from bot.handlers.launch_bot import load_text_form_file
 from bot.database.database import (
     add_users,  # Импорт функции добавления зарегистрированного пользователя в базу.
@@ -40,7 +39,9 @@ async def user_registration_command(
     :param state: Контекст состояния FSM.
     """
     await state.set_state(RegistrationStates.name)
-    await callback_query.message.answer("✍️ Для регистрации введите своё имя")
+    await callback_query.message.answer(
+        f"{load_text_form_file('text_input_name.json')}"
+    )
 
 
 # Обработчик состояния ввода имени пользователя.
@@ -55,7 +56,7 @@ async def register_user_name(message: Message, state: FSMContext) -> None:
     """
     await state.update_data(name=message.text)
     await state.set_state(RegistrationStates.height)
-    await message.answer("📏 Введите свой рост в сантиметрах")
+    await message.answer(f"{load_text_form_file('text_input_height.json')}")
 
 
 # Обработчик состояния ввода роста пользователя.±

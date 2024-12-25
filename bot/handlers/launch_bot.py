@@ -19,23 +19,13 @@ from bot.keyboards.keyboards import (
     generate_admin_button,
 )
 from bot.data.config import ADMIN_USER_ID
+from bot.utils.read_text import load_text_form_file
 
-main_router = Router()  # Создание маршрутизатора для обработки команд и сообщений.
-
-
-# Чтение файла json для выборки текстов
-def load_text_form_file(file_name):
-    file_path = Path(f"bot/messages/{file_name}")
-    if (
-        file_path.exists()
-    ):  # возвращает true , если объект файловой системы существует, и false – если нет
-        with open(file_path, "r", encoding="utf-8") as file:
-            return json.load(file)  # Загружаем строку текста
-    return "Файл не найден!"
+router_main = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
 
 # Обработчик команды /start, отправляющий приветственное сообщение и клавиатуру с вариантами.
-@main_router.message(CommandStart())
+@router_main.message(CommandStart())
 async def start_bot_command(message: Message) -> None:
     """
     Отправляет приветственное сообщение пользователю при старте бота.
@@ -88,7 +78,7 @@ async def start_bot_command(message: Message) -> None:
             )
 
 
-@main_router.callback_query(F.data == "description")
+@router_main.callback_query(F.data == "description")
 async def bot_description(callback_query: CallbackQuery) -> None:
     """
     Отправляет описание бота пользователю.

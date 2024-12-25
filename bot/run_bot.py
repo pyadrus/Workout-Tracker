@@ -7,11 +7,11 @@ from aiogram.enums.parse_mode import ParseMode
 from loguru import logger
 
 from bot.data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
-from bot.handlers.feedback import routerrrrrrr
+from bot.handlers.feedback import router_feedback
 from bot.handlers.personal_acount import routerr
-from bot.handlers.registration_user import registration_user_router
+from bot.handlers.registration_user import router_registration_user
 from bot.handlers.launch_bot import (
-    main_router,
+    router_main,
 )  # Импорт маршрутизатора с обработчиками.
 from bot.handlers.administration_panel import routerrrrrrrrr
 
@@ -32,9 +32,9 @@ async def start_bot() -> None:
         # Создание диспетчера для управления маршрутизацией и обработкой событий.
         dp = Dispatcher()
         # Подключение маршрутизаторов с обработчиками команд и сообщений.
-        dp.include_router(main_router)
-        dp.include_router(routerrrrrrr)
-        dp.include_router(registration_user_router)
+        dp.include_router(router_main)
+        dp.include_router(router_feedback)
+        dp.include_router(router_registration_user)
         dp.include_router(routerr)
         dp.include_router(routerrrrrrrrr)
         await dp.start_polling(bot)  # Запуск опроса обновлений.

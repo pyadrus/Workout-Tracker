@@ -81,8 +81,12 @@ workout-tracker/
 │   │   ├── text_authorized_user_greeting.json
 │   │   ├── text_description.json
 │   │   ├── text_hello_welcome.json
+│   │   ├── text_input_height_error.json
 │   │   ├── text_input_height.json
 │   │   ├── text_input_name.json
+│   │   ├── text_input_training_experience.json
+│   │   ├── text_input_weight_error.json
+│   │   ├── text_input_weight.json
 │   │   └── text_sending_message.json
 │   ├── utils/
 │   │   ├── __init__.py

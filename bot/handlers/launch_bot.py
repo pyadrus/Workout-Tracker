@@ -1,13 +1,11 @@
 # Основной файл Telegram-бота, использующего aiogram для взаимодействия с пользователями.
 # В этом файле создается логика обработки сообщений и FSM (Finite State Machine) для регистрации пользователей.
 
-import json
-from pathlib import Path
-
-from aiogram import F, Router
+from aiogram import F
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery, Message
 
+from bot.data.config import ADMIN_USER_ID, router
 from bot.database.database import (
     get_user_data,  # Импорт функции получения авторизованного пользователя из базы
     add_user_starting_the_bot,  # Импорт функции добавления не авторизованного пользователя
@@ -18,19 +16,15 @@ from bot.keyboards.keyboards import (
     generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
     generate_admin_button,
 )
-from bot.data.config import ADMIN_USER_ID
 from bot.utils.read_text import load_text_form_file
 
-router_main = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
-
-# Обработчик команды /start, отправляющий приветственное сообщение и клавиатуру с вариантами.
-@router_main.message(CommandStart())
+@router.message(CommandStart())
 async def start_bot_command(message: Message) -> None:
     """
     Отправляет приветственное сообщение пользователю при старте бота.
     Так же добавляет не авторизованного пользователя в таблицу.
-
+    Обработчик команды /start, отправляющий приветственное сообщение и клавиатуру с вариантами.
     Аргументы:
     :param message: Сообщение пользователя с командой /start.
     """
@@ -57,9 +51,7 @@ async def start_bot_command(message: Message) -> None:
             is_premium=telegram_user_data["is_premium"],
             added_to_attachment_menu=telegram_user_data["added_to_attachment_menu"],
             can_join_groups=telegram_user_data["can_join_groups"],
-            can_read_all_group_messages=telegram_user_data[
-                "can_read_all_group_messages"
-            ],
+            can_read_all_group_messages=telegram_user_data["can_read_all_group_messages"],
             supports_inline_queries=telegram_user_data["supports_inline_queries"],
             can_connect_to_business=telegram_user_data["can_connect_to_business"],
             has_main_web_app=telegram_user_data["has_main_web_app"],
@@ -78,7 +70,7 @@ async def start_bot_command(message: Message) -> None:
             )
 
 
-@router_main.callback_query(F.data == "description")
+@router.callback_query(F.data == "description")
 async def bot_description(callback_query: CallbackQuery) -> None:
     """
     Отправляет описание бота пользователю.

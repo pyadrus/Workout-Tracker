@@ -1,12 +1,111 @@
 import sqlite3
+from datetime import datetime
 from typing import Any
 
 from loguru import logger
 
 
-def add_users(
-    id_user_telegram: int, name: str, height: str, weight: str, training_experience: str
-) -> None:
+async def get_user_data_for_today(user_id):
+    """
+    Получение данных пользователя за текущий день.
+
+    :param user_id: ID пользователя Telegram.
+    :return: Форматированная строка с данными тренировок или сообщение о том, что данных нет.
+    """
+    try:
+        # Подключение к базе данных
+        conn = sqlite3.connect("../../gym_data.db")
+        cursor = conn.cursor()
+
+        # Получаем текущую дату как имя таблицы
+        table_name = f"workout_{datetime.now().strftime('%Y_%m_%d')}"
+
+        # Проверяем, существует ли таблица
+        cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'")
+        if not cursor.fetchone():
+            return "За сегодня данных о тренировках нет."
+
+        # Запрос данных для конкретного пользователя
+        cursor.execute(f"""
+        SELECT exercise_name, repetitions, approaches, weight, total_weight, created_at
+        FROM [{table_name}]
+        WHERE user_id = ?
+        """, (user_id,))
+
+        rows = cursor.fetchall()
+        if not rows:
+            return "За сегодня данных о ваших тренировках нет."
+
+        # Форматирование результата
+        result = ["Ваши тренировки за сегодня:"]
+        for i, (exercise_name, repetitions, approaches, weight, total_weight, created_at) in enumerate(rows, 1):
+            result.append(
+                f"{i}. Упражнение: {exercise_name}\n"
+                f"Повторений: {repetitions}, \n"
+                f"Подходов: {approaches}\n"
+                f"Вес за подход: {weight} кг, \n"
+                f"Общий вес: {total_weight} кг\n"
+                f"Время записи: {created_at}"
+            )
+
+        conn.close()
+        return "\n\n".join(result)
+
+    except sqlite3.Error as e:
+        logger.error(f"Ошибка при работе с базой данных: {e}")
+        return "Произошла ошибка при получении данных. Пожалуйста, попробуйте позже."
+
+
+def save_data_to_db(user_id, exercise_name, repetitions, approaches, weight, total_weight):
+    """
+    Функция для записи данных в базу данных SQLite.
+
+    :param user_id: ID аккаунта пользователя.
+    :param exercise_name: Название упражнения.
+    :param repetitions: Количество повторений.
+    :param approaches: Количество подходов.
+    :param weight: Вес за подход.
+    :param total_weight: Общий поднятый вес.
+    """
+    try:
+        # Подключаемся к базе данных (создаётся автоматически, если её нет)
+        conn = sqlite3.connect("../../gym_data.db")
+        cursor = conn.cursor()
+
+        # Получаем текущую дату как имя таблицы
+        table_name = f"workout_{datetime.now().strftime('%Y_%m_%d')}"
+
+        # Создаём таблицу, если она ещё не существует
+        cursor.execute(f"""
+        CREATE TABLE IF NOT EXISTS {table_name} (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            exercise_name TEXT NOT NULL,
+            repetitions INTEGER NOT NULL,
+            approaches INTEGER NOT NULL,
+            weight INTEGER NOT NULL,
+            total_weight INTEGER NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        """)
+
+        # Вставляем данные в таблицу
+        cursor.execute(f"""
+        INSERT INTO {table_name} (
+            user_id, exercise_name, repetitions, approaches, weight, total_weight
+        ) VALUES (?, ?, ?, ?, ?, ?)
+        """, (user_id, exercise_name, repetitions, approaches, weight, total_weight))
+
+        # Сохраняем изменения
+        conn.commit()
+        conn.close()
+
+        logger.info(f"Данные успешно записаны в таблицу {table_name} для пользователя {user_id}.")
+    except sqlite3.Error as e:
+        logger.error(f"Ошибка при работе с базой данных: {e}")
+
+
+def add_users(id_user_telegram: int, name: str, height: str, weight: str, training_experience: str) -> None:
     """
     Добавляет нового авторизованного пользователя
 
@@ -62,13 +161,8 @@ def get_user_data(id_user_telegram: str) -> None:
         logger.exception(error)
 
 
-def update_user_data(
-    id_user_telegram: str,
-    name: str = None,
-    height: str = None,
-    weight: str = None,
-    training_experience: str = None,
-) -> None:
+def update_user_data(id_user_telegram: str, name: str = None, height: str = None, weight: str = None,
+                     training_experience: str = None) -> None:
     """
     Редактировать пользователя из базы
 
@@ -108,21 +202,10 @@ def update_user_data(
         logger.exception(error)
 
 
-def add_user_starting_the_bot(
-    id_user: str,
-    is_bot: str,
-    first_name: str,
-    last_name: str,
-    username: str,
-    language_code: str,
-    is_premium: str,
-    added_to_attachment_menu: str,
-    can_join_groups: str,
-    can_read_all_group_messages: str,
-    supports_inline_queries: str,
-    can_connect_to_business: str,
-    has_main_web_app: str,
-) -> None:
+def add_user_starting_the_bot(id_user: str, is_bot: str, first_name: str, last_name: str, username: str,
+                              language_code: str, is_premium: str, added_to_attachment_menu: str, can_join_groups: str,
+                              can_read_all_group_messages: str, supports_inline_queries: str,
+                              can_connect_to_business: str, has_main_web_app: str, ) -> None:
     """
     Добавляет нового не авторизованного пользователя
 
@@ -152,34 +235,13 @@ def add_user_starting_the_bot(
             )
             cursor.execute(
                 """INSERT INTO not_authorized_user (
-                    id_user,
-                    is_bot,
-                    first_name,
-                    last_name,
-                    username,
-                    language_code,
-                    is_premium,
-                    added_to_attachment_menu,
-                    can_join_groups,
-                    can_read_all_group_messages,
-                    supports_inline_queries,
-                    can_connect_to_business,
+                    id_user, is_bot, first_name, last_name, username, language_code, is_premium,
+                    added_to_attachment_menu,   can_join_groups,
+                    can_read_all_group_messages, supports_inline_queries, can_connect_to_business,
                     has_main_web_app) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (
-                    id_user,
-                    is_bot,
-                    first_name,
-                    last_name,
-                    username,
-                    language_code,
-                    is_premium,
-                    added_to_attachment_menu,
-                    can_join_groups,
-                    can_read_all_group_messages,
-                    supports_inline_queries,
-                    can_connect_to_business,
-                    has_main_web_app,
-                ),
+                (id_user, is_bot, first_name, last_name, username, language_code, is_premium,
+                 added_to_attachment_menu, can_join_groups, can_read_all_group_messages,
+                 supports_inline_queries, can_connect_to_business, has_main_web_app,),
             )
             connection.commit()
 

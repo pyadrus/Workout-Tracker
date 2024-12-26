@@ -1,8 +1,5 @@
-from aiogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    WebAppInfo,
-)
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+
 from bot.data.config import BASE_SITE_URL
 
 
@@ -33,21 +30,14 @@ def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
 
     kb = [
         [
-            InlineKeyboardButton(
-                text="⚙️ Личный кабинет",
-                callback_data="personal_account",
-            ),  # Кнопка для начала процесса регистрации.
-            InlineKeyboardButton(
-                text="ℹ️ Описание",
-                callback_data="description",
-            ),  # Кнопка для отображения описания проекта.
+            InlineKeyboardButton(text="⚙️ Личный кабинет", callback_data="personal_account"),
+            # Кнопка для начала процесса регистрации.
+            InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
+            # Кнопка для отображения описания проекта.
         ],
         [
             InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
-            InlineKeyboardButton(
-                text="🤖 В бота",
-                web_app=WebAppInfo(url=BASE_SITE_URL),
-            ),
+            InlineKeyboardButton(text="🤖 В бота", web_app=WebAppInfo(url=BASE_SITE_URL)),
         ],
     ]
 
@@ -65,27 +55,18 @@ def generate_admin_button() -> InlineKeyboardMarkup:
 
     kb = [
         [
-            InlineKeyboardButton(
-                text="⚙️ Личный кабинет",
-                callback_data="personal_account",
-            ),  # Кнопка для входа в личный кабинет.
-            InlineKeyboardButton(
-                text="ℹ️ Описание",
-                callback_data="description",
-            ),  # Кнопка для отображения описания проекта.
+            InlineKeyboardButton(text="⚙️ Личный кабинет", callback_data="personal_account", ),
+            # Кнопка для входа в личный кабинет.
+            InlineKeyboardButton(text="ℹ️ Описание", callback_data="description",
+                                 ),  # Кнопка для отображения описания проекта.
         ],
         [
             InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
-            InlineKeyboardButton(
-                text="🤖 В бота",
-                web_app=WebAppInfo(url=BASE_SITE_URL),
-            ),
+            InlineKeyboardButton(text="🤖 В бота", web_app=WebAppInfo(url=BASE_SITE_URL)),
         ],
         [
-            InlineKeyboardButton(
-                text="🔧 Админ-панель",
-                callback_data="admin_panel",
-            ),  # Кнопка для входа в админское меню
+            InlineKeyboardButton(text="🔧 Админ-панель", callback_data="admin_panel"),
+            # Кнопка для входа в админское меню
         ],
     ]
 
@@ -103,21 +84,11 @@ def generate_admin_panel_keyboard() -> InlineKeyboardMarkup:
 
     kb = [
         [
-            InlineKeyboardButton(
-                text="Рассылка сообщений пользователям",
-                callback_data="sending_messages",
-            ),  # Кнопка для рассылки сообщений пользователям.
-            InlineKeyboardButton(
-                text="Статистика",
-                callback_data="statistics",
-            ),  # Кнопка для отображения статистики.
+            InlineKeyboardButton(text="Рассылка сообщений пользователям", callback_data="sending_messages"),
+            # Кнопка для рассылки сообщений пользователям.
+            InlineKeyboardButton(text="Статистика", callback_data="statistics"),  # Кнопка для отображения статистики.
         ],
-        [
-            InlineKeyboardButton(
-                text="🔙 Назад",
-                callback_data="back",
-            ),  # Кнопка для начала процесса регистрации.
-        ],
+        [InlineKeyboardButton(text="🔙 Назад", callback_data="back")],
     ]
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
@@ -127,9 +98,7 @@ def generate_admin_panel_keyboard() -> InlineKeyboardMarkup:
 
 def generate_authorized_user_discription() -> None:
     kb = [
-        [
-            InlineKeyboardButton(text="🔙 Назад", callback_data="back"),
-        ]
+        [InlineKeyboardButton(text="🔙 Назад", callback_data="back")]
     ]
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
@@ -144,14 +113,9 @@ def generate_keyboard_personal_account() -> InlineKeyboardMarkup:
 
     kb = [
         [
-            InlineKeyboardButton(
-                text="📋 Просмотр данных",
-                callback_data="view_data",
-            ),  # Кнопка для начала процесса регистрации.
-            InlineKeyboardButton(
-                text="🔙 Назад",
-                callback_data="back",
-            ),
+            InlineKeyboardButton(text="📋 Просмотр данных", callback_data="view_data"),
+            # Кнопка для начала процесса регистрации.
+            InlineKeyboardButton(text="🔙 Назад", callback_data="back"),
         ],  # Кнопка для просмотра личного кабинета
     ]
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
@@ -165,37 +129,15 @@ def create_data_change_buttons() -> InlineKeyboardMarkup:
 
     kb = [
         [
-            InlineKeyboardButton(
-                text="✍️ Изменить имя",
-                callback_data="update_name",
-            ),
-            InlineKeyboardButton(
-                text="📏 Изменить рост",
-                callback_data="update_height",
-            ),
+            InlineKeyboardButton(text="✍️ Изменить имя", callback_data="update_name"),
+            InlineKeyboardButton(text="📏 Изменить рост", callback_data="update_height"),
         ],
         [
-            InlineKeyboardButton(
-                text="⚖️ Изменить вес",
-                callback_data="update_weight",
-            ),
-            InlineKeyboardButton(
-                text="🏋️ Изменить опыт тренировок",
-                callback_data="update_training_experience",
-            ),
+            InlineKeyboardButton(text="⚖️ Изменить вес", callback_data="update_weight"),
+            InlineKeyboardButton(text="🏋️ Изменить опыт тренировок", callback_data="update_training_experience"),
         ],
-        [
-            InlineKeyboardButton(
-                text="🔙 Назад",
-                callback_data="back_personal_account",
-            ),
-        ],
-        [
-            InlineKeyboardButton(
-                text="🔙 В главное меню",
-                callback_data="back",
-            ),
-        ],
+        [InlineKeyboardButton(text="🔙 Назад", callback_data="back_personal_account")],
+        [InlineKeyboardButton(text="🔙 В главное меню", callback_data="back", )],
     ]
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
     return keyboard

@@ -1,17 +1,25 @@
+# from WebApp.main import start_web
 import asyncio
+import logging
+import sys
+
+from loguru import logger
+
 from bot.run_bot import start_bot
-from WebApp.main import start_web
+
+# Настройка логов
+logger.add("log/log.log", retention="1 days", enqueue=True)
 
 
+# Основная функция запуска бота
 async def main() -> None:
-    # await asyncio.gather(
-    #     start_bot(),
-    #     start_web(),
-    # )
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    try:
 
-    telegram_task = asyncio.create_task(start_bot())
-    webapp_task = asyncio.create_task(start_web())
-    await asyncio.gather(telegram_task, webapp_task)
+        telegram_task = asyncio.create_task(start_bot())
+        await asyncio.gather(telegram_task)
+    except Exception as e:
+        logger.error(f"Ошибка в main(): {e}")
 
 
 if __name__ == "__main__":

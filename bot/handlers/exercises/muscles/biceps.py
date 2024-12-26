@@ -3,9 +3,9 @@ from aiogram.types import FSInputFile, InputMediaPhoto
 from loguru import logger
 
 from bot.data.config import router, bot
-from bot.keyboards.exercises.keyboard_biceps_exercises import (return_to_biceps_exercises,
-                                                               keyboard_biceps_exercises,
-                                                               keyboard_biceps_exercises_2)
+from bot.keyboards.exercises.biceps import (return_to_biceps_exercises,
+                                            keyboard_biceps_exercises,
+                                            keyboard_biceps_exercises_2)
 from bot.messages.text.biceps_exercises.biceps_exercises_text import (biceps_exercises_text,
                                                                       arm_bending_with_elbow_abduction_execution,
                                                                       scott_bench_curl_execution,

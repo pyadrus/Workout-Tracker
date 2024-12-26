@@ -3,9 +3,9 @@ from aiogram.types import FSInputFile, InputMediaPhoto
 from loguru import logger
 
 from bot.data.config import router, bot
-from bot.keyboards.exercises.keyboard_triceps_exercises import (keyboard_triceps_exercises,
-                                                                return_to_triceps_exercises,
-                                                                keyboard_triceps_exercises_2)
+from bot.keyboards.exercises.triceps import (keyboard_triceps_exercises,
+                                             return_to_triceps_exercises,
+                                             keyboard_triceps_exercises_2)
 from bot.messages.text.triceps_exercises.triceps_exercises_text import (triceps_exercises_text, diamond_push_ups_text,
                                                                         reverse_push_ups_on_a_bench_text, dips_text,
                                                                         french_bench_press_with_barbell_text,

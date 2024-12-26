@@ -14,6 +14,20 @@ def generate_user_options_keyboard() -> InlineKeyboardMarkup:
             InlineKeyboardButton(text="📝 Регистрация", callback_data="registration"),
             InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
         ],
+        [
+            InlineKeyboardButton(text="Упражнения на группу мышц",
+                                 callback_data="types_of_exercises_for_muscle_groups"),
+        ],
+        [
+            InlineKeyboardButton(text="Помощь", callback_data="help_with_work"),
+            InlineKeyboardButton(text="Начать запись тренировок", callback_data="CommandStart"),
+        ],
+        [
+            InlineKeyboardButton(text="Программа тренировок", callback_data="training_program"),
+        ],
+        [
+            InlineKeyboardButton(text="Получить результат тренировки на сегодня", callback_data="get_today"),
+        ],
     ]
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)

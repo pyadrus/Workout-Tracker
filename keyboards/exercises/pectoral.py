@@ -2,11 +2,11 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 # Словарь упражнений на трицепс: ключ (key) - callback_data, значение (value) - текст кнопки
 exercises_for_the_pectoral_muscles_keyboard_dict = {
-    "bench_press_horizontally": "Жим штанги лежа горизонтально", # Готово
-    "bent_over_barbell_press": "Жим штанги в наклоне", # Готово
+    "bench_press_horizontally": "Жим штанги лежа горизонтально",  # Готово
+    "bent_over_barbell_press": "Жим штанги в наклоне",  # Готово
     "dumbbell_bench_press": "Жим гантелей лежа",  # Готово
-    "dumbbell_raises": "Разведение рук с гантелями", # Готово
-    "a_sweater": "Пуловер", # Готово
+    "dumbbell_raises": "Разведение рук с гантелями",  # Готово
+    "a_sweater": "Пуловер",  # Готово
 
     "exercises_for_the_pectoral_muscles_2": "Еще упражнения на Грудные мышцы",
     "start_handler": "В начальное меню",
@@ -24,10 +24,10 @@ def pectoral_kb():
 
 # Словарь упражнений на трицепс: ключ (key) - callback_data, значение (value) - текст кнопки
 exercises_for_the_pectoral_muscles_keyboard_dict_2 = {
-    "bringing_hands_together_on_the_lower_crossover_block": "Сведение рук на нижнем блоке кроссовера", # Готово
-    "reduction_of_arms_in_the_butterfly_simulator": "Сведение рук в тренажере бабочка", # Готово
-    "dips": "Отжимания на брусьях", # Готово
-    "hummer": "Хаммер", # Готово
+    "bringing_hands_together_on_the_lower_crossover_block": "Сведение рук на нижнем блоке кроссовера",  # Готово
+    "reduction_of_arms_in_the_butterfly_simulator": "Сведение рук в тренажере бабочка",  # Готово
+    "dips": "Отжимания на брусьях",  # Готово
+    "hummer": "Хаммер",  # Готово
     "push_ups": "Отжимания",
 
     "pectoral": "Назад",

@@ -13,7 +13,6 @@ class MessageStorage(StatesGroup):
     message_to_be_sent = State()  # Состояние хранения сообщения.
 
 
-
 class ChangeData(StatesGroup):
     name = State()  # Состояние ввода для изменения имени.
     height = State()  # Состояние ввода для изменения роста.

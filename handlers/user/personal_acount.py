@@ -2,15 +2,15 @@ from aiogram import F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from data.config import router
+from data.config import router, ADMIN_USER_ID
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
     update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
-from handlers.launch_bot import ADMIN_USER_ID
+
 from keyboards.keyboards import (create_data_change_buttons, generate_authorized_user_options_keyboard,
                                  generate_keyboard_personal_account,
-                                 generate_user_options_keyboard,
+                                 generate_main_menu_keyboard,
                                  generate_admin_button)
 from states.states import ChangeData
 from utils.read_text import load_text_form_file
@@ -27,7 +27,7 @@ async def users_personal_account(callback_query: CallbackQuery) -> None:
 
 @router.callback_query(F.data == "view_data")
 async def user_data(callback_query: CallbackQuery) -> None:
-    """Обработчик состояния просмотря личных данных при регистрации"""
+    """Обработчик состояния, просмотр личных данных при регистрации"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
     if data_user:
@@ -186,5 +186,5 @@ async def back_to_main_menu(callback_query: CallbackQuery) -> None:
     else:
         await callback_query.message.edit_text(
             f"{load_text_form_file('text_hello_welcome.json')}",
-            reply_markup=generate_user_options_keyboard(),
+            reply_markup=generate_main_menu_keyboard(),
         )

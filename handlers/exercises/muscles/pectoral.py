@@ -5,11 +5,12 @@ from loguru import logger
 
 from data.config import router, bot
 from keyboards.exercises.pectoral import pectoral_kb, pectoral_kb2, return_pectoral_kb
-from messages.text.pectoral.exercises_for_the_pectoral_muscles_text import \
-    pectoral_text, bench_text, bent_over_barbell_press_text, \
-    dumbbell_press_text, dumbbell_raises_text, a_sweater_text, \
-    crossover_text, butterfly_text, \
-    hummer_text, pushups_text
+from messages.text.pectoral.exercises_for_the_pectoral_muscles_text import (pectoral_text, bench_text,
+                                                                            bent_over_barbell_press_text,
+                                                                            dumbbell_press_text, dumbbell_raises_text,
+                                                                            a_sweater_text,
+                                                                            crossover_text, butterfly_text,
+                                                                            hummer_text, pushups_text)
 
 
 @router.callback_query(F.data == "pectoral")

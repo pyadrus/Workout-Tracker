@@ -30,7 +30,7 @@ exercises_for_the_pectoral_muscles_keyboard_dict_2 = {
     "hummer": "Хаммер", # Готово
     "push_ups": "Отжимания",
 
-    "exercises_for_the_pectoral_muscles": "Назад",
+    "pectoral": "Назад",
     "start_handler": "В начальное меню",
 }
 
@@ -45,7 +45,7 @@ def keyboard_exercises_for_the_pectoral_muscles_keyboard_2():
 
 
 return_to_biceps_exercises_dict = {
-    "exercises_for_the_pectoral_muscles": "Назад",
+    "pectoral": "Назад",
     "start_handler": "В начальное меню", }
 
 

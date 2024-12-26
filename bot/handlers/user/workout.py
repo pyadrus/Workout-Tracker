@@ -123,6 +123,6 @@ async def process_weight(message: Message, state: FSMContext):
         logger.error(f"Ошибка: {e}")
 
 
-def register_workout_recording_handlers():
+def register_workout():
     """Регистрация обработчиков для бота."""
     router.callback_query.register(workout_recording_handlers)  # Запись тренировки в базу данных

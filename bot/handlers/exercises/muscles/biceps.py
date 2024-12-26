@@ -211,7 +211,7 @@ async def arm_bending_with_elbow_abduction(callback_query: types.CallbackQuery) 
         logger.error(f"Ошибка: {e}")
 
 
-def register_biceps_exercises_handlers():
+def register_biceps():
     """Регистрация обработчиков для бота. Упражнения на бицепс"""
     router.callback_query.register(biceps_exercises)  # Перечень упражнений на бицепс
     router.callback_query.register(biceps_exercises_2)  # Перечень упражнений на бицепс 2

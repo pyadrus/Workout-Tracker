@@ -31,6 +31,6 @@ async def help_command(callback_query: types.CallbackQuery):
         logger.error(f"Ошибка: {e}")
 
 
-def register_help_command_handlers():
+def register_help():
     """Регистрация обработчиков для бота"""
     router.callback_query.register(help_command)  # Помощь

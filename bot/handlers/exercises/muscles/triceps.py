@@ -251,7 +251,7 @@ async def extension_on_the_block_from_behind_the_head(callback_query: types.Call
         logger.error(f"Ошибка: {e}")
 
 
-def register_diamond_push_ups_handlers():
+def register_triceps():
     """Регистрация обработчиков для бота"""
     router.callback_query.register(triceps_exercises)  # Перечень упражнений
     router.callback_query.register(diamond_push_ups)  # Алмазные отжимания

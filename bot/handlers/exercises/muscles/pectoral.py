@@ -194,7 +194,7 @@ async def push_ups(callback_query: types.CallbackQuery) -> None:
         logger.error(f"Ошибка: {e}")
 
 
-def register_exercises_for_the_pectoral_muscles():
+def register_pectoral():
     """Регистрация обработчиков для бота. Грудные мышцы"""
     router.callback_query.register(exercises_for_the_pectoral_muscles)  # Перечень упражнений Грудные мышцы
     router.callback_query.register(exercises_for_the_pectoral_muscles_2)  # Перечень упражнений Грудные мышцы 2

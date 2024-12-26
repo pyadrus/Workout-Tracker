@@ -23,6 +23,6 @@ async def get_today_data_handler(callback_query: types.CallbackQuery):
         logger.error(f"Ошибка: {e}")
 
 
-def register_get_today_data_handler():
+def register_today():
     """Регистрация обработчиков для бота. Упражнения на бицепс"""
     router.callback_query.register(get_today_data_handler)  # Перечень упражнений на бицепс

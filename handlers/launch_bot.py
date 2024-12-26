@@ -1,6 +1,5 @@
 # Основной файл Telegram-бота, использующего aiogram для взаимодействия с пользователями.
 # В этом файле создается логика обработки сообщений и FSM (Finite State Machine) для регистрации пользователей.
-
 from aiogram import F
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery, Message

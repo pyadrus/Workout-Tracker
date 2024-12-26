@@ -6,17 +6,17 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums.parse_mode import ParseMode
 from loguru import logger
 
-from bot.data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
-from bot.handlers.admin import router
-from bot.handlers.exercises.main import register_exercises
-from bot.handlers.exercises.muscles.biceps import register_biceps
-from bot.handlers.exercises.muscles.pectoral import register_pectoral
-from bot.handlers.exercises.muscles.triceps import register_triceps
-from bot.handlers.user.today import register_today
-from bot.handlers.user.help import register_help
-from bot.handlers.user.menu import register_menu
-from bot.handlers.user.training import register_training
-from bot.handlers.user.workout import register_workout
+from data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
+from handlers.admin import router
+from handlers.exercises.main import register_exercises
+from handlers.exercises.muscles.biceps import register_biceps
+from handlers.exercises.muscles.pectoral import register_pectoral
+from handlers.exercises.muscles.triceps import register_triceps
+from handlers.user.today import register_today
+from handlers.user.help import register_help
+from handlers.user.menu import register_menu
+from handlers.user.training import register_training
+from handlers.user.workout import register_workout
 
 logger.add("logs/log.log")
 

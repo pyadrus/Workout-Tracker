@@ -2,21 +2,21 @@ from aiogram import types, F
 from aiogram.types import FSInputFile, InputMediaPhoto
 from loguru import logger
 
-from bot.data.config import router, bot
-from bot.keyboards.exercises.biceps import (return_to_biceps_exercises,
-                                            keyboard_biceps_exercises,
-                                            keyboard_biceps_exercises_2)
-from bot.messages.text.biceps_exercises.biceps_exercises_text import (biceps_exercises_text,
-                                                                      arm_bending_with_elbow_abduction_execution,
-                                                                      scott_bench_curl_execution,
-                                                                      concentrated_arm_curls_execution,
-                                                                      incline_dumbbell_curl_execution,
-                                                                      hammer_grip_curl_execution,
-                                                                      bent_over_barbell_row_with_reverse_grip_execution,
-                                                                      reverse_grip_pull_ups_execution,
-                                                                      dumbbell_curl_execution,
-                                                                      bend_the_arms_on_the_lower_block_execution,
-                                                                      curls_with_a_barbell_or_EZ_bar_execution)
+from data.config import router, bot
+from keyboards.exercises.biceps import (return_to_biceps_exercises,
+                                        keyboard_biceps_exercises,
+                                        keyboard_biceps_exercises_2)
+from messages.text.biceps_exercises.biceps_exercises_text import (biceps_exercises_text,
+                                                                  arm_bending_with_elbow_abduction_execution,
+                                                                  scott_bench_curl_execution,
+                                                                  concentrated_arm_curls_execution,
+                                                                  incline_dumbbell_curl_execution,
+                                                                  hammer_grip_curl_execution,
+                                                                  bent_over_barbell_row_with_reverse_grip_execution,
+                                                                  reverse_grip_pull_ups_execution,
+                                                                  dumbbell_curl_execution,
+                                                                  bend_the_arms_on_the_lower_block_execution,
+                                                                  curls_with_a_barbell_or_EZ_bar_execution)
 
 
 @router.callback_query(F.data == "biceps_exercises")

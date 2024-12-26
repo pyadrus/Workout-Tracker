@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 
-from bot.data.config import BASE_SITE_URL
+from data.config import BASE_SITE_URL
 
 
 def generate_user_options_keyboard() -> InlineKeyboardMarkup:

@@ -3,9 +3,9 @@ from aiogram.types import FSInputFile, InputMediaPhoto
 from loguru import logger
 
 from bot.data.config import router, bot
-from bot.keyboards.keyboard_exercises.keyboard_triceps_exercises import (keyboard_triceps_exercises,
-                                                                         return_to_triceps_exercises,
-                                                                         keyboard_triceps_exercises_2)
+from bot.keyboards.exercises.keyboard_triceps_exercises import (keyboard_triceps_exercises,
+                                                                return_to_triceps_exercises,
+                                                                keyboard_triceps_exercises_2)
 from bot.messages.text.triceps_exercises.triceps_exercises_text import (triceps_exercises_text, diamond_push_ups_text,
                                                                         reverse_push_ups_on_a_bench_text, dips_text,
                                                                         french_bench_press_with_barbell_text,
@@ -251,7 +251,7 @@ async def extension_on_the_block_from_behind_the_head(callback_query: types.Call
         logger.error(f"Ошибка: {e}")
 
 
-def register_diamond_push_ups_handlers():
+def register_triceps():
     """Регистрация обработчиков для бота"""
     router.callback_query.register(triceps_exercises)  # Перечень упражнений
     router.callback_query.register(diamond_push_ups)  # Алмазные отжимания

@@ -13,7 +13,7 @@ exercises_for_the_pectoral_muscles_keyboard_dict = {
 }
 
 
-def keyboard_exercises_for_the_pectoral_muscles_keyboard():
+def pectoral_kb():
     """Клавиатура упражнений на трицепс. Источник информации: https://donsport.ru/blog/kompleks-effektivnykh-uprazhneniy-dlya-myshts-grudi/"""
     biceps_exercises = [
         [InlineKeyboardButton(text=value, callback_data=key)]
@@ -30,12 +30,12 @@ exercises_for_the_pectoral_muscles_keyboard_dict_2 = {
     "hummer": "Хаммер", # Готово
     "push_ups": "Отжимания",
 
-    "exercises_for_the_pectoral_muscles": "Назад",
+    "pectoral": "Назад",
     "start_handler": "В начальное меню",
 }
 
 
-def keyboard_exercises_for_the_pectoral_muscles_keyboard_2():
+def pectoral_kb2():
     """Клавиатура упражнений на трицепс. Источник информации: https://donsport.ru/blog/kompleks-effektivnykh-uprazhneniy-dlya-myshts-grudi/"""
     biceps_exercises = [
         [InlineKeyboardButton(text=value, callback_data=key)]
@@ -45,11 +45,11 @@ def keyboard_exercises_for_the_pectoral_muscles_keyboard_2():
 
 
 return_to_biceps_exercises_dict = {
-    "exercises_for_the_pectoral_muscles": "Назад",
+    "pectoral": "Назад",
     "start_handler": "В начальное меню", }
 
 
-def return_to_exercises_for_the_pectoral_muscles_keyboard():
+def return_pectoral_kb():
     """Назад в меню выбора упражнения. Источник информации: https://neodent82.ru/blog/10-luchshih-uprazhnenij-na-bitseps"""
     return_to_triceps = [
         [InlineKeyboardButton(text=value, callback_data=key)]
@@ -59,6 +59,6 @@ def return_to_exercises_for_the_pectoral_muscles_keyboard():
 
 
 if __name__ == '__main__':
-    keyboard_exercises_for_the_pectoral_muscles_keyboard()  # Клавиатура упражнений на Грудные мышцы
-    keyboard_exercises_for_the_pectoral_muscles_keyboard_2()  # Клавиатура упражнений на Грудные мышцы 2
-    return_to_exercises_for_the_pectoral_muscles_keyboard()  # Назад в меню выбора упражнения Грудные мышцы
+    pectoral_kb()  # Клавиатура упражнений на Грудные мышцы
+    pectoral_kb2()  # Клавиатура упражнений на Грудные мышцы 2
+    return_pectoral_kb()  # Назад в меню выбора упражнения Грудные мышцы

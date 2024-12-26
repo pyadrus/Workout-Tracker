@@ -63,7 +63,7 @@ async def start_handler_callback(callback_query: types.CallbackQuery) -> None:
         logger.error(f"Ошибка: {e}")
 
 
-def register_start_handler_handlers():
+def register_menu():
     """Регистрация обработчиков для бота"""
     router.message.register(start_handler)  # Главное меню бота
     router.callback_query.register(start_handler_callback)  # Главное меню бота

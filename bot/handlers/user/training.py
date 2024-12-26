@@ -63,6 +63,6 @@ async def training_program(callback_query: types.CallbackQuery):
         logger.error(f"Ошибка: {e}")
 
 
-def register_training_program():
+def register_training():
     """Регистрация обработчиков для бота"""
     router.callback_query.register(training_program)  # Программа тренировок

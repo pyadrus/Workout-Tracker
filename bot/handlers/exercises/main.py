@@ -2,7 +2,7 @@ from aiogram import types, F
 from loguru import logger
 
 from bot.data.config import router, bot
-from bot.keyboards.keyboard_exercises.exercise_keyboard import exercise_keyboard
+from bot.keyboards.exercises.exercise_keyboard import exercise_keyboard
 
 
 @router.callback_query(F.data == "types_of_exercises_for_muscle_groups")
@@ -38,6 +38,6 @@ async def types_of_exercises_for_muscle_groups_handlers(callback_query: types.Ca
         logger.error(f"Ошибка: {e}")
 
 
-def register_types_of_exercises_for_muscle_groups_handlers():
+def register_exercises():
     """Регистрация обработчиков для бота"""
     router.callback_query.register(types_of_exercises_for_muscle_groups_handlers)  # Перечень групп мышц

@@ -6,10 +6,10 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from loguru import logger
 
-from bot.data.config import router, bot
-from bot.database.database import save_data_to_db
-from bot.keyboards.keyboard_user.keyboard_help import keyboard_help
-from bot.states.states import FormeditMainMenu
+from data.config import router, bot
+from database.database import save_data_to_db
+from keyboards.keyboard_user.keyboard_help import keyboard_help
+from states.states import FormeditMainMenu
 
 
 @router.callback_query(F.data == "CommandStart")

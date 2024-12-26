@@ -2,11 +2,11 @@ from aiogram import F, Bot
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from bot.data.config import router
-from bot.database.database import get_user_starting_the_bot  # Получение не авторизованных пользователей
-from bot.keyboards.keyboards import generate_admin_panel_keyboard
-from bot.states.states import MessageStorage
-from bot.utils.read_text import load_text_form_file
+from data.config import router
+from database.database import get_user_starting_the_bot  # Получение не авторизованных пользователей
+from keyboards.keyboards import generate_admin_panel_keyboard
+from states.states import MessageStorage
+from utils.read_text import load_text_form_file
 
 
 @router.callback_query(F.data == "admin_panel")

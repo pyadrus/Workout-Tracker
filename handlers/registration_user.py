@@ -2,16 +2,16 @@ from aiogram import F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from bot.data.config import router
-from bot.database.database import (
+from data.config import router
+from database.database import (
     add_users,  # Импорт функции добавления зарегистрированного пользователя в базу.
 )
-from bot.keyboards.keyboards import (
+from keyboards.keyboards import (
     generate_authorized_user_options_keyboard,
 )
-from bot.states.states import RegistrationStates
-from bot.utils.read_text import load_text_form_file
-from bot.utils.validators import (
+from states.states import RegistrationStates
+from utils.read_text import load_text_form_file
+from utils.validators import (
     is_float,  # Имфорт функции валидации вещественных чисел.
     is_int,  # Имфорт функций валидации целых чисел.
 )

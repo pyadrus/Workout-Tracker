@@ -2,19 +2,19 @@ from aiogram import types, F
 from aiogram.types import FSInputFile, InputMediaPhoto
 from loguru import logger
 
-from bot.data.config import router, bot
-from bot.keyboards.exercises.keyboard_triceps_exercises import (keyboard_triceps_exercises,
-                                                                return_to_triceps_exercises,
-                                                                keyboard_triceps_exercises_2)
-from bot.messages.text.triceps_exercises.triceps_exercises_text import (triceps_exercises_text, diamond_push_ups_text,
-                                                                        reverse_push_ups_on_a_bench_text, dips_text,
-                                                                        french_bench_press_with_barbell_text,
-                                                                        dumbbell_overhead_press_text,
-                                                                        bent_over_arm_extension_with_dumbbells_text,
-                                                                        extension_of_one_arm_with_support_on_the_bench_text,
-                                                                        extension_of_arms_on_a_block_with_a_rope_handle_text,
-                                                                        extension_of_arms_on_a_block_with_a_reverse_grip_text,
-                                                                        extension_on_the_block_from_behind_the_head_text)
+from data.config import router, bot
+from keyboards.exercises.triceps import (keyboard_triceps_exercises,
+                                         return_to_triceps_exercises,
+                                         keyboard_triceps_exercises_2)
+from messages.text.triceps_exercises.triceps_exercises_text import (triceps_exercises_text, diamond_push_ups_text,
+                                                                    reverse_push_ups_on_a_bench_text, dips_text,
+                                                                    french_bench_press_with_barbell_text,
+                                                                    dumbbell_overhead_press_text,
+                                                                    bent_over_arm_extension_with_dumbbells_text,
+                                                                    extension_of_one_arm_with_support_on_the_bench_text,
+                                                                    extension_of_arms_on_a_block_with_a_rope_handle_text,
+                                                                    extension_of_arms_on_a_block_with_a_reverse_grip_text,
+                                                                    extension_on_the_block_from_behind_the_head_text)
 
 
 @router.callback_query(F.data == "triceps_exercises")

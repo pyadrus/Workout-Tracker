@@ -1,8 +1,8 @@
 from aiogram import F
 from aiogram.types import CallbackQuery
 
-from bot.data.config import router
-from bot.utils.read_text import load_text_form_file
+from data.config import router
+from utils.read_text import load_text_form_file
 
 
 @router.callback_query(F.data == "feedback")

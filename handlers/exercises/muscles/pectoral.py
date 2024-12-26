@@ -3,9 +3,9 @@ from aiogram import types, F
 from aiogram.types import FSInputFile, InputMediaPhoto
 from loguru import logger
 
-from bot.data.config import router, bot
-from bot.keyboards.exercises.pectoral import pectoral_kb, pectoral_kb2, return_pectoral_kb
-from bot.messages.text.pectoral.exercises_for_the_pectoral_muscles_text import \
+from data.config import router, bot
+from keyboards.exercises.pectoral import pectoral_kb, pectoral_kb2, return_pectoral_kb
+from messages.text.pectoral.exercises_for_the_pectoral_muscles_text import \
     pectoral_text, bench_text, bent_over_barbell_press_text, \
     dumbbell_press_text, dumbbell_raises_text, a_sweater_text, \
     crossover_text, butterfly_text, \

@@ -1,8 +1,8 @@
 from aiogram import types, F
 from loguru import logger
 
-from bot.data.config import router, bot
-from bot.keyboards.keyboard_user.keyboard_help import keyboard_help
+from data.config import router, bot
+from keyboards.keyboard_user.keyboard_help import keyboard_help
 
 
 @router.callback_query(F.data == "help_with_work")

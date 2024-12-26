@@ -3,8 +3,8 @@ from aiogram import types
 from loguru import logger
 from datetime import datetime
 
-from bot.data.config import router, bot
-from bot.keyboards.keyboard_user.keyboard_help import keyboard_help
+from data.config import router, bot
+from keyboards.keyboard_user.keyboard_help import keyboard_help
 
 
 @router.callback_query(F.data == "training_program")

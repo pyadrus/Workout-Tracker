@@ -5,7 +5,7 @@ import sys
 
 from loguru import logger
 
-from bot.run_bot import start_bot
+from run_bot import start_bot
 
 # Настройка логов
 logger.add("log/log.log", retention="1 days", enqueue=True)

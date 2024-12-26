@@ -1,9 +1,9 @@
 from aiogram import types, F
 from loguru import logger
 
-from bot.data.config import bot, router
-from bot.database.database import get_user_data_for_today
-from bot.keyboards.keyboard_user.keyboard_help import keyboard_help
+from data.config import bot, router
+from database.database import get_user_data_for_today
+from keyboards.keyboard_user.keyboard_help import keyboard_help
 
 
 @router.callback_query(F.data == "get_today")

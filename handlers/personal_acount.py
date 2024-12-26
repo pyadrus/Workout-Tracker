@@ -2,18 +2,18 @@ from aiogram import F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from bot.data.config import router
-from bot.database.database import (
+from data.config import router
+from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
     update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
-from bot.handlers.launch_bot import ADMIN_USER_ID
-from bot.keyboards.keyboards import (create_data_change_buttons, generate_authorized_user_options_keyboard,
-                                     generate_keyboard_personal_account,
-                                     generate_user_options_keyboard,
-                                     generate_admin_button)
-from bot.states.states import ChangeData
-from bot.utils.read_text import load_text_form_file
+from handlers.launch_bot import ADMIN_USER_ID
+from keyboards.keyboards import (create_data_change_buttons, generate_authorized_user_options_keyboard,
+                                 generate_keyboard_personal_account,
+                                 generate_user_options_keyboard,
+                                 generate_admin_button)
+from states.states import ChangeData
+from utils.read_text import load_text_form_file
 
 
 @router.callback_query(F.data == "personal_account")

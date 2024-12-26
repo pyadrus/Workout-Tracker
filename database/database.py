@@ -14,7 +14,7 @@ async def get_user_data_for_today(user_id):
     """
     try:
         # Подключение к базе данных
-        conn = sqlite3.connect("../../gym_data.db")
+        conn = sqlite3.connect("../gym_data.db")
         cursor = conn.cursor()
 
         # Получаем текущую дату как имя таблицы
@@ -69,7 +69,7 @@ def save_data_to_db(user_id, exercise_name, repetitions, approaches, weight, tot
     """
     try:
         # Подключаемся к базе данных (создаётся автоматически, если её нет)
-        conn = sqlite3.connect("../../gym_data.db")
+        conn = sqlite3.connect("../gym_data.db")
         cursor = conn.cursor()
 
         # Получаем текущую дату как имя таблицы

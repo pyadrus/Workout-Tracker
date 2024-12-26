@@ -19,13 +19,12 @@ from bot.keyboards.keyboards import (
 from bot.utils.read_text import load_text_form_file
 
 
-# Обработчик команды /start, отправляющий приветственное сообщение и клавиатуру с вариантами.
 @router.message(CommandStart())
 async def start_bot_command(message: Message) -> None:
     """
     Отправляет приветственное сообщение пользователю при старте бота.
     Так же добавляет не авторизованного пользователя в таблицу.
-
+    Обработчик команды /start, отправляющий приветственное сообщение и клавиатуру с вариантами.
     Аргументы:
     :param message: Сообщение пользователя с командой /start.
     """

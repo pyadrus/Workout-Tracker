@@ -16,18 +16,18 @@ from bot.states.states import ChangeData
 from bot.utils.read_text import load_text_form_file
 
 
-# Обработчик состояния просмотра личного кабинета
 @router.callback_query(F.data == "personal_account")
 async def users_personal_account(callback_query: CallbackQuery) -> None:
+    """Обработчик состояния просмотра личного кабинета"""
     await callback_query.message.edit_text(
         f"{load_text_form_file('text_log_in_to_your_personal_account.json')}",
         reply_markup=generate_keyboard_personal_account(),
     )
 
 
-# Обработчик состояния просмотря личных данных при регистрации
 @router.callback_query(F.data == "view_data")
 async def user_data(callback_query: CallbackQuery) -> None:
+    """Обработчик состояния просмотря личных данных при регистрации"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
     if data_user:
@@ -43,18 +43,18 @@ async def user_data(callback_query: CallbackQuery) -> None:
         )
 
 
-# Обработчик состояния вернутся в основное меню
 @router.callback_query(F.data == "back_personal_account")
 async def back_to_personal_account(callback_query: CallbackQuery) -> None:
+    """Обработчик состояния вернутся в основное меню"""
     await callback_query.message.edit_text(
         f"{load_text_form_file('text_log_in_to_your_personal_account.json')}",
         reply_markup=generate_keyboard_personal_account(),
     )
 
 
-# Обработчик состояния изменения имя профиля
 @router.callback_query(F.data == "update_name")
 async def update_user_data_name(callback_query: CallbackQuery, state: FSMContext) -> None:
+    """Обработчик состояния изменения имя профиля"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
     if data_user:
@@ -64,9 +64,9 @@ async def update_user_data_name(callback_query: CallbackQuery, state: FSMContext
         )
 
 
-# Обработчик состояния изменения имя профиля. Продолжение update_user_data_name
 @router.message(ChangeData.name)
 async def update_name(message: Message, state: FSMContext) -> None:
+    """Обработчик состояния изменения имя профиля. Продолжение update_user_data_name"""
     await state.update_data(name=message.text)
     state_user_data = await state.get_data()
     user_id = message.from_user.id
@@ -80,9 +80,9 @@ async def update_name(message: Message, state: FSMContext) -> None:
     await state.clear()
 
 
-# Обработчик состояния изменения рост профиля
 @router.callback_query(F.data == "update_height")
 async def update_user_data_height(callback_query: CallbackQuery, state: FSMContext) -> None:
+    """Обработчик состояния изменения рост профиля"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
     if data_user:
@@ -92,9 +92,9 @@ async def update_user_data_height(callback_query: CallbackQuery, state: FSMConte
         )
 
 
-# Обработчик состояния изменения имя профиля. Продолжение update_user_data_height
 @router.message(ChangeData.height)
 async def update_height(message: Message, state: FSMContext) -> None:
+    """Обработчик состояния изменения имя профиля. Продолжение update_user_data_height"""
     await state.update_data(height=message.text)
     state_user_data = await state.get_data()
     user_id = message.from_user.id
@@ -108,9 +108,9 @@ async def update_height(message: Message, state: FSMContext) -> None:
     await state.clear()
 
 
-# Обработчик состояния изменения вес профиля
 @router.callback_query(F.data == "update_weight")
 async def update_user_data_weight(callback_query: CallbackQuery, state: FSMContext) -> None:
+    """Обработчик состояния изменения вес профиля"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
     if data_user:
@@ -120,9 +120,9 @@ async def update_user_data_weight(callback_query: CallbackQuery, state: FSMConte
         )
 
 
-# Обработчик состояния изменения вес профиля. Продолжение update_user_data_weight
 @router.message(ChangeData.weight)
 async def update_weight(message: Message, state: FSMContext) -> None:
+    """Обработчик состояния изменения вес профиля. Продолжение update_user_data_weight"""
     await state.update_data(weight=message.text)
     state_user_data = await state.get_data()
     user_id = message.from_user.id
@@ -136,9 +136,9 @@ async def update_weight(message: Message, state: FSMContext) -> None:
     await state.clear()
 
 
-# Обработчик состояния изменения опыт тренировок профиля
 @router.callback_query(F.data == "update_training_experience")
 async def update_user_data_training_experience(callback_query: CallbackQuery, state: FSMContext) -> None:
+    """Обработчик состояния изменения опыт тренировок профиля"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
     if data_user:
@@ -148,9 +148,9 @@ async def update_user_data_training_experience(callback_query: CallbackQuery, st
         )
 
 
-# Обработчик состояния изменения опыт тренировок профиля. Продолжение update_user_data_training_experience
 @router.message(ChangeData.training_experience)
 async def update_training_experience(message: Message, state: FSMContext) -> None:
+    """Обработчик состояния изменения опыт тренировок профиля. Продолжение update_user_data_training_experience"""
     await state.update_data(training_experience=message.text)
     state_user_data = await state.get_data()
     user_id = message.from_user.id
@@ -166,9 +166,9 @@ async def update_training_experience(message: Message, state: FSMContext) -> Non
     await state.clear()
 
 
-# Обработчик состояния вернутся в основное меню
 @router.callback_query(F.data == "back")
 async def back_to_main_menu(callback_query: CallbackQuery) -> None:
+    """Обработчик состояния вернутся в основное меню"""
     username = callback_query.from_user.username
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)

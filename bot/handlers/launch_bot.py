@@ -52,9 +52,7 @@ async def start_bot_command(message: Message) -> None:
             is_premium=telegram_user_data["is_premium"],
             added_to_attachment_menu=telegram_user_data["added_to_attachment_menu"],
             can_join_groups=telegram_user_data["can_join_groups"],
-            can_read_all_group_messages=telegram_user_data[
-                "can_read_all_group_messages"
-            ],
+            can_read_all_group_messages=telegram_user_data["can_read_all_group_messages"],
             supports_inline_queries=telegram_user_data["supports_inline_queries"],
             can_connect_to_business=telegram_user_data["can_connect_to_business"],
             has_main_web_app=telegram_user_data["has_main_web_app"],

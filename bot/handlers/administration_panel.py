@@ -1,4 +1,4 @@
-from aiogram import F, Router, Bot
+from aiogram import F, Bot
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 

@@ -1,29 +1,20 @@
-from aiogram import F, Router
+from aiogram import F
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
-from bot.utils.read_text import load_text_form_file
+
+from bot.data.config import router_registration_user
 from bot.database.database import (
     add_users,  # Импорт функции добавления зарегистрированного пользователя в базу.
 )
 from bot.keyboards.keyboards import (
     generate_authorized_user_options_keyboard,
 )
+from bot.states.states import RegistrationStates
+from bot.utils.read_text import load_text_form_file
 from bot.utils.validators import (
     is_float,  # Имфорт функции валидации вещественных чисел.
     is_int,  # Имфорт функций валидации целых чисел.
 )
-
-router_registration_user = (
-    Router()
-)  # Создание маршрутизатора для обработки команд и сообщений.
-
-
-class RegistrationStates(StatesGroup):
-    name = State()  # Состояние ввода имени.
-    height = State()  # Состояние ввода роста.
-    weight = State()  # Состояние ввода веса.
-    training_experience = State()  # Состояние ввода опыта тренировок.
 
 
 # Обработчик сообщения с текстом "регистрация", начинающий процесс регистрации.
@@ -78,9 +69,7 @@ async def register_user_height(message: Message, state: FSMContext) -> None:
 
 # Обработчик состояния ввода веса пользователя.
 @router_registration_user.message(RegistrationStates.weight)
-async def register_user_training_experience(
-        message: Message, state: FSMContext
-) -> None:
+async def register_user_training_experience(message: Message, state: FSMContext) -> None:
     """
     Запрашивает опыт тренировок пользователя после ввода веса.
 

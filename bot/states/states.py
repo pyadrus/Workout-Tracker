@@ -19,3 +19,10 @@ class ChangeData(StatesGroup):
     height = State()  # Состояние ввода для изменения роста.
     weight = State()  # Состояние ввода для изменения веса.
     training_experience = State()  # Состояние ввода для изменения опыта тренировок.
+
+
+class RegistrationStates(StatesGroup):
+    name = State()  # Состояние ввода имени.
+    height = State()  # Состояние ввода роста.
+    weight = State()  # Состояние ввода веса.
+    training_experience = State()  # Состояние ввода опыта тренировок.

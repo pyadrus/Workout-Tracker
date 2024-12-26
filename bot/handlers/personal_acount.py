@@ -14,9 +14,7 @@ from bot.keyboards.keyboards import (create_data_change_buttons, generate_author
 from bot.states.states import ChangeData
 from bot.utils.read_text import load_text_form_file
 
-router_personal_acount = (
-    Router()
-)  # Создание маршрутизатора для обработки команд и сообщений.
+
 
 
 # Обработчик состояния просмотра личного кабинета

@@ -14,12 +14,13 @@ BASE_SITE_URL = os.getenv("BASE_SITE")
 
 logger.info(BOT_TOKEN)  # Проверка, что токен загружен
 
-
 # Создание маршрутизатора для обработки команд и сообщений.
-router_administration_panel = (Router())
-
+router_administration_panel = Router()
 
 router_feedback = Router()  # Создание маршрутизатора для обработки команд и сообщений.
 
-
 router_main = Router()  # Создание маршрутизатора для обработки команд и сообщений.
+
+router_registration_user = Router()  # Создание маршрутизатора для обработки команд и сообщений.
+
+router_personal_acount = Router()  # Создание маршрутизатора для обработки команд и сообщений.

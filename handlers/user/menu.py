@@ -7,8 +7,8 @@ from datetime import datetime
 from data.config import ADMIN_USER_ID
 from data.config import router, bot
 from database.database import get_user_data, add_user_starting_the_bot, check_for_bot_launch
-from keyboards.keyboards import (generate_authorized_user_discription, generate_main_menu_keyboard,
-                                 generate_admin_button)
+from keyboards.keyboard_user.keyboards import (generate_authorized_user_discription, generate_main_menu_keyboard,
+                                               generate_admin_button)
 from utils.read_text import load_text_form_file
 
 menu_text = ("Привет! 💪 Я — твой персональный тренер в мире спорта! 🚀\n\n"

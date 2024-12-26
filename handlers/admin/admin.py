@@ -4,7 +4,7 @@ from aiogram.types import CallbackQuery, Message
 
 from data.config import router
 from database.database import get_user_starting_the_bot  # Получение не авторизованных пользователей
-from keyboards.keyboards import generate_admin_panel_keyboard
+from keyboards.keyboard_user.keyboards import generate_admin_panel_keyboard
 from states.states import MessageStorage
 from utils.read_text import load_text_form_file
 

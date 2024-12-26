@@ -26,14 +26,14 @@ async def start_bot() -> None:
     try:
         await dp.start_polling(bot)
 
+        register_menu()  # Главное меню
+
         register_triceps()  # Упражнения на трицепс
         register_biceps()  # Упражнения на бицепс
         register_help()  # Помощь
-        register_menu()
         register_workout()  # Запись тренировки в базу данных
         register_training()  # Программа тренировки
         register_today()  # Получение данных тренировок за сегодня
-
         register_exercises()  # Перечень упражнений для группы мышц
         register_pectoral()  # Перечень упражнений на Грудные мышцы
 

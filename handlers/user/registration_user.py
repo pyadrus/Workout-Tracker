@@ -3,12 +3,9 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from data.config import router
-from database.database import (
-    add_users,  # Импорт функции добавления зарегистрированного пользователя в базу.
-)
-from keyboards.keyboards import (
-    generate_authorized_user_options_keyboard,
-)
+from database.database import add_users  # Импорт функции добавления зарегистрированного пользователя в базу.
+
+from keyboards.keyboards import generate_authorized_user_options_keyboard
 from states.states import RegistrationStates
 from utils.read_text import load_text_form_file
 from utils.validators import (
@@ -20,7 +17,7 @@ from utils.validators import (
 @router.callback_query(F.data == "registration")
 async def user_registration_command(callback_query: CallbackQuery, state: FSMContext) -> None:
     """
-    Начинает процесс регистрации пользователя.Обработчик сообщения с текстом "регистрация", начинающий процесс регистрации.
+    Начинает процесс регистрации пользователя. Обработчик сообщения с текстом "регистрация", начинающий процесс регистрации.
 
     Аргументы:
     :param message: Сообщение пользователя с текстом "регистрация".

@@ -210,35 +210,25 @@ def add_user_starting_the_bot(id_user: str, is_bot: str, first_name: str, last_n
     Добавляет нового не авторизованного пользователя
 
     Аргументы:
+    :param language_code:
+    :param is_premium:
+    :param can_read_all_group_messages:
+    :param can_connect_to_business:
+    :param has_main_web_app:
+    :param supports_inline_queries:
+    :param can_join_groups:
+    :param added_to_attachment_menu:
+    :param last_name:
+    :param first_name:
+    :param is_bot:
     :param id_user: id пользователя телеграмма
     :param username: имя пользователя телеграмма
     """
     try:
-        with sqlite3.connect("sqlite3.db") as connection:
+        with sqlite3.connect("database.db") as connection:
             cursor = connection.cursor()
-            cursor.execute(
-                """CREATE TABLE IF NOT EXISTS not_authorized_user (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                id_user TEXT UNIQUE,
-                is_bot,
-                first_name,
-                last_name,
-                username,
-                language_code,
-                is_premium,
-                added_to_attachment_menu,
-                can_join_groups,
-                can_read_all_group_messages,
-                supports_inline_queries,
-                can_connect_to_business,
-                has_main_web_app)"""
-            )
-            cursor.execute(
-                """INSERT INTO not_authorized_user (
-                    id_user, is_bot, first_name, last_name, username, language_code, is_premium,
-                    added_to_attachment_menu,   can_join_groups,
-                    can_read_all_group_messages, supports_inline_queries, can_connect_to_business,
-                    has_main_web_app) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            cursor.execute("""CREATE TABLE IF NOT EXISTS launch_bot (id INTEGER PRIMARY KEY AUTOINCREMENT, id_user TEXT UNIQUE, is_bot, first_name, last_name, username, language_code, is_premium, added_to_attachment_menu, can_join_groups, can_read_all_group_messages, supports_inline_queries, can_connect_to_business, has_main_web_app)""")
+            cursor.execute("""INSERT INTO launch_bot (id_user, is_bot, first_name, last_name, username, language_code, is_premium, added_to_attachment_menu,   can_join_groups, can_read_all_group_messages, supports_inline_queries, can_connect_to_business, has_main_web_app) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (id_user, is_bot, first_name, last_name, username, language_code, is_premium,
                  added_to_attachment_menu, can_join_groups, can_read_all_group_messages,
                  supports_inline_queries, can_connect_to_business, has_main_web_app,),
@@ -259,9 +249,7 @@ def get_user_starting_the_bot() -> list[Any] | None:
     try:
         with sqlite3.connect("sqlite3.db") as connection:
             cursor = connection.cursor()
-            cursor.execute(
-                """SELECT id_user, username FROM not_authorized_user""",
-            )
+            cursor.execute("""SELECT id_user, username FROM not_authorized_user""")
             return cursor.fetchall()
     except Exception as error:
         logger.exception(error)

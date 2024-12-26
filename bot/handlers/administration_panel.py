@@ -1,22 +1,13 @@
 from aiogram import F, Router, Bot
-from aiogram.types import CallbackQuery, Message
-from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
+from aiogram.types import CallbackQuery, Message
+
+from bot.data.config import router_administration_panel
+from bot.database.database import \
+    get_user_starting_the_bot  # Импорт функции для получения не авторизованных пользователей
+from bot.keyboards.keyboards import generate_admin_panel_keyboard
+from bot.states.states import MessageStorage
 from bot.utils.read_text import load_text_form_file
-from bot.database.database import (
-    get_user_starting_the_bot,  # Импорт функции для получения не авторизованных пользователей
-)
-from bot.keyboards.keyboards import (
-    generate_admin_panel_keyboard,
-)
-
-router_administration_panel = (
-    Router()
-)  # Создание маршрутизатора для обработки команд и сообщений.
-
-
-class MessageStorage(StatesGroup):
-    message_to_be_sent = State()  # Состояние хранения сообщения.
 
 
 # Обработчик состояния админской-панели
@@ -52,9 +43,7 @@ async def messages_for_user(callback_query: CallbackQuery, state: FSMContext) ->
 
 # Обработчик состояния отправки сообщения пользователям
 @router_administration_panel.message(MessageStorage.message_to_be_sent)
-async def sending_messages_for_user(
-        message: Message, state: FSMContext, bot: Bot
-) -> None:
+async def sending_messages_for_user(message: Message, state: FSMContext, bot: Bot) -> None:
     """
     Отправляет сообщения пользователям
 
@@ -79,11 +68,10 @@ async def sending_messages_for_user(
     await state.clear()  # Сброс состояния после отправки сообщения пользователям.
 
 
-# Обработчик состояния статистики
 @router_administration_panel.callback_query(F.data == "statistics")
 async def user_activity_analysis(callback_query: CallbackQuery) -> None:
     """
-    Статистика
+    Обработчик состояния статистики
 
     Аргументы:
     :param callback_query:

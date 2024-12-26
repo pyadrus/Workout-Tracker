@@ -7,3 +7,15 @@ class FormeditMainMenu(StatesGroup):
     repetitions = State()  # Количество повторений
     approaches = State()  # Количество подходов
     weight = State()  # Вес
+
+
+class MessageStorage(StatesGroup):
+    message_to_be_sent = State()  # Состояние хранения сообщения.
+
+
+
+class ChangeData(StatesGroup):
+    name = State()  # Состояние ввода для изменения имени.
+    height = State()  # Состояние ввода для изменения роста.
+    weight = State()  # Состояние ввода для изменения веса.
+    training_experience = State()  # Состояние ввода для изменения опыта тренировок.

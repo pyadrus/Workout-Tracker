@@ -1,5 +1,6 @@
 import os
 
+from aiogram import Router
 from dotenv import load_dotenv
 from loguru import logger
 
@@ -12,3 +13,7 @@ ADMIN_USER_ID = os.getenv("ADMIN_ID")
 BASE_SITE_URL = os.getenv("BASE_SITE")
 
 logger.info(BOT_TOKEN)  # Проверка, что токен загружен
+
+
+# Создание маршрутизатора для обработки команд и сообщений.
+router_administration_panel = (Router())

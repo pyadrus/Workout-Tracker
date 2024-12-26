@@ -7,10 +7,6 @@ from aiogram.enums.parse_mode import ParseMode
 from loguru import logger
 
 from bot.data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
-from bot.handlers.feedback import router
-from bot.handlers.personal_acount import router_personal_acount
-from bot.handlers.registration_user import router
-from bot.handlers.launch_bot import router_main
 from bot.handlers.administration_panel import router
 from bot.handlers.types_of_exercises_for_muscle_groups_handlers.exercise_handlers import \
     register_types_of_exercises_for_muscle_groups_handlers
@@ -43,10 +39,6 @@ async def start_bot() -> None:
         # Создание диспетчера для управления маршрутизацией и обработкой событий.
         dp = Dispatcher()
         # Подключение маршрутизаторов с обработчиками команд и сообщений.
-        dp.include_router(router_main)
-        dp.include_router(router)
-        dp.include_router(router)
-        dp.include_router(router_personal_acount)
         dp.include_router(router)
 
         register_diamond_push_ups_handlers()  # Упражнения на трицепс

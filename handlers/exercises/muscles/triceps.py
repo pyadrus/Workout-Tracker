@@ -17,11 +17,11 @@ from messages.text.triceps_exercises.triceps_exercises_text import (triceps_exer
                                                                     extension_on_the_block_from_behind_the_head_text)
 
 
-@router.callback_query(F.data == "triceps_exercises")
+@router.callback_query(F.data == "triceps")
 async def triceps_exercises(callback_query: types.CallbackQuery):
     """Упражнения на трицепс. Выводим список кнопок с упражнениями"""
     try:
-        document = FSInputFile('messages/images/triceps_exercises/triceps_exercises.jpg')
+        document = FSInputFile('messages/images/triceps/triceps.jpg')
         media = InputMediaPhoto(media=document, caption=triceps_exercises_text)
         await bot.edit_message_media(
             media=media,
@@ -37,7 +37,7 @@ async def triceps_exercises(callback_query: types.CallbackQuery):
 async def triceps_exercises(callback_query: types.CallbackQuery):
     """Упражнения на трицепс. Выводим список кнопок с упражнениями"""
     try:
-        document = FSInputFile('messages/images/triceps_exercises/triceps_exercises.jpg')
+        document = FSInputFile('messages/images/triceps/triceps.jpg')
         media = InputMediaPhoto(media=document, caption=triceps_exercises_text)
         await bot.edit_message_media(
             media=media,
@@ -53,7 +53,7 @@ async def triceps_exercises(callback_query: types.CallbackQuery):
 async def diamond_push_ups(callback_query: types.CallbackQuery) -> None:
     """Алмазные отжимания. Источник информации https://lifehacker.ru/luchshie-uprazhneniya-na-triceps/"""
     try:
-        document = FSInputFile('messages/images/triceps_exercises/diamond_push_ups.jpg')
+        document = FSInputFile('messages/images/triceps/diamond_push_ups.jpg')
         media = InputMediaPhoto(media=document, caption=diamond_push_ups_text)
         await bot.edit_message_media(
             media=media,
@@ -69,7 +69,7 @@ async def diamond_push_ups(callback_query: types.CallbackQuery) -> None:
 async def reverse_push_ups_on_a_bench(callback_query: types.CallbackQuery) -> None:
     """Обратные отжимания на скамье. Источник информации https://lifehacker.ru/luchshie-uprazhneniya-na-triceps/"""
     try:
-        document = FSInputFile('messages/images/triceps_exercises/reverse_push_ups_on_a_bench.jpg')
+        document = FSInputFile('messages/images/triceps/reverse_push_ups_on_a_bench.jpg')
         media = InputMediaPhoto(media=document, caption=reverse_push_ups_on_a_bench_text)
         await bot.edit_message_media(
             media=media,
@@ -85,7 +85,7 @@ async def reverse_push_ups_on_a_bench(callback_query: types.CallbackQuery) -> No
 async def dips(callback_query: types.CallbackQuery) -> None:
     """Отжимания на брусьях. Источник информации https://lifehacker.ru/luchshie-uprazhneniya-na-triceps/"""
     try:
-        document = FSInputFile('messages/images/triceps_exercises/dips.jpg')
+        document = FSInputFile('messages/images/triceps/dips.jpg')
         media = InputMediaPhoto(media=document, caption=dips_text)
         await bot.edit_message_media(
             media=media,
@@ -101,7 +101,7 @@ async def dips(callback_query: types.CallbackQuery) -> None:
 async def french_bench_press_with_barbell(callback_query: types.CallbackQuery) -> None:
     """Французский жим лёжа со штангой. Источник информации https://lifehacker.ru/luchshie-uprazhneniya-na-triceps/"""
     try:
-        document = FSInputFile('messages/images/triceps_exercises/french_bench_press_with_barbell.jpg')
+        document = FSInputFile('messages/images/triceps/french_bench_press_with_barbell.jpg')
         media = InputMediaPhoto(media=document, caption=french_bench_press_with_barbell_text)
         await bot.edit_message_media(
             media=media,
@@ -117,7 +117,7 @@ async def french_bench_press_with_barbell(callback_query: types.CallbackQuery) -
 async def dumbbell_overhead_press(callback_query: types.CallbackQuery) -> None:
     """Жим гантели из-за головы. Источник информации https://lifehacker.ru/luchshie-uprazhneniya-na-triceps/"""
     try:
-        document = FSInputFile('messages/images/triceps_exercises/dumbbell_overhead_press.jpg')
+        document = FSInputFile('messages/images/triceps/dumbbell_overhead_press.jpg')
         media = InputMediaPhoto(media=document, caption=dumbbell_overhead_press_text)
         await bot.edit_message_media(
             media=media,
@@ -133,7 +133,7 @@ async def dumbbell_overhead_press(callback_query: types.CallbackQuery) -> None:
 async def bent_over_arm_extension_with_dumbbells(callback_query: types.CallbackQuery) -> None:
     """Разгибание рук с гантелями в наклоне. Источник информации https://lifehacker.ru/luchshie-uprazhneniya-na-triceps/"""
     try:
-        document = FSInputFile('messages/images/triceps_exercises/bent_over_arm_extension_with_dumbbells.jpg')
+        document = FSInputFile('messages/images/triceps/bent_over_arm_extension_with_dumbbells.jpg')
         media = InputMediaPhoto(media=document, caption=bent_over_arm_extension_with_dumbbells_text)
         await bot.edit_message_media(
             media=media,
@@ -163,7 +163,7 @@ async def one_arm_extension(callback_query: types.CallbackQuery) -> None:
         или обновлением сообщения.
     """
     try:
-        document = FSInputFile('messages/images/triceps_exercises/extension_of_one_arm_with_support_on_the_bench.jpg')
+        document = FSInputFile('messages/images/triceps/extension_of_one_arm_with_support_on_the_bench.jpg')
         media = InputMediaPhoto(media=document, caption=extension_of_one_arm_with_support_on_the_bench_text)
         await bot.edit_message_media(
             media=media,
@@ -193,7 +193,7 @@ async def block_rope_extension(callback_query: types.CallbackQuery) -> None:
         или обновлением сообщения.
     """
     try:
-        document = FSInputFile('messages/images/triceps_exercises/extension_of_arms_on_a_block_with_a_rope_handle.jpg')
+        document = FSInputFile('messages/images/triceps/extension_of_arms_on_a_block_with_a_rope_handle.jpg')
         media = InputMediaPhoto(media=document, caption=extension_of_arms_on_a_block_with_a_rope_handle_text)
         await bot.edit_message_media(
             media=media,
@@ -223,7 +223,7 @@ async def reverse_grip_extension(callback_query: types.CallbackQuery) -> None:
         или обновлением сообщения.
     """
     try:
-        document = FSInputFile('messages/images/triceps_exercises/extension_of_arms_on_a_block_with_a_reverse_grip.jpg')
+        document = FSInputFile('messages/images/triceps/extension_of_arms_on_a_block_with_a_reverse_grip.jpg')
         media = InputMediaPhoto(media=document, caption=extension_of_arms_on_a_block_with_a_reverse_grip_text)
         await bot.edit_message_media(
             media=media,
@@ -239,7 +239,7 @@ async def reverse_grip_extension(callback_query: types.CallbackQuery) -> None:
 async def extension_on_the_block_from_behind_the_head(callback_query: types.CallbackQuery) -> None:
     """Разгибания на блоке из-за головы. Источник информации https://lifehacker.ru/luchshie-uprazhneniya-na-triceps/"""
     try:
-        document = FSInputFile('messages/images/triceps_exercises/extension_on_the_block_from_behind_the_head.jpg')
+        document = FSInputFile('messages/images/triceps/extension_on_the_block_from_behind_the_head.jpg')
         media = InputMediaPhoto(media=document, caption=extension_on_the_block_from_behind_the_head_text)
         await bot.edit_message_media(
             media=media,

@@ -1,11 +1,10 @@
-# from WebApp.main import start_web
 import asyncio
 import logging
 import sys
 
 from loguru import logger
 
-from run_bot import start_bot
+from bot import start_bot
 
 # Настройка логов
 logger.add("log/log.log", retention="1 days", enqueue=True)

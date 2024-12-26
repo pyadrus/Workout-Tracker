@@ -4,14 +4,12 @@ from aiogram.types import FSInputFile, InputMediaPhoto
 from loguru import logger
 
 from bot.data.config import router, bot
-from bot.keyboards.exercises.pectoral import \
-    keyboard_exercises_for_the_pectoral_muscles_keyboard, keyboard_exercises_for_the_pectoral_muscles_keyboard_2, \
-    return_to_exercises_for_the_pectoral_muscles_keyboard
+from bot.keyboards.exercises.pectoral import pectoral_kb, pectoral_kb2, return_pectoral_kb
 from bot.messages.text.pectoral.exercises_for_the_pectoral_muscles_text import \
-    exercises_for_the_pectoral_muscles_text, bench_press_horizontally_text, bent_over_barbell_press_text, \
-    dumbbell_bench_press_text, dumbbell_raises_text, a_sweater_text, \
-    bringing_hands_together_on_the_lower_crossover_block_text, reduction_of_arms_in_the_butterfly_simulator_text, \
-    hummer_text, push_ups_text
+    pectoral_text, bench_text, bent_over_barbell_press_text, \
+    dumbbell_press_text, dumbbell_raises_text, a_sweater_text, \
+    crossover_text, butterfly_text, \
+    hummer_text, pushups_text
 
 
 @router.callback_query(F.data == "pectoral")
@@ -20,12 +18,12 @@ async def pectoral_ex1(callback_query: types.CallbackQuery):
     try:
         document = FSInputFile(
             'messages/images/pectoral/pectoral.jpg')
-        media = InputMediaPhoto(media=document, caption=exercises_for_the_pectoral_muscles_text)
+        media = InputMediaPhoto(media=document, caption=pectoral_text)
         await bot.edit_message_media(
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=keyboard_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -37,12 +35,12 @@ async def pectoral_ex2(callback_query: types.CallbackQuery):
     try:
         document = FSInputFile(
             'messages/images/pectoral/pectoral.jpg')
-        media = InputMediaPhoto(media=document, caption=exercises_for_the_pectoral_muscles_text)
+        media = InputMediaPhoto(media=document, caption=pectoral_text)
         await bot.edit_message_media(
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=keyboard_exercises_for_the_pectoral_muscles_keyboard_2(),
+            reply_markup=pectoral_kb2(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -53,12 +51,12 @@ async def bench_press(callback_query: types.CallbackQuery) -> None:
     """Жим штанги лежа горизонтально. Источник информации https://neodent82.ru/blog/10-luchshih-uprazhnenij-na-bitseps"""
     try:
         document = FSInputFile('messages/images/pectoral/bench_press_horizontally.jpg')
-        media = InputMediaPhoto(media=document, caption=bench_press_horizontally_text)
+        media = InputMediaPhoto(media=document, caption=bench_text)
         await bot.edit_message_media(
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=return_to_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=return_pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -74,7 +72,7 @@ async def incline_press(callback_query: types.CallbackQuery) -> None:
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=return_to_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=return_pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -85,12 +83,12 @@ async def dumbbell_press(callback_query: types.CallbackQuery) -> None:
     """Жим гантелей лежа. Источник информации https://neodent82.ru/blog/10-luchshih-uprazhnenij-na-bitseps"""
     try:
         document = FSInputFile('messages/images/pectoral/dumbbell_bench_press.jpg')
-        media = InputMediaPhoto(media=document, caption=dumbbell_bench_press_text)
+        media = InputMediaPhoto(media=document, caption=dumbbell_press_text)
         await bot.edit_message_media(
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=return_to_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=return_pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -106,7 +104,7 @@ async def dumbbell_fly(callback_query: types.CallbackQuery) -> None:
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=return_to_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=return_pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -122,7 +120,7 @@ async def pullover(callback_query: types.CallbackQuery) -> None:
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=return_to_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=return_pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -134,12 +132,12 @@ async def crossover_low(callback_query: types.CallbackQuery) -> None:
     try:
         document = FSInputFile(
             'messages/images/pectoral/bringing_hands_together_on_the_lower_crossover_block.jpg')
-        media = InputMediaPhoto(media=document, caption=bringing_hands_together_on_the_lower_crossover_block_text)
+        media = InputMediaPhoto(media=document, caption=crossover_text)
         await bot.edit_message_media(
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=return_to_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=return_pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -151,12 +149,12 @@ async def butterfly(callback_query: types.CallbackQuery) -> None:
     try:
         document = FSInputFile(
             'messages/images/pectoral/reduction_of_arms_in_the_butterfly_simulator.jpg')
-        media = InputMediaPhoto(media=document, caption=reduction_of_arms_in_the_butterfly_simulator_text)
+        media = InputMediaPhoto(media=document, caption=butterfly_text)
         await bot.edit_message_media(
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=return_to_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=return_pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -172,7 +170,7 @@ async def hummer(callback_query: types.CallbackQuery) -> None:
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=return_to_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=return_pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
@@ -183,12 +181,12 @@ async def pushups(callback_query: types.CallbackQuery) -> None:
     """Отжимания. Источник информации https://neodent82.ru/blog/10-luchshih-uprazhnenij-na-bitseps"""
     try:
         document = FSInputFile('messages/images/pectoral/push_ups.jpg')
-        media = InputMediaPhoto(media=document, caption=push_ups_text)
+        media = InputMediaPhoto(media=document, caption=pushups_text)
         await bot.edit_message_media(
             media=media,
             chat_id=callback_query.message.chat.id,
             message_id=callback_query.message.message_id,
-            reply_markup=return_to_exercises_for_the_pectoral_muscles_keyboard(),
+            reply_markup=return_pectoral_kb(),
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")

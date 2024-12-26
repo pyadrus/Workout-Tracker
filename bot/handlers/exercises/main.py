@@ -38,6 +38,6 @@ async def types_of_exercises_for_muscle_groups_handlers(callback_query: types.Ca
         logger.error(f"Ошибка: {e}")
 
 
-def register_types_of_exercises_for_muscle_groups_handlers():
+def register_exercises():
     """Регистрация обработчиков для бота"""
     router.callback_query.register(types_of_exercises_for_muscle_groups_handlers)  # Перечень групп мышц

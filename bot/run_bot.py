@@ -7,20 +7,16 @@ from aiogram.enums.parse_mode import ParseMode
 from loguru import logger
 
 from bot.data.config import BOT_TOKEN  # Импорт токена бота из файла конфигурации.
-from bot.handlers.administration_panel import router
-from bot.handlers.types_of_exercises_for_muscle_groups_handlers.exercise_handlers import \
-    register_types_of_exercises_for_muscle_groups_handlers
-from bot.handlers.types_of_exercises_for_muscle_groups_handlers.exercises_handlers.biceps_exercises_handlers import \
-    register_biceps_exercises_handlers
-from bot.handlers.types_of_exercises_for_muscle_groups_handlers.exercises_handlers.pectoral_muscles_exercises_handlers import \
-    register_exercises_for_the_pectoral_muscles
-from bot.handlers.types_of_exercises_for_muscle_groups_handlers.exercises_handlers.triceps_exercises_handlers import \
-    register_diamond_push_ups_handlers
-from bot.handlers.user_handlers.get_today_data_handler import register_get_today_data_handler
-from bot.handlers.user_handlers.help_handlers import register_help_command_handlers
-from bot.handlers.user_handlers.menu_handlers import register_start_handler_handlers
-from bot.handlers.user_handlers.training_program_handlers import register_training_program
-from bot.handlers.user_handlers.workout_recording_handlers import register_workout_recording_handlers
+from bot.handlers.admin import router
+from bot.handlers.exercises.main import register_exercises
+from bot.handlers.exercises.muscles.biceps import register_biceps_exercises_handlers
+from bot.handlers.exercises.muscles.pectoral import register_exercises_for_the_pectoral_muscles
+from bot.handlers.exercises.muscles.triceps import register_diamond_push_ups_handlers
+from bot.handlers.user.today import register_get_today_data_handler
+from bot.handlers.user.help import register_help_command_handlers
+from bot.handlers.user.menu import register_start_handler_handlers
+from bot.handlers.user.training import register_training_program
+from bot.handlers.user.workout import register_workout_recording_handlers
 
 logger.add("logs/log.log")
 
@@ -33,9 +29,7 @@ async def start_bot() -> None:
     """
     try:
         global bot
-        bot = Bot(
-            token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML)
-        )
+        bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
         # Создание диспетчера для управления маршрутизацией и обработкой событий.
         dp = Dispatcher()
         # Подключение маршрутизаторов с обработчиками команд и сообщений.
@@ -49,7 +43,7 @@ async def start_bot() -> None:
         register_training_program()  # Программа тренировки
         register_get_today_data_handler()  # Получение данных тренировок за сегодня
 
-        register_types_of_exercises_for_muscle_groups_handlers()  # Перечень упражнений для группы мышц
+        register_exercises()  # Перечень упражнений для группы мышц
         register_exercises_for_the_pectoral_muscles()  # Перечень упражнений на Грудные мышцы
 
         await dp.start_polling(bot)  # Запуск опроса обновлений.

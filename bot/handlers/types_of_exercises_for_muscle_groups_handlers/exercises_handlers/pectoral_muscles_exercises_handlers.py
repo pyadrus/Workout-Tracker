@@ -3,6 +3,7 @@ from aiogram import types, F
 from aiogram.types import FSInputFile, InputMediaPhoto
 from loguru import logger
 
+from bot.data.config import router, bot
 from bot.keyboards.keyboard_exercises.exercises_for_the_pectoral_muscles_keyboard import \
     keyboard_exercises_for_the_pectoral_muscles_keyboard, keyboard_exercises_for_the_pectoral_muscles_keyboard_2, \
     return_to_exercises_for_the_pectoral_muscles_keyboard
@@ -11,7 +12,6 @@ from bot.messages.text.exercises_for_the_pectoral_muscles.exercises_for_the_pect
     dumbbell_bench_press_text, dumbbell_raises_text, a_sweater_text, \
     bringing_hands_together_on_the_lower_crossover_block_text, reduction_of_arms_in_the_butterfly_simulator_text, \
     hummer_text, push_ups_text
-from system.dispatcher import router, bot
 
 
 @router.callback_query(F.data == "exercises_for_the_pectoral_muscles")

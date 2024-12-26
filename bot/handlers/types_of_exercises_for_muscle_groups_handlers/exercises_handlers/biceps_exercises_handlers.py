@@ -2,6 +2,7 @@ from aiogram import types, F
 from aiogram.types import FSInputFile, InputMediaPhoto
 from loguru import logger
 
+from bot.data.config import router, bot
 from bot.keyboards.keyboard_exercises.keyboard_biceps_exercises import (return_to_biceps_exercises,
                                                                         keyboard_biceps_exercises,
                                                                         keyboard_biceps_exercises_2)
@@ -16,7 +17,6 @@ from bot.messages.text.biceps_exercises.biceps_exercises_text import (biceps_exe
                                                                       dumbbell_curl_execution,
                                                                       bend_the_arms_on_the_lower_block_execution,
                                                                       curls_with_a_barbell_or_EZ_bar_execution)
-from system.dispatcher import router, bot
 
 
 @router.callback_query(F.data == "biceps_exercises")

@@ -1,8 +1,8 @@
 from aiogram import types, F
 from loguru import logger
 
+from bot.data.config import router, bot
 from bot.keyboards.keyboard_exercises.exercise_keyboard import exercise_keyboard
-from system.dispatcher import router, bot
 
 
 @router.callback_query(F.data == "types_of_exercises_for_muscle_groups")

@@ -3,9 +3,8 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message
 from loguru import logger
 
+from bot.data.config import router, bot
 from bot.keyboards.keyboard_user.keyboard_menu import keyboard_menu
-from system.dispatcher import bot
-from system.dispatcher import router
 
 
 # Обработчик команды /start

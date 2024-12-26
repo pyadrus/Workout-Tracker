@@ -10,7 +10,7 @@ from database.database import (
 
 from keyboards.keyboards import (create_data_change_buttons, generate_authorized_user_options_keyboard,
                                  generate_keyboard_personal_account,
-                                 generate_user_options_keyboard,
+                                 generate_main_menu_keyboard,
                                  generate_admin_button)
 from states.states import ChangeData
 from utils.read_text import load_text_form_file
@@ -186,5 +186,5 @@ async def back_to_main_menu(callback_query: CallbackQuery) -> None:
     else:
         await callback_query.message.edit_text(
             f"{load_text_form_file('text_hello_welcome.json')}",
-            reply_markup=generate_user_options_keyboard(),
+            reply_markup=generate_main_menu_keyboard(),
         )

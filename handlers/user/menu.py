@@ -1,16 +1,14 @@
-# Основной файл Telegram-бота, использующего aiogram для взаимодействия с пользователями.
-# В этом файле создается логика обработки сообщений и FSM (Finite State Machine) для регистрации пользователей.
 from aiogram import types, F
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery
 from aiogram.types import Message
 from loguru import logger
-
+from datetime import datetime
 from data.config import ADMIN_USER_ID
 from data.config import router, bot
-from database.database import get_user_data, add_user_starting_the_bot
-from keyboards.keyboards import (generate_authorized_user_discription, generate_authorized_user_options_keyboard,
-                                 generate_user_options_keyboard, generate_admin_button)
+from database.database import get_user_data, add_user_starting_the_bot, check_for_bot_launch
+from keyboards.keyboards import (generate_authorized_user_discription, generate_main_menu_keyboard,
+                                 generate_admin_button)
 from utils.read_text import load_text_form_file
 
 menu_text = ("Привет! 💪 Я — твой персональный тренер в мире спорта! 🚀\n\n"
@@ -32,61 +30,61 @@ async def start_handler(message: Message) -> None:
     :param message: Сообщение пользователя с командой /start.
     """
     try:
-        # Запись пользователя в базу данных, который ввел команду /start
-        add_user_starting_the_bot(id_user=message.from_user.id,
-                                  is_bot=message.from_user.is_bot or "",
-                                  first_name=message.from_user.first_name or "",
-                                  last_name=message.from_user.last_name or "",
-                                  username=message.from_user.username or "",
-                                  language_code=message.from_user.language_code or "",
-                                  is_premium=message.from_user.is_premium or "",
-                                  added_to_attachment_menu=message.from_user.added_to_attachment_menu or "",
-                                  can_join_groups=message.from_user.can_join_groups or "",
-                                  can_read_all_group_messages=message.from_user.can_read_all_group_messages or "",
-                                  supports_inline_queries=message.from_user.supports_inline_queries or "",
-                                  can_connect_to_business=message.from_user.can_connect_to_business or "",
-                                  has_main_web_app=message.from_user.has_main_web_app or "",
-                                  user_date=message.date.strftime("%Y-%m-%d %H:%M:%S"))
+        user_id = message.from_user.id
+        if check_for_bot_launch(user_id):
+            # await message.answer(
+            #     f"{load_text_form_file('text_authorized_user_greeting.json')}",
+            #     reply_markup=generate_admin_button() if user_id == ADMIN_USER_ID else generate_user_options_keyboard(),
+            # )
+            # Запись пользователя в базу данных, который ввел команду /start
+            add_user_starting_the_bot(
+                id_user=message.from_user.id,
+                is_bot=message.from_user.is_bot or "",
+                first_name=message.from_user.first_name or "",
+                last_name=message.from_user.last_name or "",
+                username=message.from_user.username or "",
+                language_code=message.from_user.language_code or "",
+                is_premium=message.from_user.is_premium or "",
+                added_to_attachment_menu=message.from_user.added_to_attachment_menu or "",
+                can_join_groups=message.from_user.can_join_groups or "",
+                can_read_all_group_messages=message.from_user.can_read_all_group_messages or "",
+                supports_inline_queries=message.from_user.supports_inline_queries or "",
+                can_connect_to_business=message.from_user.can_connect_to_business or "",
+                has_main_web_app=message.from_user.has_main_web_app or "",
+                user_date=message.date.strftime("%Y-%m-%d %H:%M:%S")
+            )
 
-        await message.answer(menu_text, reply_markup=generate_user_options_keyboard())
+            await message.answer(menu_text, reply_markup=generate_main_menu_keyboard())
+
+        else:
+
+            if get_user_data(ADMIN_USER_ID):
+
+                await message.answer(f"{load_text_form_file('text_authorized_user_greeting.json')}",
+                                     reply_markup=generate_admin_button(),
+                                     )
+            else:
+                # Запись пользователя в базу данных, который ввел команду /start
+                add_user_starting_the_bot(
+                    id_user=message.from_user.id,
+                    is_bot=message.from_user.is_bot or "",
+                    first_name=message.from_user.first_name or "",
+                    last_name=message.from_user.last_name or "",
+                    username=message.from_user.username or "",
+                    language_code=message.from_user.language_code or "",
+                    is_premium=message.from_user.is_premium or "",
+                    added_to_attachment_menu=message.from_user.added_to_attachment_menu or "",
+                    can_join_groups=message.from_user.can_join_groups or "",
+                    can_read_all_group_messages=message.from_user.can_read_all_group_messages or "",
+                    supports_inline_queries=message.from_user.supports_inline_queries or "",
+                    can_connect_to_business=message.from_user.can_connect_to_business or "",
+                    has_main_web_app=message.from_user.has_main_web_app or "",
+                    user_date=message.date.strftime("%Y-%m-%d %H:%M:%S")
+                )
+
+                await message.answer(menu_text, reply_markup=generate_main_menu_keyboard())
     except Exception as e:
         logger.error(f"Ошибка в обработчике /start: {e}")
-
-
-@router.message(CommandStart())
-async def start_bot_command(message: Message) -> None:
-    telegram_user_data: dict[str, str] = (dict())  # В словаре хранятся данные пользователя из телеграмм.
-    for key, value in message.from_user:
-        telegram_user_data[key] = value
-
-    if not get_user_data(telegram_user_data["id"]):
-        await message.answer(f"{load_text_form_file('text_hello_welcome.json')}",
-                             reply_markup=generate_user_options_keyboard())
-
-        add_user_starting_the_bot(id_user=telegram_user_data["id"],
-                                  is_bot=telegram_user_data["is_bot"],
-                                  first_name=telegram_user_data["first_name"],
-                                  last_name=telegram_user_data["last_name"],
-                                  username=telegram_user_data["username"],
-                                  language_code=telegram_user_data["language_code"],
-                                  is_premium=telegram_user_data["is_premium"],
-                                  added_to_attachment_menu=telegram_user_data["added_to_attachment_menu"],
-                                  can_join_groups=telegram_user_data["can_join_groups"],
-                                  can_read_all_group_messages=telegram_user_data["can_read_all_group_messages"],
-                                  supports_inline_queries=telegram_user_data["supports_inline_queries"],
-                                  can_connect_to_business=telegram_user_data["can_connect_to_business"],
-                                  has_main_web_app=telegram_user_data["has_main_web_app"],
-                                  )  # Добавление пользователя при запуске бота.
-
-    else:
-        if get_user_data(ADMIN_USER_ID):
-            await message.answer(f"{load_text_form_file('text_authorized_user_greeting.json')}",
-                reply_markup=generate_admin_button(),
-            )
-        else:
-            await message.answer(f"{load_text_form_file('text_authorized_user_greeting.json')}",
-                reply_markup=generate_authorized_user_options_keyboard(),
-            )
 
 
 @router.callback_query(F.data == "description")
@@ -118,12 +116,12 @@ async def start_handler_callback(callback_query: types.CallbackQuery) -> None:
                                   supports_inline_queries=callback_query.from_user.supports_inline_queries or "",
                                   can_connect_to_business=callback_query.from_user.can_connect_to_business or "",
                                   has_main_web_app=callback_query.from_user.has_main_web_app or "",
-                                  user_date=callback_query.date.strftime("%Y-%m-%d %H:%M:%S"))
+                                  user_date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
         # Если нужно отправить новое сообщение:
         await bot.send_message(chat_id=callback_query.message.chat.id,
                                text=menu_text,
-                               reply_markup=generate_user_options_keyboard())
+                               reply_markup=generate_main_menu_keyboard())
 
     except Exception as e:
         logger.error(f"Ошибка: {e}")

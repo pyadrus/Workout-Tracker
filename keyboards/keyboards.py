@@ -3,9 +3,9 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from data.config import BASE_SITE_URL
 
 
-def generate_user_options_keyboard() -> InlineKeyboardMarkup:
+def generate_main_menu_keyboard() -> InlineKeyboardMarkup:
     """
-    Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
+    Создает компактную клавиатуру с кнопками для взаимодействия пользователя с ботом.
 
     :return: Объект InlineKeyboardMarkup с кнопками для выбора.
     """
@@ -15,18 +15,15 @@ def generate_user_options_keyboard() -> InlineKeyboardMarkup:
             InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
         ],
         [
-            InlineKeyboardButton(text="Упражнения на группу мышц",
-                                 callback_data="types_of_exercises_for_muscle_groups"),
+            InlineKeyboardButton(text="💪 Упражнения", callback_data="types_of_exercises_for_muscle_groups"),
+            InlineKeyboardButton(text="🆘 Помощь", callback_data="help_with_work"),
         ],
         [
-            InlineKeyboardButton(text="Помощь", callback_data="help_with_work"),
-            InlineKeyboardButton(text="Начать запись тренировок", callback_data="CommandStart"),
+            InlineKeyboardButton(text="🗂️ Тренировки", callback_data="training_program"),
+            InlineKeyboardButton(text="🏋️ Запись", callback_data="CommandStart"),
         ],
         [
-            InlineKeyboardButton(text="Программа тренировок", callback_data="training_program"),
-        ],
-        [
-            InlineKeyboardButton(text="Получить результат тренировки на сегодня", callback_data="get_today"),
+            InlineKeyboardButton(text="📊 Результат", callback_data="get_today"),
         ],
     ]
 
@@ -154,7 +151,7 @@ def create_data_change_buttons() -> InlineKeyboardMarkup:
 
 
 if __name__ == "__main__":
-    generate_user_options_keyboard()
+    generate_main_menu_keyboard()
     generate_authorized_user_options_keyboard()
     generate_keyboard_personal_account()
     create_data_change_buttons()

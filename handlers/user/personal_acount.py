@@ -8,10 +8,10 @@ from database.database import (
     update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
 
-from keyboards.keyboards import (create_data_change_buttons, generate_authorized_user_options_keyboard,
-                                 generate_keyboard_personal_account,
-                                 generate_main_menu_keyboard,
-                                 generate_admin_button)
+from keyboards.keyboard_user.keyboards import (create_data_change_buttons, generate_authorized_user_options_keyboard,
+                                               generate_keyboard_personal_account,
+                                               generate_main_menu_keyboard,
+                                               generate_admin_button)
 from states.states import ChangeData
 from utils.read_text import load_text_form_file
 

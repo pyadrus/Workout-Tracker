@@ -22,8 +22,7 @@ def exercise_keyboard():
             [InlineKeyboardButton(text='В начальное меню', callback_data='start_handler')],
         ]
 
-        greeting_keyboards = InlineKeyboardMarkup(inline_keyboard=rows)
-        return greeting_keyboards
+        return InlineKeyboardMarkup(inline_keyboard=rows)
     except Exception as e:
         logger.error(f"Ошибка: {e}")
 

@@ -5,7 +5,7 @@ from aiogram.types import CallbackQuery, Message
 from data.config import router
 from database.database import add_users  # Импорт функции добавления зарегистрированного пользователя в базу.
 
-from keyboards.keyboards import generate_authorized_user_options_keyboard
+from keyboards.keyboard_user.keyboards import generate_authorized_user_options_keyboard
 from states.states import RegistrationStates
 from utils.read_text import load_text_form_file
 from utils.validators import (

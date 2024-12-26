@@ -27,9 +27,7 @@ def generate_main_menu_keyboard() -> InlineKeyboardMarkup:
         ],
     ]
 
-    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
-
-    return keyboard
+    return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
 def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
@@ -52,9 +50,7 @@ def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
         ],
     ]
 
-    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
-
-    return keyboard
+    return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
 def generate_admin_button() -> InlineKeyboardMarkup:
@@ -81,9 +77,7 @@ def generate_admin_button() -> InlineKeyboardMarkup:
         ],
     ]
 
-    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
-
-    return keyboard
+    return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
 def generate_admin_panel_keyboard() -> InlineKeyboardMarkup:
@@ -102,12 +96,10 @@ def generate_admin_panel_keyboard() -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text="🔙 Назад", callback_data="back")],
     ]
 
-    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
-
-    return keyboard
+    return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
-def generate_authorized_user_discription() -> None:
+def generate_authorized_user_discription() -> InlineKeyboardMarkup:
     kb = [[InlineKeyboardButton(text="🔙 Назад", callback_data="back")]]
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
     return keyboard
@@ -125,8 +117,7 @@ def generate_keyboard_personal_account() -> InlineKeyboardMarkup:
             InlineKeyboardButton(text="🔙 Назад", callback_data="back"),
         ],  # Кнопка для просмотра личного кабинета
     ]
-    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
-    return keyboard
+    return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
 def create_data_change_buttons() -> InlineKeyboardMarkup:
@@ -146,8 +137,7 @@ def create_data_change_buttons() -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text="🔙 Назад", callback_data="back_personal_account")],
         [InlineKeyboardButton(text="🔙 В главное меню", callback_data="back", )],
     ]
-    keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
-    return keyboard
+    return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
 if __name__ == "__main__":
@@ -155,3 +145,6 @@ if __name__ == "__main__":
     generate_authorized_user_options_keyboard()
     generate_keyboard_personal_account()
     create_data_change_buttons()
+    generate_authorized_user_discription()
+    generate_admin_button()
+    generate_admin_panel_keyboard()

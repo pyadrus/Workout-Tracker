@@ -8,9 +8,7 @@ from loguru import logger
 
 from data.config import ADMIN_USER_ID
 from data.config import router, bot
-from database.database import (get_user_data,  # Импорт функции получения авторизованного пользователя из базы
-                               add_user_starting_the_bot,  # Импорт функции добавления не авторизованного пользователя
-                               )
+from database.database import get_user_data, add_user_starting_the_bot
 from keyboards.keyboard_user.keyboard_menu import keyboard_menu
 from keyboards.keyboards import (generate_authorized_user_discription, generate_authorized_user_options_keyboard,
                                  generate_user_options_keyboard, generate_admin_button)
@@ -21,40 +19,21 @@ from utils.read_text import load_text_form_file
 async def start_handler(message: Message) -> None:
     """Обработчик команды /start"""
     try:
-        logger.info(f"{message}")
-        user_id = message.from_user.id
-        user_name = message.from_user.username or ""
-        user_first_name = message.from_user.first_name or ""
-        user_last_name = message.from_user.last_name or ""
-        user_date = message.date.strftime("%Y-%m-%d %H:%M:%S")
-
-        is_bot = message.from_user.is_bot
-        language_code = message.from_user.language_code
-        is_premium = message.from_user.is_premium
-        added_to_attachment_menu = message.from_user.added_to_attachment_menu
-        can_join_groups = message.from_user.can_join_groups
-        can_read_all_group_messages = message.from_user.can_read_all_group_messages
-        supports_inline_queries = message.from_user.supports_inline_queries
-        can_connect_to_business = message.from_user.can_connect_to_business
-        has_main_web_app = message.from_user.has_main_web_app
-
-        logger.info(f"User Info: {user_id}, {user_name}, {user_first_name}, {user_last_name}, {user_date}")
-
-        add_user_starting_the_bot(id_user=user_id,
-                                  is_bot=is_bot,
-                                  first_name=user_first_name,
-                                  last_name=user_last_name,
-                                  username=user_name,
-                                  language_code=language_code,
-                                  is_premium=is_premium,
-                                  added_to_attachment_menu=added_to_attachment_menu,
-                                  can_join_groups=can_join_groups,
-                                  can_read_all_group_messages=can_read_all_group_messages,
-                                  supports_inline_queries=supports_inline_queries,
-                                  can_connect_to_business=can_connect_to_business,
-                                  has_main_web_app=has_main_web_app,
-                                  )  # Добавление пользователя при запуске бота.
-
+        # Запись пользователя в базу данных, который ввел команду /start
+        add_user_starting_the_bot(id_user=message.from_user.id,
+                                  is_bot=message.from_user.is_bot or "",
+                                  first_name=message.from_user.first_name or "",
+                                  last_name=message.from_user.last_name or "",
+                                  username=message.from_user.username or "",
+                                  language_code=message.from_user.language_code or "",
+                                  is_premium=message.from_user.is_premium or "",
+                                  added_to_attachment_menu=message.from_user.added_to_attachment_menu or "",
+                                  can_join_groups=message.from_user.can_join_groups or "",
+                                  can_read_all_group_messages=message.from_user.can_read_all_group_messages or "",
+                                  supports_inline_queries=message.from_user.supports_inline_queries or "",
+                                  can_connect_to_business=message.from_user.can_connect_to_business or "",
+                                  has_main_web_app=message.from_user.has_main_web_app or "",
+                                  user_date=message.date.strftime("%Y-%m-%d %H:%M:%S"))
         menu_text = ("Привет! 💪 Я — твой персональный тренер в мире спорта! 🚀\n\n"
 
                      "Готов помочь тебе достичь новых высот и максимально эффективно тренироваться.\n\n"

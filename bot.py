@@ -1,4 +1,3 @@
-# Код для запуска Telegram-бота с использованием aiogram.
 import asyncio
 
 from aiogram import Bot, Dispatcher
@@ -18,8 +17,6 @@ from handlers.user.menu import register_menu
 from handlers.user.training import register_training
 from handlers.user.workout import register_workout
 
-logger.add("logs/log.log")
-
 
 async def start_bot() -> None:
     """
@@ -28,7 +25,6 @@ async def start_bot() -> None:
     Создает экземпляр бота, регистрирует маршрутизаторы и запускает процесс опроса обновлений (polling).
     """
     try:
-        global bot
         bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
         # Создание диспетчера для управления маршрутизацией и обработкой событий.
         dp = Dispatcher()

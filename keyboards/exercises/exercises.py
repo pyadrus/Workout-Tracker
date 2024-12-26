@@ -7,8 +7,8 @@ def exercise_keyboard():
     try:
 
         rows = [
-            [InlineKeyboardButton(text='Трицепс', callback_data='triceps_exercises'), # TODO готово
-             InlineKeyboardButton(text='Бицепс', callback_data='biceps_exercises'), ], # TODO готово
+            [InlineKeyboardButton(text='Трицепс', callback_data='triceps'), # TODO готово
+             InlineKeyboardButton(text='Бицепс', callback_data='biceps'), ], # TODO готово
 
             [InlineKeyboardButton(text='Грудные мышцы', callback_data='pectoral'), # TODO в разработке
              InlineKeyboardButton(text='Спина', callback_data='back_exercises')],

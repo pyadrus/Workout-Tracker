@@ -50,7 +50,7 @@ async def pectoral_ex2(callback_query: types.CallbackQuery):
 async def bench_press(callback_query: types.CallbackQuery) -> None:
     """Жим штанги лежа горизонтально. Источник информации https://neodent82.ru/blog/10-luchshih-uprazhnenij-na-bitseps"""
     try:
-        document = FSInputFile('messages/images/pectoral/bench_press_horizontally.jpg')
+        document = FSInputFile('messages/images/pectoral/bench_press.jpg')
         media = InputMediaPhoto(media=document, caption=bench_text)
         await bot.edit_message_media(
             media=media,
@@ -66,7 +66,7 @@ async def bench_press(callback_query: types.CallbackQuery) -> None:
 async def incline_press(callback_query: types.CallbackQuery) -> None:
     """Жим штанги в наклоне. Источник информации https://neodent82.ru/blog/10-luchshih-uprazhnenij-na-bitseps"""
     try:
-        document = FSInputFile('messages/images/pectoral/bent_over_barbell_press.jpg')
+        document = FSInputFile('messages/images/pectoral/incline_press.jpg')
         media = InputMediaPhoto(media=document, caption=bent_over_barbell_press_text)
         await bot.edit_message_media(
             media=media,

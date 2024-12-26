@@ -18,7 +18,8 @@ from system.dispatcher import router, bot
 async def exercises_for_the_pectoral_muscles(callback_query: types.CallbackQuery):
     """Грудные мышцы. Выводим список кнопок с упражнениями"""
     try:
-        document = FSInputFile('messages/images/exercises_for_the_pectoral_muscles/exercises_for_the_pectoral_muscles.jpg')
+        document = FSInputFile(
+            'messages/images/exercises_for_the_pectoral_muscles/exercises_for_the_pectoral_muscles.jpg')
         media = InputMediaPhoto(media=document, caption=exercises_for_the_pectoral_muscles_text)
         await bot.edit_message_media(
             media=media,
@@ -29,11 +30,13 @@ async def exercises_for_the_pectoral_muscles(callback_query: types.CallbackQuery
     except Exception as e:
         logger.error(f"Ошибка: {e}")
 
+
 @router.callback_query(F.data == "exercises_for_the_pectoral_muscles_2")
 async def exercises_for_the_pectoral_muscles_2(callback_query: types.CallbackQuery):
     """Грудные мышцы. Выводим список кнопок с упражнениями"""
     try:
-        document = FSInputFile('messages/images/exercises_for_the_pectoral_muscles/exercises_for_the_pectoral_muscles.jpg')
+        document = FSInputFile(
+            'messages/images/exercises_for_the_pectoral_muscles/exercises_for_the_pectoral_muscles.jpg')
         media = InputMediaPhoto(media=document, caption=exercises_for_the_pectoral_muscles_text)
         await bot.edit_message_media(
             media=media,
@@ -75,6 +78,7 @@ async def bent_over_barbell_press(callback_query: types.CallbackQuery) -> None:
         )
     except Exception as e:
         logger.error(f"Ошибка: {e}")
+
 
 @router.callback_query(F.data == "dumbbell_bench_press")
 async def dumbbell_bench_press(callback_query: types.CallbackQuery) -> None:
@@ -128,7 +132,8 @@ async def a_sweater(callback_query: types.CallbackQuery) -> None:
 async def bringing_hands_together_on_the_lower_crossover_block(callback_query: types.CallbackQuery) -> None:
     """Сведение рук на нижнем блоке кроссовера. Источник информации https://neodent82.ru/blog/10-luchshih-uprazhnenij-na-bitseps"""
     try:
-        document = FSInputFile('messages/images/exercises_for_the_pectoral_muscles/bringing_hands_together_on_the_lower_crossover_block.jpg')
+        document = FSInputFile(
+            'messages/images/exercises_for_the_pectoral_muscles/bringing_hands_together_on_the_lower_crossover_block.jpg')
         media = InputMediaPhoto(media=document, caption=bringing_hands_together_on_the_lower_crossover_block_text)
         await bot.edit_message_media(
             media=media,
@@ -144,7 +149,8 @@ async def bringing_hands_together_on_the_lower_crossover_block(callback_query: t
 async def reduction_of_arms_in_the_butterfly_simulator(callback_query: types.CallbackQuery) -> None:
     """Сведение рук в тренажере бабочка. Источник информации https://neodent82.ru/blog/10-luchshih-uprazhnenij-na-bitseps"""
     try:
-        document = FSInputFile('messages/images/exercises_for_the_pectoral_muscles/reduction_of_arms_in_the_butterfly_simulator.jpg')
+        document = FSInputFile(
+            'messages/images/exercises_for_the_pectoral_muscles/reduction_of_arms_in_the_butterfly_simulator.jpg')
         media = InputMediaPhoto(media=document, caption=reduction_of_arms_in_the_butterfly_simulator_text)
         await bot.edit_message_media(
             media=media,
@@ -171,6 +177,7 @@ async def hummer(callback_query: types.CallbackQuery) -> None:
     except Exception as e:
         logger.error(f"Ошибка: {e}")
 
+
 @router.callback_query(F.data == "push_ups")
 async def push_ups(callback_query: types.CallbackQuery) -> None:
     """Отжимания. Источник информации https://neodent82.ru/blog/10-luchshih-uprazhnenij-na-bitseps"""
@@ -196,7 +203,8 @@ def register_exercises_for_the_pectoral_muscles():
     router.callback_query.register(dumbbell_bench_press)  # Жим гантелей лежа
     router.callback_query.register(dumbbell_raises)  # Разведение рук с гантелями
     router.callback_query.register(a_sweater)  # Пуловер
-    router.callback_query.register(bringing_hands_together_on_the_lower_crossover_block)  # Сведение рук на нижнем блоке кроссовера
+    router.callback_query.register(
+        bringing_hands_together_on_the_lower_crossover_block)  # Сведение рук на нижнем блоке кроссовера
     router.callback_query.register(reduction_of_arms_in_the_butterfly_simulator)  # Сведение рук в тренажере бабочка
     router.callback_query.register(hummer)  # Хаммер
     router.callback_query.register(push_ups)  # Отжимания

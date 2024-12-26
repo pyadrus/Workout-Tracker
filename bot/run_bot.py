@@ -12,6 +12,19 @@ from bot.handlers.personal_acount import router_personal_acount
 from bot.handlers.registration_user import router_registration_user
 from bot.handlers.launch_bot import router_main
 from bot.handlers.administration_panel import router_administration_panel
+from bot.handlers.types_of_exercises_for_muscle_groups_handlers.exercise_handlers import \
+    register_types_of_exercises_for_muscle_groups_handlers
+from bot.handlers.types_of_exercises_for_muscle_groups_handlers.exercises_handlers.biceps_exercises_handlers import \
+    register_biceps_exercises_handlers
+from bot.handlers.types_of_exercises_for_muscle_groups_handlers.exercises_handlers.pectoral_muscles_exercises_handlers import \
+    register_exercises_for_the_pectoral_muscles
+from bot.handlers.types_of_exercises_for_muscle_groups_handlers.exercises_handlers.triceps_exercises_handlers import \
+    register_diamond_push_ups_handlers
+from bot.handlers.user_handlers.get_today_data_handler import register_get_today_data_handler
+from bot.handlers.user_handlers.help_handlers import register_help_command_handlers
+from bot.handlers.user_handlers.menu_handlers import register_start_handler_handlers
+from bot.handlers.user_handlers.training_program_handlers import register_training_program
+from bot.handlers.user_handlers.workout_recording_handlers import register_workout_recording_handlers
 
 logger.add("logs/log.log")
 
@@ -35,10 +48,22 @@ async def start_bot() -> None:
         dp.include_router(router_registration_user)
         dp.include_router(router_personal_acount)
         dp.include_router(router_administration_panel)
+
+        register_diamond_push_ups_handlers()  # Упражнения на трицепс
+        register_biceps_exercises_handlers()  # Упражнения на бицепс
+        register_help_command_handlers()  # Помощь
+        register_start_handler_handlers()
+        register_workout_recording_handlers()  # Запись тренировки в базу данных
+        register_training_program()  # Программа тренировки
+        register_get_today_data_handler()  # Получение данных тренировок за сегодня
+
+        register_types_of_exercises_for_muscle_groups_handlers()  # Перечень упражнений для группы мышц
+        register_exercises_for_the_pectoral_muscles()  # Перечень упражнений на Грудные мышцы
+
         await dp.start_polling(bot)  # Запуск опроса обновлений.
     except Exception as error:
         logger.exception(error)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())  # Запуск основного цикла бота.
+    asyncio.run(start_bot())  # Запуск основного цикла бота.

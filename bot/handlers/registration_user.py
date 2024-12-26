@@ -28,9 +28,7 @@ class RegistrationStates(StatesGroup):
 
 # Обработчик сообщения с текстом "регистрация", начинающий процесс регистрации.
 @router_registration_user.callback_query(F.data == "registration")
-async def user_registration_command(
-    callback_query: CallbackQuery, state: FSMContext
-) -> None:
+async def user_registration_command(callback_query: CallbackQuery, state: FSMContext) -> None:
     """
     Начинает процесс регистрации пользователя.
 
@@ -81,7 +79,7 @@ async def register_user_height(message: Message, state: FSMContext) -> None:
 # Обработчик состояния ввода веса пользователя.
 @router_registration_user.message(RegistrationStates.weight)
 async def register_user_training_experience(
-    message: Message, state: FSMContext
+        message: Message, state: FSMContext
 ) -> None:
     """
     Запрашивает опыт тренировок пользователя после ввода веса.

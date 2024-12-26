@@ -1,13 +1,11 @@
 # Основной файл Telegram-бота, использующего aiogram для взаимодействия с пользователями.
 # В этом файле создается логика обработки сообщений и FSM (Finite State Machine) для регистрации пользователей.
 
-import json
-from pathlib import Path
-
 from aiogram import F, Router
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery, Message
 
+from bot.data.config import ADMIN_USER_ID
 from bot.database.database import (
     get_user_data,  # Импорт функции получения авторизованного пользователя из базы
     add_user_starting_the_bot,  # Импорт функции добавления не авторизованного пользователя
@@ -18,7 +16,6 @@ from bot.keyboards.keyboards import (
     generate_user_options_keyboard,  # Импорт функции для создания клавиатуры.
     generate_admin_button,
 )
-from bot.data.config import ADMIN_USER_ID
 from bot.utils.read_text import load_text_form_file
 
 router_main = Router()  # Создание маршрутизатора для обработки команд и сообщений.

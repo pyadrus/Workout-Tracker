@@ -5,7 +5,7 @@ from loguru import logger
 
 
 def add_users(
-    id_user_telegram: int, name: str, height: str, weight: str, training_experience: str
+        id_user_telegram: int, name: str, height: str, weight: str, training_experience: str
 ) -> None:
     """
     Добавляет нового авторизованного пользователя
@@ -63,11 +63,11 @@ def get_user_data(id_user_telegram: str) -> None:
 
 
 def update_user_data(
-    id_user_telegram: str,
-    name: str = None,
-    height: str = None,
-    weight: str = None,
-    training_experience: str = None,
+        id_user_telegram: str,
+        name: str = None,
+        height: str = None,
+        weight: str = None,
+        training_experience: str = None,
 ) -> None:
     """
     Редактировать пользователя из базы
@@ -109,19 +109,19 @@ def update_user_data(
 
 
 def add_user_starting_the_bot(
-    id_user: str,
-    is_bot: str,
-    first_name: str,
-    last_name: str,
-    username: str,
-    language_code: str,
-    is_premium: str,
-    added_to_attachment_menu: str,
-    can_join_groups: str,
-    can_read_all_group_messages: str,
-    supports_inline_queries: str,
-    can_connect_to_business: str,
-    has_main_web_app: str,
+        id_user: str,
+        is_bot: str,
+        first_name: str,
+        last_name: str,
+        username: str,
+        language_code: str,
+        is_premium: str,
+        added_to_attachment_menu: str,
+        can_join_groups: str,
+        can_read_all_group_messages: str,
+        supports_inline_queries: str,
+        can_connect_to_business: str,
+        has_main_web_app: str,
 ) -> None:
     """
     Добавляет нового не авторизованного пользователя

@@ -17,7 +17,6 @@ from bot.keyboards.keyboards import (
     generate_admin_button,
 )
 
-
 router_personal_acount = (
     Router()
 )  # Создание маршрутизатора для обработки команд и сообщений.
@@ -69,7 +68,7 @@ async def back_to_personal_account(callback_query: CallbackQuery) -> None:
 # Обработчик состояния изменения имя профиля
 @router_personal_acount.callback_query(F.data == "update_name")
 async def update_user_data_name(
-    callback_query: CallbackQuery, state: FSMContext
+        callback_query: CallbackQuery, state: FSMContext
 ) -> None:
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
@@ -99,7 +98,7 @@ async def update_name(message: Message, state: FSMContext) -> None:
 # Обработчик состояния изменения рост профиля
 @router_personal_acount.callback_query(F.data == "update_height")
 async def update_user_data_height(
-    callback_query: CallbackQuery, state: FSMContext
+        callback_query: CallbackQuery, state: FSMContext
 ) -> None:
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
@@ -129,7 +128,7 @@ async def update_height(message: Message, state: FSMContext) -> None:
 # Обработчик состояния изменения вес профиля
 @router_personal_acount.callback_query(F.data == "update_weight")
 async def update_user_data_weight(
-    callback_query: CallbackQuery, state: FSMContext
+        callback_query: CallbackQuery, state: FSMContext
 ) -> None:
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
@@ -159,7 +158,7 @@ async def update_weight(message: Message, state: FSMContext) -> None:
 # Обработчик состояния изменения опыт тренировок профиля
 @router_personal_acount.callback_query(F.data == "update_training_experience")
 async def update_user_data_training_experience(
-    callback_query: CallbackQuery, state: FSMContext
+        callback_query: CallbackQuery, state: FSMContext
 ) -> None:
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)

@@ -24,7 +24,7 @@ async def help_command(callback_query: types.CallbackQuery):
         await bot.send_message(
             chat_id=callback_query.message.chat.id,
             text=help_text,
-            reply_markup=keyboard_help(),  parse_mode ="Markdown",
+            reply_markup=keyboard_help(), parse_mode="Markdown",
         )
 
     except Exception as e:

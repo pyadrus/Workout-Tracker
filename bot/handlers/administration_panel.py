@@ -53,7 +53,7 @@ async def messages_for_user(callback_query: CallbackQuery, state: FSMContext) ->
 # Обработчик состояния отправки сообщения пользователям
 @router_administration_panel.message(MessageStorage.message_to_be_sent)
 async def sending_messages_for_user(
-    message: Message, state: FSMContext, bot: Bot
+        message: Message, state: FSMContext, bot: Bot
 ) -> None:
     """
     Отправляет сообщения пользователям

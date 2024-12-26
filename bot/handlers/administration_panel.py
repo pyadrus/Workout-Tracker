@@ -2,16 +2,15 @@ from aiogram import F, Bot
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from bot.data.config import router_administration_panel
-from bot.database.database import \
-    get_user_starting_the_bot  # Импорт функции для получения не авторизованных пользователей
+from bot.data.config import router
+from bot.database.database import get_user_starting_the_bot  # Получение не авторизованных пользователей
 from bot.keyboards.keyboards import generate_admin_panel_keyboard
 from bot.states.states import MessageStorage
 from bot.utils.read_text import load_text_form_file
 
 
 # Обработчик состояния админской-панели
-@router_administration_panel.callback_query(F.data == "admin_panel")
+@router.callback_query(F.data == "admin_panel")
 async def login_to_the_admin_panel(callback_query: CallbackQuery) -> None:
     """
     Переходит в админское меню
@@ -26,7 +25,7 @@ async def login_to_the_admin_panel(callback_query: CallbackQuery) -> None:
 
 
 # Обработчик состояния подготовки сообщения пользователям
-@router_administration_panel.callback_query(F.data == "sending_messages")
+@router.callback_query(F.data == "sending_messages")
 async def messages_for_user(callback_query: CallbackQuery, state: FSMContext) -> None:
     """
     Начинает процесс регистрации сообщения для отправки пользователям
@@ -42,7 +41,7 @@ async def messages_for_user(callback_query: CallbackQuery, state: FSMContext) ->
 
 
 # Обработчик состояния отправки сообщения пользователям
-@router_administration_panel.message(MessageStorage.message_to_be_sent)
+@router.message(MessageStorage.message_to_be_sent)
 async def sending_messages_for_user(message: Message, state: FSMContext, bot: Bot) -> None:
     """
     Отправляет сообщения пользователям
@@ -68,7 +67,7 @@ async def sending_messages_for_user(message: Message, state: FSMContext, bot: Bo
     await state.clear()  # Сброс состояния после отправки сообщения пользователям.
 
 
-@router_administration_panel.callback_query(F.data == "statistics")
+@router.callback_query(F.data == "statistics")
 async def user_activity_analysis(callback_query: CallbackQuery) -> None:
     """
     Обработчик состояния статистики

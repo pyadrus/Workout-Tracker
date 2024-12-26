@@ -2,7 +2,7 @@ from aiogram import F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from bot.data.config import router_registration_user
+from bot.data.config import router
 from bot.database.database import (
     add_users,  # Импорт функции добавления зарегистрированного пользователя в базу.
 )
@@ -18,7 +18,7 @@ from bot.utils.validators import (
 
 
 # Обработчик сообщения с текстом "регистрация", начинающий процесс регистрации.
-@router_registration_user.callback_query(F.data == "registration")
+@router.callback_query(F.data == "registration")
 async def user_registration_command(callback_query: CallbackQuery, state: FSMContext) -> None:
     """
     Начинает процесс регистрации пользователя.
@@ -34,7 +34,7 @@ async def user_registration_command(callback_query: CallbackQuery, state: FSMCon
 
 
 # Обработчик состояния ввода имени пользователя.
-@router_registration_user.message(RegistrationStates.name)
+@router.message(RegistrationStates.name)
 async def register_user_name(message: Message, state: FSMContext) -> None:
     """
     Запрашивает рост пользователя после ввода имени.
@@ -49,7 +49,7 @@ async def register_user_name(message: Message, state: FSMContext) -> None:
 
 
 # Обработчик состояния ввода роста пользователя.±
-@router_registration_user.message(RegistrationStates.height)
+@router.message(RegistrationStates.height)
 async def register_user_height(message: Message, state: FSMContext) -> None:
     """
     Запрашивает вес пользователя после ввода роста.
@@ -68,7 +68,7 @@ async def register_user_height(message: Message, state: FSMContext) -> None:
 
 
 # Обработчик состояния ввода веса пользователя.
-@router_registration_user.message(RegistrationStates.weight)
+@router.message(RegistrationStates.weight)
 async def register_user_training_experience(message: Message, state: FSMContext) -> None:
     """
     Запрашивает опыт тренировок пользователя после ввода веса.
@@ -89,7 +89,7 @@ async def register_user_training_experience(message: Message, state: FSMContext)
 
 
 # Обработчик состояния ввода опыта тренировок, завершающий процесс регистрации.
-@router_registration_user.message(RegistrationStates.training_experience)
+@router.message(RegistrationStates.training_experience)
 async def registration_user_info(message: Message, state: FSMContext) -> None:
     """
     Завершает процесс регистрации и отображает введенные пользователем данные.

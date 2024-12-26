@@ -105,9 +105,7 @@ def save_data_to_db(user_id, exercise_name, repetitions, approaches, weight, tot
         logger.error(f"Ошибка при работе с базой данных: {e}")
 
 
-def add_users(
-        id_user_telegram: int, name: str, height: str, weight: str, training_experience: str
-) -> None:
+def add_users(id_user_telegram: int, name: str, height: str, weight: str, training_experience: str) -> None:
     """
     Добавляет нового авторизованного пользователя
 
@@ -163,13 +161,8 @@ def get_user_data(id_user_telegram: str) -> None:
         logger.exception(error)
 
 
-def update_user_data(
-        id_user_telegram: str,
-        name: str = None,
-        height: str = None,
-        weight: str = None,
-        training_experience: str = None,
-) -> None:
+def update_user_data(id_user_telegram: str, name: str = None, height: str = None, weight: str = None,
+                     training_experience: str = None) -> None:
     """
     Редактировать пользователя из базы
 
@@ -209,21 +202,10 @@ def update_user_data(
         logger.exception(error)
 
 
-def add_user_starting_the_bot(
-        id_user: str,
-        is_bot: str,
-        first_name: str,
-        last_name: str,
-        username: str,
-        language_code: str,
-        is_premium: str,
-        added_to_attachment_menu: str,
-        can_join_groups: str,
-        can_read_all_group_messages: str,
-        supports_inline_queries: str,
-        can_connect_to_business: str,
-        has_main_web_app: str,
-) -> None:
+def add_user_starting_the_bot(id_user: str, is_bot: str, first_name: str, last_name: str, username: str,
+                              language_code: str, is_premium: str, added_to_attachment_menu: str, can_join_groups: str,
+                              can_read_all_group_messages: str, supports_inline_queries: str,
+                              can_connect_to_business: str, has_main_web_app: str, ) -> None:
     """
     Добавляет нового не авторизованного пользователя
 
@@ -253,34 +235,13 @@ def add_user_starting_the_bot(
             )
             cursor.execute(
                 """INSERT INTO not_authorized_user (
-                    id_user,
-                    is_bot,
-                    first_name,
-                    last_name,
-                    username,
-                    language_code,
-                    is_premium,
-                    added_to_attachment_menu,
-                    can_join_groups,
-                    can_read_all_group_messages,
-                    supports_inline_queries,
-                    can_connect_to_business,
+                    id_user, is_bot, first_name, last_name, username, language_code, is_premium,
+                    added_to_attachment_menu,   can_join_groups,
+                    can_read_all_group_messages, supports_inline_queries, can_connect_to_business,
                     has_main_web_app) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (
-                    id_user,
-                    is_bot,
-                    first_name,
-                    last_name,
-                    username,
-                    language_code,
-                    is_premium,
-                    added_to_attachment_menu,
-                    can_join_groups,
-                    can_read_all_group_messages,
-                    supports_inline_queries,
-                    can_connect_to_business,
-                    has_main_web_app,
-                ),
+                (id_user, is_bot, first_name, last_name, username, language_code, is_premium,
+                 added_to_attachment_menu, can_join_groups, can_read_all_group_messages,
+                 supports_inline_queries, can_connect_to_business, has_main_web_app,),
             )
             connection.commit()
 

@@ -1,8 +1,5 @@
-from aiogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    WebAppInfo,
-)
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+
 from bot.data.config import BASE_SITE_URL
 
 

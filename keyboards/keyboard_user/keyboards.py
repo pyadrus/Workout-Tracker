@@ -3,6 +3,16 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from data.config import BASE_SITE_URL
 
 
+def registration_keyboard() -> InlineKeyboardMarkup:
+    """
+    Создает клавиатуру для регистрации
+    """
+    kb = [
+        [InlineKeyboardButton(text="📝 Регистрация", callback_data='registration')],
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=kb)
+
+
 def generate_main_menu_keyboard() -> InlineKeyboardMarkup:
     """
     Создает компактную клавиатуру с кнопками для взаимодействия пользователя с ботом.

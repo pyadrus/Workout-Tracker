@@ -11,6 +11,7 @@ from handlers.exercises.muscles.pectoral import register_pectoral
 from handlers.exercises.muscles.triceps import register_triceps
 from handlers.user.help import register_help
 from handlers.user.menu import register_menu
+from handlers.user.registration_user import register_registration_user
 from handlers.user.today import register_today
 from handlers.user.training import register_training
 from handlers.user.workout import register_workout
@@ -27,6 +28,8 @@ async def start_bot() -> None:
         await dp.start_polling(bot)
 
         register_menu()  # Главное меню
+
+        register_registration_user() # Регистрация пользователя, если пользователь не зарегистрирован в боте
 
         register_triceps()  # Упражнения на трицепс
         register_biceps()  # Упражнения на бицепс

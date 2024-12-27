@@ -1,18 +1,19 @@
 from aiogram import F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
-
+import yaml
 from data.config import router
 from database.database import add_users  # Импорт функции добавления зарегистрированного пользователя в базу.
 
 from keyboards.keyboard_user.keyboards import generate_authorized_user_options_keyboard
 from states.states import RegistrationStates
 from utils.read_text import load_text_form_file
-from utils.validators import (
-    is_float,  # Имфорт функции валидации вещественных чисел.
-    is_int,  # Имфорт функций валидации целых чисел.
-)
+from utils.validators import is_float, is_int
 
+with open("messages/text/messages.yaml", "r", encoding="utf-8") as file:
+    messages = yaml.safe_load(file)
+
+text_input_name = messages["text_input_name"]["text"]
 
 @router.callback_query(F.data == "registration")
 async def user_registration_command(callback_query: CallbackQuery, state: FSMContext) -> None:
@@ -20,13 +21,11 @@ async def user_registration_command(callback_query: CallbackQuery, state: FSMCon
     Начинает процесс регистрации пользователя. Обработчик сообщения с текстом "регистрация", начинающий процесс регистрации.
 
     Аргументы:
-    :param message: Сообщение пользователя с текстом "регистрация".
+    :param callback_query: CallbackQuery: Сообщение пользователя с текстом "регистрация".
     :param state: Контекст состояния FSM.
     """
     await state.set_state(RegistrationStates.name)
-    await callback_query.message.answer(
-        f"{load_text_form_file('text_input_name.json')}"
-    )
+    await callback_query.message.answer(text_input_name, parse_mode="HTML")
 
 
 @router.message(RegistrationStates.name)
@@ -98,12 +97,11 @@ async def registration_user_info(message: Message, state: FSMContext) -> None:
         f"{load_text_form_file('text_authorized_user_greeting.json')}",
         reply_markup=generate_authorized_user_options_keyboard(),
     )
-    add_users(
-        user_id_telegram,
-        user_data["name"],
-        user_data["height"],
-        user_data["weight"],
-        user_data["training_experience"],
-    )
+    add_users(user_id_telegram, user_data["name"], user_data["height"], user_data["weight"], user_data["training_experience"])
 
     await state.clear()  # Сброс состояния после завершения регистрации.
+
+
+def register_registration_user():
+    """Регистрация обработчиков для бота"""
+    router.callback_query.register(user_registration_command)  # Регистрация пользователя

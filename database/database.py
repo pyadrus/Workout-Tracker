@@ -177,6 +177,37 @@ def save_data_to_db(user_id, exercise_name, repetitions, approaches, weight, tot
         logger.error(f"Ошибка при работе с базой данных: {e}")
 
 
+def is_user_authorized(user_id: int) -> bool:
+    """
+    Проверяет, зарегистрирован ли пользователь в базе данных.
+
+    :param user_id: ID пользователя Telegram.
+    :return: True, если пользователь зарегистрирован, иначе False.
+    """
+    try:
+        with sqlite3.connect("database/database.db") as connection:
+            cursor = connection.cursor()
+
+            cursor.execute(
+                """CREATE TABLE IF NOT EXISTS authorized_user (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id_user_telegram TEXT,
+                    name TEXT,
+                    height TEXT,
+                    weight TEXT,
+                    training_experience TEXT,
+                    registered_at TEXT DEFAULT CURRENT_TIMESTAMP)"""
+            )
+
+            cursor.execute("SELECT id_user_telegram FROM authorized_user WHERE id_user_telegram = ?", (user_id,))
+            result = cursor.fetchone()
+            return result is not None
+    except Exception as error:
+        logger.exception(error)
+        return False
+
+
+
 def add_users(id_user_telegram: int, name: str, height: str, weight: str, training_experience: str) -> None:
     """
     Добавляет нового авторизованного пользователя

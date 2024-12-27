@@ -1,22 +1,25 @@
+from datetime import datetime
+
+import yaml
 from aiogram import types, F
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery
 from aiogram.types import Message
 from loguru import logger
-from datetime import datetime
+
 from data.config import ADMIN_USER_ID
 from data.config import router, bot
 from database.database import get_user_data, add_user_starting_the_bot, check_for_bot_launch
 from keyboards.keyboard_user.keyboards import (generate_authorized_user_discription, generate_main_menu_keyboard,
                                                generate_admin_button)
 from utils.read_text import load_text_form_file
-import yaml
 
 with open("messages/text/messages.yaml", "r", encoding="utf-8") as file:
     messages = yaml.safe_load(file)
 
 menu_text = messages["menu"]["text"]
 text_admin_panel = messages["text_admin_panel"]["text"]
+text_description = messages["text_description"]["text"]
 
 
 @router.message(CommandStart())
@@ -92,8 +95,8 @@ async def bot_description(callback_query: CallbackQuery) -> None:
     Аргументы:
     :param callback_query: Кнопка с текстом "описание".
     """
-    await callback_query.message.edit_text(f"{load_text_form_file('text_description.json')}",
-                                           reply_markup=generate_authorized_user_discription())
+    await callback_query.message.edit_text(text_description, reply_markup=generate_authorized_user_discription(),
+                                           parse_mode="HTML")
 
 
 @router.callback_query(F.data == "start_handler")

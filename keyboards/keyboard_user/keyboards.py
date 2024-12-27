@@ -100,7 +100,7 @@ def generate_admin_panel_keyboard() -> InlineKeyboardMarkup:
 
 
 def generate_authorized_user_discription() -> InlineKeyboardMarkup:
-    kb = [[InlineKeyboardButton(text="🔙 Назад", callback_data="back")]]
+    kb = [[InlineKeyboardButton(text="🔙 Назад", callback_data="start_handler")]]
     keyboard = InlineKeyboardMarkup(inline_keyboard=kb)
     return keyboard
 

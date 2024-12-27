@@ -5,7 +5,7 @@ import sys
 from loguru import logger
 
 from data.config import dp, bot  # Импорт токена бота из файла конфигурации.
-from handlers.exercises.main import register_exercises
+from handlers.exercises.exercises_menu import register_exercises
 from handlers.exercises.muscles.biceps import register_biceps
 from handlers.exercises.muscles.pectoral import register_pectoral
 from handlers.exercises.muscles.triceps import register_triceps

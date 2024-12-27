@@ -1,6 +1,8 @@
-fastapi[standard]
+fastapi[standard]~=0.115.6
 python-multipart
-uvicorn[standard]
-aiogram
-python-dotenv
-loguru
+uvicorn[standard]~=0.32.0
+aiogram~=3.13.1
+python-dotenv~=1.0.1
+loguru~=0.6.0
+
+PyYAML~=6.0.2

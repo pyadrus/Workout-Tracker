@@ -10,13 +10,12 @@ from database.database import get_user_data, add_user_starting_the_bot, check_fo
 from keyboards.keyboard_user.keyboards import (generate_authorized_user_discription, generate_main_menu_keyboard,
                                                generate_admin_button)
 from utils.read_text import load_text_form_file
+import yaml
 
-menu_text = ("Привет! 💪 Я — твой персональный тренер в мире спорта! 🚀\n\n"
+with open("messages/text/messages.yaml", "r", encoding="utf-8") as file:
+    messages = yaml.safe_load(file)
 
-             "Готов помочь тебе достичь новых высот и максимально эффективно тренироваться.\n\n"
-
-             "Неважно, хочешь ли ты увеличить силу, улучшить выносливость или просто поддерживать форму — я "
-             "здесь, чтобы помочь! Начнём тренировку? 😎")
+menu_text = messages["menu"]["text"]
 
 
 @router.message(CommandStart())
@@ -54,13 +53,13 @@ async def start_handler(message: Message) -> None:
                 user_date=message.date.strftime("%Y-%m-%d %H:%M:%S")
             )
 
-            await message.answer(menu_text, reply_markup=generate_main_menu_keyboard())
+            await message.answer(menu_text, reply_markup=generate_main_menu_keyboard(), parse_mode="HTML")
 
         else:
 
             if get_user_data(ADMIN_USER_ID):
 
-                await message.answer(f"{load_text_form_file('text_authorized_user_greeting.json')}",
+                await message.answer(f"{load_text_form_file('messages/text/text_authorized_user_greeting.json')}",
                                      reply_markup=generate_admin_button(),
                                      )
             else:

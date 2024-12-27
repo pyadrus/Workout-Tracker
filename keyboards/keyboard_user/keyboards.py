@@ -46,28 +46,6 @@ def generate_main_menu_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
-# def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
-#     """
-#     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
-#
-#     :return: Объект InlineKeyboardMarkup с кнопками для выбора.
-#     """
-#
-#     kb = [
-#         [
-#             InlineKeyboardButton(text="⚙️ Личный кабинет", callback_data="personal_account"),
-#             # Кнопка для начала процесса регистрации.
-#             InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
-#             # Кнопка для отображения описания проекта.
-#         ],
-#         [
-#             InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
-#         ],
-#     ]
-#
-#     return InlineKeyboardMarkup(inline_keyboard=kb)
-
-
 def generate_admin_button() -> InlineKeyboardMarkup:
     """
     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
@@ -77,14 +55,25 @@ def generate_admin_button() -> InlineKeyboardMarkup:
 
     kb = [
         [
-            InlineKeyboardButton(text="⚙️ Личный кабинет", callback_data="personal_account", ),
-            # Кнопка для входа в личный кабинет.
-            InlineKeyboardButton(text="ℹ️ Описание", callback_data="description",
-                                 ),  # Кнопка для отображения описания проекта.
+            InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
+        ],
+        [
+            InlineKeyboardButton(text="💪 Упражнения", callback_data="types_of_exercises_for_muscle_groups"),
+            InlineKeyboardButton(text="🆘 Помощь", callback_data="help_with_work"),
+        ],
+        [
+            InlineKeyboardButton(text="🗂️ Тренировки", callback_data="training_program"),
+            InlineKeyboardButton(text="🏋️ Запись", callback_data="CommandStart"),
+        ],
+        [
+            InlineKeyboardButton(text="📊 Результат", callback_data="get_today"),
+        ],
+
+        [
+            InlineKeyboardButton(text="⚙️ Личный кабинет", callback_data="personal_account"),
         ],
         [
             InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
-            InlineKeyboardButton(text="🤖 В бота", web_app=WebAppInfo(url=BASE_SITE_URL)),
         ],
         [
             InlineKeyboardButton(text="🔧 Админ-панель", callback_data="admin_panel"),

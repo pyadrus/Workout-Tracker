@@ -5,9 +5,9 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message
 from loguru import logger
 
-from data.config import router, bot
+from data.config import router, bot, ADMIN_USER_ID
 from database.database import add_user_starting_the_bot, check_for_bot_launch, is_user_authorized
-from keyboards.keyboard_user.keyboards import generate_main_menu_keyboard, registration_keyboard
+from keyboards.keyboard_user.keyboards import generate_main_menu_keyboard, registration_keyboard, generate_admin_button
 from utils.messages_loader import menu_text
 
 
@@ -41,7 +41,6 @@ async def start_handler(message: Message) -> None:
 
         # Проверяем, зарегистрирован ли пользователь
         if not is_user_authorized(user_id):
-
             await message.answer(
                 "Вы не зарегистрированы. Пожалуйста, пройдите регистрацию, чтобы продолжить.",
                 reply_markup=registration_keyboard(),  # Кнопка для начала регистрации
@@ -50,8 +49,12 @@ async def start_handler(message: Message) -> None:
         else:
             # Пользователь зарегистрирован, продолжаем обработку
             if check_for_bot_launch(user_id):
-                await message.answer(menu_text, reply_markup=generate_main_menu_keyboard(), parse_mode="HTML")
+                # Проверяем ID администратора
 
+                if user_id == int(ADMIN_USER_ID):
+                    await message.answer(menu_text, reply_markup=generate_admin_button(), parse_mode="HTML")
+                else:
+                    await message.answer(menu_text, reply_markup=generate_main_menu_keyboard(), parse_mode="HTML")
     except Exception as e:
         logger.error(f"Ошибка в обработчике /start: {e}")
 
@@ -89,7 +92,14 @@ async def start_handler_callback(callback_query: types.CallbackQuery) -> None:
         else:
             # Пользователь зарегистрирован, продолжаем обработку
             if check_for_bot_launch(user_id):
-                await bot.send_message(chat_id=callback_query.message.chat.id, text=menu_text,
+
+                # Проверяем ID администратора
+
+                if user_id == int(ADMIN_USER_ID):
+                    await bot.send_message(chat_id=callback_query.message.chat.id, text=menu_text,
+                                           reply_markup=generate_admin_button(), parse_mode="HTML")
+                else:
+                    await bot.send_message(chat_id=callback_query.message.chat.id, text=menu_text,
                                        reply_markup=generate_main_menu_keyboard(), parse_mode="HTML")
 
     except Exception as e:

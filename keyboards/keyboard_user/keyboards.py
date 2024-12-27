@@ -21,7 +21,6 @@ def generate_main_menu_keyboard() -> InlineKeyboardMarkup:
     """
     kb = [
         [
-            InlineKeyboardButton(text="📝 Регистрация", callback_data="registration"),
             InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
         ],
         [
@@ -35,32 +34,38 @@ def generate_main_menu_keyboard() -> InlineKeyboardMarkup:
         [
             InlineKeyboardButton(text="📊 Результат", callback_data="get_today"),
         ],
-    ]
 
-    return InlineKeyboardMarkup(inline_keyboard=kb)
-
-
-def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
-    """
-    Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
-
-    :return: Объект InlineKeyboardMarkup с кнопками для выбора.
-    """
-
-    kb = [
         [
             InlineKeyboardButton(text="⚙️ Личный кабинет", callback_data="personal_account"),
-            # Кнопка для начала процесса регистрации.
-            InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
-            # Кнопка для отображения описания проекта.
         ],
         [
             InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
-            InlineKeyboardButton(text="🤖 В бота", web_app=WebAppInfo(url=BASE_SITE_URL)),
         ],
     ]
 
     return InlineKeyboardMarkup(inline_keyboard=kb)
+
+
+# def generate_authorized_user_options_keyboard() -> InlineKeyboardMarkup:
+#     """
+#     Создает клавиатуру с кнопками для взаимодействия пользователя с ботом.
+#
+#     :return: Объект InlineKeyboardMarkup с кнопками для выбора.
+#     """
+#
+#     kb = [
+#         [
+#             InlineKeyboardButton(text="⚙️ Личный кабинет", callback_data="personal_account"),
+#             # Кнопка для начала процесса регистрации.
+#             InlineKeyboardButton(text="ℹ️ Описание", callback_data="description"),
+#             # Кнопка для отображения описания проекта.
+#         ],
+#         [
+#             InlineKeyboardButton(text="🗣️ Обратная связь", callback_data="feedback"),
+#         ],
+#     ]
+#
+#     return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
 def generate_admin_button() -> InlineKeyboardMarkup:
@@ -152,7 +157,6 @@ def create_data_change_buttons() -> InlineKeyboardMarkup:
 
 if __name__ == "__main__":
     generate_main_menu_keyboard()
-    generate_authorized_user_options_keyboard()
     generate_keyboard_personal_account()
     create_data_change_buttons()
     generate_authorized_user_discription()

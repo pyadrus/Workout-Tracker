@@ -8,7 +8,7 @@ from database.database import (
     update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
 
-from keyboards.keyboard_user.keyboards import (create_data_change_buttons, generate_authorized_user_options_keyboard,
+from keyboards.keyboard_user.keyboards import (create_data_change_buttons,
                                                generate_keyboard_personal_account,
                                                generate_main_menu_keyboard,
                                                generate_admin_button)
@@ -181,7 +181,7 @@ async def back_to_main_menu(callback_query: CallbackQuery) -> None:
         else:
             await callback_query.message.edit_text(
                 f"{load_text_form_file('text_authorized_user_greeting.json')}",
-                reply_markup=generate_authorized_user_options_keyboard(),
+                reply_markup=generate_main_menu_keyboard(),
             )
     else:
         await callback_query.message.edit_text(

@@ -109,6 +109,9 @@ text_input_weight:
   text: >
     ⚖️ Введите свой вес в килограммах
 
+text_input_weight_error:
+  text: >
+    Вес должен содержать только числа
 
 text_log_in_to_your_personal_account:
   text: >

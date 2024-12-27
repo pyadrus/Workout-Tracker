@@ -7,4 +7,5 @@ from utils.read_text import load_text_form_file
 
 @router.callback_query(F.data == "feedback")
 async def get_feedback(callback_query: CallbackQuery) -> None:
+    """Обратная связь с разработчиком"""
     await callback_query.message.answer(f"{load_text_form_file('text_feedback.json')}")

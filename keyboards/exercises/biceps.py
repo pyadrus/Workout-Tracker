@@ -28,7 +28,7 @@ biceps_exercises_dict_2 = {
     "concentrated_arm_curls": "Концентрированные сгибания рук",
     "scott_bench_curl": "Сгибание рук со штангой на скамье Скотта",
     "arm_bending_with_elbow_abduction": "Сгибание рук с отведением локтей",
-    "biceps": "Назад",
+    "biceps": "🔙  Назад",
     "start_handler": "В начальное меню",
 }
 
@@ -43,7 +43,7 @@ def keyboard_biceps_exercises_2():
 
 
 return_to_biceps_exercises_dict = {
-    "biceps": "Назад",
+    "biceps": "🔙  Назад",
     "start_handler": "В начальное меню", }
 
 

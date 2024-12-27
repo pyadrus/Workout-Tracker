@@ -28,7 +28,7 @@ triceps_exercises_dict_2 = {
     "extension_of_arms_on_a_block_with_a_rope_handle": "Разгибание рук на блоке с канатной рукоятью",
     "extension_of_arms_on_a_block_with_a_reverse_grip": "Разгибание рук на блоке обратным хватом",
     "extension_on_the_block_from_behind_the_head": "Разгибания на блоке из-за головы",
-    "triceps": "Назад",
+    "triceps": "🔙  Назад",
     "start_handler": "В начальное меню",
 }
 
@@ -43,7 +43,7 @@ def keyboard_triceps_exercises_2():
 
 
 return_to_triceps_exercises_dict = {
-    "triceps": "Назад",
+    "triceps": "🔙  Назад",
     "start_handler": "В начальное меню", }
 
 

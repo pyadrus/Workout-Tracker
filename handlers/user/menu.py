@@ -16,6 +16,7 @@ with open("messages/text/messages.yaml", "r", encoding="utf-8") as file:
     messages = yaml.safe_load(file)
 
 menu_text = messages["menu"]["text"]
+text_admin_panel = messages["text_admin_panel"]["text"]
 
 
 @router.message(CommandStart())
@@ -31,10 +32,7 @@ async def start_handler(message: Message) -> None:
     try:
         user_id = message.from_user.id
         if check_for_bot_launch(user_id):
-            # await message.answer(
-            #     f"{load_text_form_file('text_authorized_user_greeting.json')}",
-            #     reply_markup=generate_admin_button() if user_id == ADMIN_USER_ID else generate_user_options_keyboard(),
-            # )
+
             # Запись пользователя в базу данных, который ввел команду /start
             add_user_starting_the_bot(
                 id_user=message.from_user.id,

@@ -100,7 +100,7 @@ async def start_handler_callback(callback_query: types.CallbackQuery) -> None:
                                            reply_markup=generate_admin_button(), parse_mode="HTML")
                 else:
                     await bot.send_message(chat_id=callback_query.message.chat.id, text=menu_text,
-                                       reply_markup=generate_main_menu_keyboard(), parse_mode="HTML")
+                                           reply_markup=generate_main_menu_keyboard(), parse_mode="HTML")
 
     except Exception as e:
         logger.error(f"Ошибка: {e}")

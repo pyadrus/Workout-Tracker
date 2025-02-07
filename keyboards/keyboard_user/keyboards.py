@@ -1,6 +1,4 @@
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
-
-from data.config import BASE_SITE_URL
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 def registration_keyboard() -> InlineKeyboardMarkup:

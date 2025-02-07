@@ -4,6 +4,7 @@ from typing import Any
 
 from loguru import logger
 
+
 def check_for_bot_launch(user_id: int) -> bool:
     """
     Проверяет, есть ли пользователь с заданным `user_id` в базе данных.
@@ -76,6 +77,7 @@ def add_user_starting_the_bot(id_user, is_bot, first_name, last_name, username, 
 
     except Exception as error:
         logger.exception(error)
+
 
 async def get_user_data_for_today(user_id):
     """
@@ -207,7 +209,6 @@ def is_user_authorized(user_id: int) -> bool:
         return False
 
 
-
 def add_users(id_user_telegram: int, name: str, height: str, weight: str, training_experience: str) -> None:
     """
     Добавляет нового авторизованного пользователя
@@ -299,9 +300,6 @@ def update_user_data(id_user_telegram: str, name: str = None, height: str = None
 
     except Exception as error:
         logger.exception(error)
-
-
-
 
 
 def get_user_starting_the_bot() -> list[Any] | None:

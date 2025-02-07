@@ -12,6 +12,7 @@ from handlers.exercises.muscles.triceps import register_triceps
 from handlers.user.description import register_description
 from handlers.user.help import register_help
 from handlers.user.menu import register_menu
+from handlers.user.personal_acount import register_users_personal_account
 from handlers.user.registration import register_registration_user
 from handlers.user.today import register_today
 from handlers.user.training import register_training
@@ -41,6 +42,8 @@ async def start_bot() -> None:
         register_today()  # Получение данных тренировок за сегодня
         register_exercises()  # Перечень упражнений для группы мышц
         register_pectoral()  # Перечень упражнений на Грудные мышцы
+
+        register_users_personal_account() # Личный кабинет
 
         await dp.start_polling(bot)  # Запуск опроса обновлений.
     except Exception as error:

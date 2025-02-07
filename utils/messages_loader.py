@@ -13,4 +13,6 @@ text_authorized_user_greeting = messages["text_authorized_user_greeting"]["text"
 menu_text = messages["menu"]["text"]
 text_admin_panel = messages["text_admin_panel"]["text"]
 text_description = messages["text_description"]["text"]
+text_feedback = messages["text_feedback"]["text"]
+
 messages = "Привет админ"

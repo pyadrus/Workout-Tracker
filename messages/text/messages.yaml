@@ -93,12 +93,12 @@ text_input_height_error:
 text_input_name:
   text: >
     ✍️ Для регистрации введите своё имя
-    
+
 
 text_input_training_experience:
   text: >
     🏋️ Введите свой опыт в тренировках
-    
+
 
 text_input_training_experience_weight:
   text: >

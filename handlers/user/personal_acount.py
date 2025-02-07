@@ -1,13 +1,12 @@
-from aiogram import F
+from aiogram import types, F
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import Message
 
 from data.config import router, ADMIN_USER_ID
 from database.database import (
     get_user_data,  # Импорт функции получения пользователя из базы
     update_user_data,  # Импорт функции изменения данных пользователя в базе
 )
-
 from keyboards.keyboard_user.keyboards import (create_data_change_buttons,
                                                generate_keyboard_personal_account,
                                                generate_main_menu_keyboard,
@@ -17,7 +16,7 @@ from utils.read_text import load_text_form_file
 
 
 @router.callback_query(F.data == "personal_account")
-async def users_personal_account(callback_query: CallbackQuery) -> None:
+async def users_personal_account(callback_query: types.CallbackQuery) -> None:
     """Обработчик состояния просмотра личного кабинета"""
     await callback_query.message.edit_text(
         f"{load_text_form_file('text_log_in_to_your_personal_account.json')}",
@@ -26,7 +25,7 @@ async def users_personal_account(callback_query: CallbackQuery) -> None:
 
 
 @router.callback_query(F.data == "view_data")
-async def user_data(callback_query: CallbackQuery) -> None:
+async def user_data(callback_query: types.CallbackQuery) -> None:
     """Обработчик состояния, просмотр личных данных при регистрации"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
@@ -44,7 +43,7 @@ async def user_data(callback_query: CallbackQuery) -> None:
 
 
 @router.callback_query(F.data == "back_personal_account")
-async def back_to_personal_account(callback_query: CallbackQuery) -> None:
+async def back_to_personal_account(callback_query: types.CallbackQuery) -> None:
     """Обработчик состояния вернутся в основное меню"""
     await callback_query.message.edit_text(
         f"{load_text_form_file('text_log_in_to_your_personal_account.json')}",
@@ -53,7 +52,7 @@ async def back_to_personal_account(callback_query: CallbackQuery) -> None:
 
 
 @router.callback_query(F.data == "update_name")
-async def update_user_data_name(callback_query: CallbackQuery, state: FSMContext) -> None:
+async def update_user_data_name(callback_query: types.CallbackQuery, state: FSMContext) -> None:
     """Обработчик состояния изменения имя профиля"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
@@ -81,7 +80,7 @@ async def update_name(message: Message, state: FSMContext) -> None:
 
 
 @router.callback_query(F.data == "update_height")
-async def update_user_data_height(callback_query: CallbackQuery, state: FSMContext) -> None:
+async def update_user_data_height(callback_query: types.CallbackQuery, state: FSMContext) -> None:
     """Обработчик состояния изменения рост профиля"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
@@ -109,7 +108,7 @@ async def update_height(message: Message, state: FSMContext) -> None:
 
 
 @router.callback_query(F.data == "update_weight")
-async def update_user_data_weight(callback_query: CallbackQuery, state: FSMContext) -> None:
+async def update_user_data_weight(callback_query: types.CallbackQuery, state: FSMContext) -> None:
     """Обработчик состояния изменения вес профиля"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
@@ -137,7 +136,7 @@ async def update_weight(message: Message, state: FSMContext) -> None:
 
 
 @router.callback_query(F.data == "update_training_experience")
-async def update_user_data_training_experience(callback_query: CallbackQuery, state: FSMContext) -> None:
+async def update_user_data_training_experience(callback_query: types.CallbackQuery, state: FSMContext) -> None:
     """Обработчик состояния изменения опыт тренировок профиля"""
     user_id = callback_query.from_user.id
     data_user = get_user_data(user_id)
@@ -167,7 +166,7 @@ async def update_training_experience(message: Message, state: FSMContext) -> Non
 
 
 @router.callback_query(F.data == "back")
-async def back_to_main_menu(callback_query: CallbackQuery) -> None:
+async def back_to_main_menu(callback_query: types.CallbackQuery) -> None:
     """Обработчик состояния вернутся в основное меню"""
     username = callback_query.from_user.username
     user_id = callback_query.from_user.id
@@ -188,3 +187,7 @@ async def back_to_main_menu(callback_query: CallbackQuery) -> None:
             f"{load_text_form_file('text_hello_welcome.json')}",
             reply_markup=generate_main_menu_keyboard(),
         )
+
+def register_users_personal_account():
+    """Регистрация обработчиков для бота"""
+    router.callback_query.register(users_personal_account)  # Обработчик состояния просмотра личного кабинета

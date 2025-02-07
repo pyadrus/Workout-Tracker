@@ -4,6 +4,8 @@ from typing import Any
 
 from loguru import logger
 
+path_database = 'database/database.db'
+
 
 def check_for_bot_launch(user_id: int) -> bool:
     """
@@ -13,7 +15,7 @@ def check_for_bot_launch(user_id: int) -> bool:
     :return: True, если пользователь найден, иначе False.
     """
     try:
-        with sqlite3.connect("database/database.db") as connection:
+        with sqlite3.connect(path_database) as connection:
             cursor = connection.cursor()
             cursor.execute("""CREATE TABLE IF NOT EXISTS launch_bot (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -64,7 +66,7 @@ def add_user_starting_the_bot(id_user, is_bot, first_name, last_name, username, 
     logger.info(f"User Info: {id_user}, {username}, {first_name}, {last_name}, {user_date}")
 
     try:
-        with sqlite3.connect("database/database.db") as connection:
+        with sqlite3.connect(path_database) as connection:
             cursor = connection.cursor()
             cursor.execute(
                 """CREATE TABLE IF NOT EXISTS launch_bot (id INTEGER PRIMARY KEY AUTOINCREMENT, id_user, is_bot, first_name, last_name, username, language_code, is_premium, added_to_attachment_menu, can_join_groups, can_read_all_group_messages, supports_inline_queries, can_connect_to_business, has_main_web_app, user_date)""")
@@ -88,7 +90,7 @@ async def get_user_data_for_today(user_id):
     """
     try:
         # Подключение к базе данных
-        conn = sqlite3.connect("database/database.db")
+        conn = sqlite3.connect(path_database)
         cursor = conn.cursor()
 
         # Получаем текущую дату как имя таблицы
@@ -143,7 +145,7 @@ def save_data_to_db(user_id, exercise_name, repetitions, approaches, weight, tot
     """
     try:
         # Подключаемся к базе данных (создаётся автоматически, если её нет)
-        conn = sqlite3.connect("database/database.db")
+        conn = sqlite3.connect(path_database)
         cursor = conn.cursor()
 
         # Получаем текущую дату как имя таблицы
@@ -187,7 +189,7 @@ def is_user_authorized(user_id: int) -> bool:
     :return: True, если пользователь зарегистрирован, иначе False.
     """
     try:
-        with sqlite3.connect("database/database.db") as connection:
+        with sqlite3.connect(path_database) as connection:
             cursor = connection.cursor()
 
             cursor.execute(
@@ -221,7 +223,7 @@ def add_users(id_user_telegram: int, name: str, height: str, weight: str, traini
     :param training_experience: опыт тренировок пользователя
     """
     try:
-        with sqlite3.connect("database/database.db") as connection:
+        with sqlite3.connect(path_database) as connection:
             cursor = connection.cursor()
             cursor.execute(
                 """CREATE TABLE IF NOT EXISTS authorized_user (
@@ -250,7 +252,7 @@ def get_user_data(id_user_telegram: str) -> None:
     :param id_user_telegram: логин пользователя в телеграмме
     """
     try:
-        with sqlite3.connect("database/database.db") as connection:
+        with sqlite3.connect(path_database) as connection:
             cursor = connection.cursor()
             cursor.execute(
                 """SELECT id_user_telegram, name, height, weight, training_experience FROM authorized_user WHERE id_user_telegram = ?""",
@@ -274,7 +276,7 @@ def update_user_data(id_user_telegram: str, name: str = None, height: str = None
     :param training_experience: опыт тренировок пользователя
     """
     try:
-        with sqlite3.connect("database/database.db") as connection:
+        with sqlite3.connect(path_database) as connection:
             # Создаем словарь для обновляемых значений
             updates = []
             values = []
@@ -305,12 +307,9 @@ def update_user_data(id_user_telegram: str, name: str = None, height: str = None
 def get_user_starting_the_bot() -> list[Any] | None:
     """
     Получение не авторизованных пользователей
-
-    Аргументы:
-    :param id_user: id пользователя телеграмма
     """
     try:
-        with sqlite3.connect("database/database.db") as connection:
+        with sqlite3.connect(path_database) as connection:
             cursor = connection.cursor()
             cursor.execute("""SELECT id_user, username FROM not_authorized_user""")
             return cursor.fetchall()
